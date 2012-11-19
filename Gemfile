@@ -7,6 +7,29 @@ gem 'rails', '3.2.9'
 
 gem 'pg'
 
+gem 'cancan'
+gem 'devise'
+gem 'faker'
+gem 'friendly_id', '~> 4.0.0.beta14'
+gem 'haml'
+gem 'kaminari'
+gem 'simple_form'
+
+group :development do
+  gem 'haml-rails'
+  gem 'pry'
+  gem 'debugger'
+end
+
+group :development, :test do
+  gem 'capybara'
+  # gem 'capybara-webkit'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'launchy'
+  gem 'rspec-rails'
+  gem 'simplecov'
+end
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -33,6 +56,11 @@ gem 'jquery-rails'
 
 # Deploy with Capistrano
 # gem 'capistrano'
+# gem 'rvm-capistrano'
 
-# To use debugger
-# gem 'debugger'
+group :production do
+  gem 'therubyracer'
+  gem 'execjs'
+end
+
+gem 'newrelic_rpm'
