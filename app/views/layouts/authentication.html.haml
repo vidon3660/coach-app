@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    %title BooksExchange
+    = stylesheet_link_tag    "authentication", :media => "all"
+    = javascript_include_tag "authentication"
+    = csrf_meta_tags
+
+  %body
+    = render "shared/notice"
+    %hr
+
+    = link_to "Sign up", new_user_registration_path
+    = link_to "Login", new_user_session_path
+
+    %hr
+    = yield
