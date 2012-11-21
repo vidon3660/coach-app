@@ -4,15 +4,22 @@ class ApplicationController < ActionController::Base
 
   layout :layout_by_resource
 
+  before_filter :auth_user
+
   protected
+
+  def auth_user
+  end
+
+  def after_sign_out_path_for(resource)
+    welcome_path
+  end
 
   def layout_by_resource
     if devise_controller?
-    	"authentication" 
+    	"authentication"
     elsif user_signed_in?
       "application"
-    else
-    	"welcome"
     end
   end
 
