@@ -25,7 +25,7 @@ describe "Admin panel" do
       pending "contrinue when specify roles"
       fill_in "Email", with: user.email
       fill_in "Password", with: user.password
-      click_button "Sign in"
+      click_button "Login"
       current_path.should == root_path
     end
   end
