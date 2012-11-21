@@ -8,7 +8,7 @@ describe Admin::PanelController do
     it "returns http success" do
       get 'index'
       response.should be_success
-      response.should render_template("layouts/application")
+      response.should render_template("layouts/admin")
       response.should render_template("admin/panel/index")      
     end
   end
