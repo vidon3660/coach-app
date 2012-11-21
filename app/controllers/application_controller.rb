@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_out_path_for(resource)
     welcome_path
-  end  
+  end
 
   def layout_by_resource
     if devise_controller?
