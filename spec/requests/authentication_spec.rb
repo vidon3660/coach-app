@@ -24,7 +24,7 @@ describe "Authentication" do
 	it "sign out" do
 		sign_in
 		click_link "Logout"
-		current_path.should == root_path
+		current_path.should == welcome_path
 		page.has_content?("Signed out successfully.").should be_true
 	end
 

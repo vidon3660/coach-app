@@ -1,7 +1,6 @@
-class HomeController < ApplicationController
+class HomeController < AuthenticatedController
 
   def index
-    render "unsigned" unless user_signed_in?
   end
   
 end
