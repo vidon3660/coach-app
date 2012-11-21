@@ -6,5 +6,4 @@ class UserController < AuthenticatedController
     redirect_to welcome_path unless user_signed_in?
   end
 
-
 end
