@@ -7,5 +7,8 @@ FactoryGirl.define do
 
     factory :admin do
     end
+
+    factory :coach do
+    end
   end
 end

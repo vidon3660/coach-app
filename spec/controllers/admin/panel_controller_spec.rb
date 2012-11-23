@@ -12,5 +12,4 @@ describe Admin::PanelController do
       response.should render_template("admin/panel/index")      
     end
   end
-
 end
