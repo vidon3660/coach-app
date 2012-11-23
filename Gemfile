@@ -15,7 +15,7 @@ gem 'haml'
 gem 'kaminari'
 gem 'simple_form'
 
-gem 'country-select'
+gem 'country-select', git: 'git://github.com/jamesds/country-select.git'
 
 group :development do
   gem 'haml-rails'

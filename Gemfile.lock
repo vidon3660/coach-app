@@ -1,3 +1,9 @@
+GIT
+  remote: git://github.com/jamesds/country-select.git
+  revision: b3e9965232d155755d413a34e8c639ababadd1b3
+  specs:
+    country-select (1.1.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -51,7 +57,6 @@ GEM
       execjs
     coffee-script-source (1.4.0)
     columnize (0.3.6)
-    country-select (1.1.1)
     database_cleaner (0.9.1)
     debugger (1.2.1)
       columnize (>= 0.3.1)
@@ -200,7 +205,7 @@ DEPENDENCIES
   cancan
   capybara
   coffee-rails (~> 3.2.1)
-  country-select
+  country-select!
   database_cleaner
   debugger
   devise
