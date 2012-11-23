@@ -15,6 +15,8 @@ gem 'haml'
 gem 'kaminari'
 gem 'simple_form'
 
+gem 'country-select'
+
 group :development do
   gem 'haml-rails'
   gem 'pry'
