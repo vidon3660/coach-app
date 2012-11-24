@@ -14,6 +14,7 @@ describe "Authentication" do
     fill_in "Password confirmation", with: "password"
     click_button "Sign up"
     current_path.should == complete_path
+    page.has_content?("Welcome! You have signed up successfully.").should be_true
     fill_in "First name", with: "Peter"
     fill_in "Last name", with: "Jones"
     fill_in "Phone", with: "+48 123 456 789"
@@ -23,8 +24,7 @@ describe "Authentication" do
     fill_in "Address", with: "Wawel"
     click_button "Save"
     current_path.should == root_path
-    page.has_content?("Welcome! You have signed up successfully.").should be_true
-    page.has_content?("Welcome Peter Jones").should be_true    
+    page.has_content?("Welcome Peter Jones").should be_true
   end
 
   it "sign in" do

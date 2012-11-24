@@ -11,24 +11,35 @@ class User < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :address, :birth, :country, :city, :first_name, :last_name,
-                  :status, :phone
+                  :phone
   # attr_accessible :title, :body
 
   validate :status, inclusion: STATUS
+  validate :validate_birth
 
   after_create :set_initial_status
-
-  def name
-    "#{first_name} #{last_name}"
-  end
 
   def is_new?
     status == "new"
   end
 
+  def name
+    [first_name, last_name].join(" ")
+  end
+
+  def update_attributes(attributes)
+    self.status = "active" if self.is_new?
+    super(attributes)
+  end
+
   private
 
-    def set_initial_status
-      update_attribute(:status, "new")
+    def validate_birth
+      errors.add(:birth, "Birth date is incorrect") if birth && birth > Date.today
     end
+
+    def set_initial_status
+      update_attribute(:status, "new") if status.blank?
+    end
+
 end
