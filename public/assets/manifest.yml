@@ -9,6 +9,8 @@ authentication.js: authentication-158641dd81b4e9489fb633cdff9fba7f.js
 authentication/index.js: authentication-158641dd81b4e9489fb633cdff9fba7f.js
 coach.css: coach-2ee0c3b28d0fd1f174147d5676105232.css
 coach/index.css: coach-2ee0c3b28d0fd1f174147d5676105232.css
+user.js: user-158641dd81b4e9489fb633cdff9fba7f.js
+user/index.js: user-158641dd81b4e9489fb633cdff9fba7f.js
 welcome.js: welcome-158641dd81b4e9489fb633cdff9fba7f.js
 welcome/index.js: welcome-158641dd81b4e9489fb633cdff9fba7f.js
 application.css: application-406daee488fb9ff32053daaca45d1507.css
