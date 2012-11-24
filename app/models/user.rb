@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
   validate :status, inclusion: STATUS
   validate :validate_birth
 
-  after_create :set_initial_status
+  before_save :set_initial_status
 
   def is_new?
     status == "new"
@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
     end
 
     def set_initial_status
-      update_attribute(:status, "new") if status.blank?
+      self.status = "new" if status.blank?
     end
 
 end
