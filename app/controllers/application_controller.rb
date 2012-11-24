@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
   def auth_user
   end
 
+  def after_sign_in_path_for(resource)
+    current_user.is_new? ? complete_url : super
+  end
+
   def after_sign_out_path_for(resource)
     welcome_path
   end

@@ -9,7 +9,10 @@ GymSport::Application.routes.draw do
   namespace :admin do
     root to: "panel#index"
   end
-  
+
+  match "/complete" => "complete#edit", as: :complete
+  put "/complete_user" => "complete#update", as: :complete_user
+
   match "/welcome" => "welcome#index", as: :welcome
   root to: "home#index"
   
