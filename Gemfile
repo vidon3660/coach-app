@@ -17,6 +17,8 @@ gem 'simple_form'
 
 gem 'country-select', git: 'git://github.com/jamesds/country-select.git'
 
+gem 'heroku'
+
 group :development do
   gem 'haml-rails'
   gem 'pry'
