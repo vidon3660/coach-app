@@ -6,8 +6,8 @@ describe WelcomeController do
     it "returns http success" do
       get 'index'
       response.should be_success
-      response.should render_template ("layouts/welcome")
-      response.should render_template ("welcome/index")
+      response.should render_template ("layouts/user")
+      response.should render_template ("user/index")
     end
   end
 

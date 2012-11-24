@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     if devise_controller?
     	"authentication"
     elsif user_signed_in?
-      "application"
+      "user"
     end
   end
 

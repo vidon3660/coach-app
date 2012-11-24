@@ -7,7 +7,7 @@ describe HomeController do
   describe "signed user" do
     it "GET 'index'" do
       get :index
-      response.should render_template ("layouts/application")
+      response.should render_template ("layouts/user")
       response.should render_template ("home/index")
     end
   end
