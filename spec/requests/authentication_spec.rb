@@ -37,5 +37,4 @@ describe "Authentication" do
     current_path.should == welcome_path
     page.has_content?("Signed out successfully.").should be_true
   end
-
 end
