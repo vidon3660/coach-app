@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
 
-  STATUS = ["new", "active", "banned"]
+  ROLES = %w[admin coach user]
+  STATUS = %w[new active banned]
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -18,22 +19,32 @@ class User < ActiveRecord::Base
   validate :validate_birth
 
   before_validation :set_initial_status
+  before_validation :set_roles
 
-  def is_active?
+  def active!
+    self.update_attribute(:status, "active")
+  end
+
+  def active?
     status == "active"
   end
 
-  def is_new?
+  def new?
     status == "new"
+  end
+
+  def roles=(roles)
+    self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.inject(0, :+)
+  end
+
+  def roles
+    ROLES.reject do |r|
+      ((roles_mask || 0) & 2**ROLES.index(r)).zero?
+    end
   end
 
   def name
     [first_name, last_name].join(" ")
-  end
-
-  def update_attributes(attributes)
-    self.status = "active" if self.is_new?
-    super(attributes)
   end
 
   private
@@ -44,6 +55,10 @@ class User < ActiveRecord::Base
 
     def set_initial_status
       self.status = "new" if status.blank?
+    end
+
+    def set_roles
+      self.roles = ROLES
     end
 
 end

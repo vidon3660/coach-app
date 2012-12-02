@@ -5,10 +5,10 @@ class Ability
 
     user ||= User.new # guest user (not logged in)
 
-    if user.is_new?
+    if user.new?
       can :read, User, id: user.id
       can :update, User, id: user.id
-    elsif user.is_active?
+    elsif user.active?
       can :read, User, id: user.id
       can :update, User, id: user.id
     end
