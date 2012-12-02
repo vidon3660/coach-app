@@ -5,11 +5,14 @@ FactoryGirl.define do
     email "user@example.com"
     password "password"
     status "active"
+    roles ["user"]
 
     factory :admin do
+      roles ["admin"]
     end
 
     factory :coach do
+      roles ["coach"]
     end
   end
 end
