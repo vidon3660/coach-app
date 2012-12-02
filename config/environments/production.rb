@@ -46,8 +46,8 @@ GymSport::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( admin.js authentication.js coach.js user.js welcome.js )
-  config.assets.precompile += %w( admin.css authentication.css coach.css user.css welcome.css )
+  config.assets.precompile += %w( admin.js banned.js authentication.js coach.js user.js welcome.js )
+  config.assets.precompile += %w( admin.css banned.css authentication.css coach.css user.css welcome.css )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
