@@ -10,6 +10,8 @@ GymSport::Application.routes.draw do
     root to: "panel#index"
   end
 
+  match "/banned" => "banned#index", as: :banned
+
   match "/complete" => "complete#edit", as: :complete
   put "/complete_user" => "complete#update", as: :complete_user
 

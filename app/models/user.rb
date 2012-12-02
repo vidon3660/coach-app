@@ -29,6 +29,10 @@ class User < ActiveRecord::Base
     status == "active"
   end
 
+  def banned?
+    status == "banned"
+  end
+
   def new?
     status == "new"
   end
