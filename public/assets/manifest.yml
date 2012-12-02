@@ -9,8 +9,8 @@ authentication.js: authentication-158641dd81b4e9489fb633cdff9fba7f.js
 authentication/index.js: authentication-158641dd81b4e9489fb633cdff9fba7f.js
 banned.js: banned-158641dd81b4e9489fb633cdff9fba7f.js
 banned/index.js: banned-158641dd81b4e9489fb633cdff9fba7f.js
-coach.css: coach-2ee0c3b28d0fd1f174147d5676105232.css
-coach/index.css: coach-2ee0c3b28d0fd1f174147d5676105232.css
+coach.js: coach-158641dd81b4e9489fb633cdff9fba7f.js
+coach/index.js: coach-158641dd81b4e9489fb633cdff9fba7f.js
 user.js: user-158641dd81b4e9489fb633cdff9fba7f.js
 user/index.js: user-158641dd81b4e9489fb633cdff9fba7f.js
 welcome.js: welcome-158641dd81b4e9489fb633cdff9fba7f.js
@@ -23,6 +23,8 @@ authentication.css: authentication-2ee0c3b28d0fd1f174147d5676105232.css
 authentication/index.css: authentication-2ee0c3b28d0fd1f174147d5676105232.css
 banned.css: banned-2ee0c3b28d0fd1f174147d5676105232.css
 banned/index.css: banned-2ee0c3b28d0fd1f174147d5676105232.css
+coach.css: coach-2ee0c3b28d0fd1f174147d5676105232.css
+coach/index.css: coach-2ee0c3b28d0fd1f174147d5676105232.css
 user.css: user-2ee0c3b28d0fd1f174147d5676105232.css
 user/index.css: user-2ee0c3b28d0fd1f174147d5676105232.css
 welcome.css: welcome-2ee0c3b28d0fd1f174147d5676105232.css
