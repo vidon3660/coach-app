@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  STATUS = ["new", "active"]
+  STATUS = ["new", "active", "banned"]
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
@@ -14,10 +14,14 @@ class User < ActiveRecord::Base
                   :phone
   # attr_accessible :title, :body
 
-  validate :status, inclusion: STATUS
+  validates :status, inclusion: STATUS
   validate :validate_birth
 
-  before_save :set_initial_status
+  before_validation :set_initial_status
+
+  def is_active?
+    status == "active"
+  end
 
   def is_new?
     status == "new"

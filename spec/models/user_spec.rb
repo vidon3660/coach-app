@@ -5,6 +5,14 @@ describe User do
   let(:user) { FactoryGirl.create :user }
 
   describe "status" do
+    it "should has available statuses" do
+      user.status = "banned"
+      ["new", "active", "banned"].each do |status|
+        user.status = status
+        user.should be_valid
+      end
+    end
+
     it "should set status 'new' for active user haven't signed yet" do
       user = FactoryGirl.create :user, status: ""
       user.status.should == "new"

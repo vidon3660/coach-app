@@ -1,4 +1,7 @@
 class CompleteController < UserController
+
+  load_and_authorize_resource :user
+
   def edit
   end
 
