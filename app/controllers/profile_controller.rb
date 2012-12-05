@@ -1,4 +1,4 @@
-class ProfileController < ApplicationController
+class ProfileController < UserController
 
   load_and_authorize_resource :user
 

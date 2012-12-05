@@ -21,6 +21,17 @@ class User < ActiveRecord::Base
   before_validation :set_initial_status
   before_validation :set_roles
 
+  define_index do
+    # fields
+    indexes first_name, :sortable => true
+    indexes last_name, :sortable => true
+    indexes status
+
+    # attributes
+
+    set_property delta: true
+  end
+
   def active!
     self.update_attribute(:status, "active")
   end

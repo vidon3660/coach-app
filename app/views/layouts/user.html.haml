@@ -12,9 +12,8 @@
 
     %p= "Welcome #{current_user.name}"
     = link_to "Logout", destroy_user_session_path, method: :delete
-
-    %hr
     = link_to "Profile", profile_path
+    = render "shared/search"
     %hr
 
     = yield
