@@ -18,8 +18,10 @@ GymSport::Application.routes.draw do
   match "/profile" => "profile#index", as: :profile
   match "/profile/informations" => "profile#informations", as: :profile_informations
   match "/profile/update" => "profile#update", as: :profile_update
+  match "/profile/:id" => "profile#show", as: :public_profile
 
   match "/welcome" => "welcome#index", as: :welcome
+
   root to: "home#index"
   
 end

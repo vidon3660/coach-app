@@ -9,7 +9,8 @@ class Ability
       can :read, User, id: user.id
       can :update, User, id: user.id
     elsif user.active?
-      can :read, User, id: user.id
+      can :index, User, id: user.id
+      can :show, User
       can :update, User, id: user.id
     end
 

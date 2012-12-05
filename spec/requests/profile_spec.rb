@@ -33,4 +33,12 @@ describe "User profile" do
     current_path.should == profile_informations_path
     page.has_content?("You updated your account successfully.").should be_true
   end
+
+  it "show user profile" do
+    visit public_profile_path(@user)
+    current_path.should == public_profile_path(@user)
+    page.has_content?(@user.first_name).should be_true
+    page.has_content?(@user.last_name).should be_true
+    page.has_content?(@user.city).should be_true
+  end
 end
