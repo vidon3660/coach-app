@@ -35,6 +35,18 @@ describe SearchController do
             get :index, search: user.name
             assigns(:users).should include(user)
           end
+
+          it "return empty array if nothing search" do
+            get :index
+            assigns(:users).should be_blank
+            response.should be_success
+          end
+
+          it "shouldn't search banned user" do
+            user.update_attribute(:status, "banned")
+            get :index, search: user.name
+            assigns(:users).should be_blank
+          end
         end
       end
     end
