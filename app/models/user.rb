@@ -15,6 +15,12 @@ class User < ActiveRecord::Base
                   :phone
   # attr_accessible :title, :body
 
+  has_many :invitations, class_name: "Invitation", foreign_key: "inviting_id"
+  has_many :invited, through: :invitations, class_name: "User", foreign_key: "invited_id"
+
+  has_many :invitation_requests, class_name: "Invitation", foreign_key: "invited_id"
+  has_many :inviting, through: :invitation_requests, class_name: "User", foreign_key: "inviting_id"
+
   validates :status, inclusion: STATUS
   validate :validate_birth
 

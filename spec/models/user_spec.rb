@@ -4,6 +4,19 @@ describe User do
 
   let(:user) { FactoryGirl.create :user }
 
+  describe "associations" do
+    let(:other_user) { FactoryGirl.create :user }
+    before(:each) { user.invited << other_user }
+
+    it "should send invitations" do
+      user.invited.should include(other_user)
+    end
+
+    it "should get invitations" do
+      other_user.inviting.should include(user)
+    end
+  end
+
   describe "roles" do
     let(:roles) { %w[admin coach user] }
 

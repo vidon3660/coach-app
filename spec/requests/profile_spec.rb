@@ -34,11 +34,24 @@ describe "User profile" do
     page.has_content?("You updated your account successfully.").should be_true
   end
 
-  it "show user profile" do
-    visit public_profile_path(@user)
-    current_path.should == public_profile_path(@user)
-    page.has_content?(@user.first_name).should be_true
-    page.has_content?(@user.last_name).should be_true
-    page.has_content?(@user.city).should be_true
+  describe "user public profile" do
+    let!(:other_user) { FactoryGirl.create(:user) }
+
+    before(:each) do
+      visit person_path(other_user)
+      current_path.should == person_path(other_user)
+    end
+
+    it "show user profile" do
+      page.has_content?(other_user.first_name).should be_true
+      page.has_content?(other_user.last_name).should be_true
+      page.has_content?(other_user.city).should be_true
+    end
+
+    it "send invitation" do
+      click_button "Add to friends"
+      current_path.should == person_path(other_user)
+      page.has_content?("Invitation sent successfully.").should be_true
+    end
   end
 end

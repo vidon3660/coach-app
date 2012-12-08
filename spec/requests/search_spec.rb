@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "Search" do
-    let!(:user) { FactoryGirl.create :user }
+  let!(:user) { FactoryGirl.create :user }
 
   sphinx_environment :users do
     before(:each) do
@@ -21,7 +21,7 @@ describe "Search" do
         current_path.should == search_path
         page.has_content?(user.name).should be_true
         click_link user.name
-        current_path.should == public_profile_path(user)
+        current_path.should == person_path(user)
       end
     end
   end
