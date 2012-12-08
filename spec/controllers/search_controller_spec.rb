@@ -32,6 +32,7 @@ describe SearchController do
           end
 
           it "should search by user name" do
+            pending "to work this should be run in thinking sphinx"
             get :index, search: user.name
             assigns(:users).should include(user)
           end
@@ -43,9 +44,9 @@ describe SearchController do
           end
 
           it "shouldn't search banned user" do
-            user.update_attribute(:status, "banned")
-            get :index, search: user.name
-            assigns(:users).should be_blank
+            user2 = FactoryGirl.create(:user, status: "banned", first_name: "Paul")
+            get :index, search: user2.first_name
+            assigns(:users).should be_empty
           end
         end
       end

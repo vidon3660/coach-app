@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  ROLES = %w[admin coach user]
+  ROLES  = %w[admin coach user]
   STATUS = %w[new active banned]
 
   # Include default devise modules. Others available are:
