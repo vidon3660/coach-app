@@ -1,2 +1,11 @@
-%h1 Invitations#show
-%p Find me in app/views/invitations/show.html.haml
+%h1 Invitation
+
+%p= "#{@invitation.inviting.name} want to add you to contacts."
+
+= form_for @invitation, method: :put do |f|
+  = f.hidden_field :status, value: 'accepted'
+  = f.submit "Accept"
+
+= form_for @invitation, method: :put do |f|
+  = f.hidden_field :status, value: 'rejected'
+  = f.submit "Reject"

@@ -47,11 +47,5 @@ describe "User profile" do
       page.has_content?(other_user.last_name).should be_true
       page.has_content?(other_user.city).should be_true
     end
-
-    it "send invitation" do
-      click_button "Add to friends"
-      current_path.should == person_path(other_user)
-      page.has_content?("Invitation sent successfully.").should be_true
-    end
   end
 end

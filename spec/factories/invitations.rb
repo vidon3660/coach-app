@@ -2,7 +2,8 @@
 
 FactoryGirl.define do
   factory :invitation do
-    inviting_id 1
-    invited_id 1
+    inviting { FactoryGirl.create :user }
+    invited  { FactoryGirl.create :user }
+    status   "expectant"
   end
 end

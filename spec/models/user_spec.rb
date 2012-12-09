@@ -3,9 +3,9 @@ require 'spec_helper'
 describe User do
 
   let(:user) { FactoryGirl.create :user }
+  let(:other_user) { FactoryGirl.create :user }
 
   describe "associations" do
-    let(:other_user) { FactoryGirl.create :user }
     before(:each) { user.invited << other_user }
 
     it "should send invitations" do
@@ -14,6 +14,11 @@ describe User do
 
     it "should get invitations" do
       other_user.inviting.should include(user)
+    end
+
+    it "should has contacts created by self" do
+      user.contacts << other_user
+      user.contacts.should include(other_user)
     end
   end
 

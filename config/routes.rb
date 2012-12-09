@@ -10,10 +10,10 @@ GymSport::Application.routes.draw do
     root to: "panel#index"
   end
 
-  resources :invitations, only: [:index, :show]
+  resources :invitations #, except: [:create]
 
   resources :people do
-    resources :invitations, only: [:create, :destroy]
+    resources :invitations, only: [:create]
   end
 
   match "/banned" => "banned#index", as: :banned

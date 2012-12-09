@@ -1,2 +1,4 @@
-%h1 Invitations#index
-%p Find me in app/views/invitations/index.html.haml
+%h1 Invitations
+
+- @invitations.each do |invitation|
+  %p= link_to invitation.inviting.name, invitation_path(invitation)
