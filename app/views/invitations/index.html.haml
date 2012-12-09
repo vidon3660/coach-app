@@ -1,0 +1,4 @@
+%h1 Invitations
+
+- @invitations.each do |invitation|
+  %p= link_to invitation.inviting.name, invitation_path(invitation)

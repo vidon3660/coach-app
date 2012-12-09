@@ -1,5 +1,7 @@
 %h1 User profile
 
+= button_to "Add to friends", person_invitations_path(@user)
+
 %p= @user.first_name
 %p= @user.last_name
 %p= @user.city

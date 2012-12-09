@@ -13,28 +13,6 @@ describe ProfileController do
     end
   end
 
-  describe "GET 'show'" do
-    it "should return active user public profile" do
-      get :show, id: user.id
-      assigns(:user).should == user
-      response.should be_success
-      response.should render_template ("layouts/user")
-      response.should render_template ("profile/show")
-    end
-
-    it "should redirect and alert if new user public profile" do
-      user2 = FactoryGirl.create :user, status: "new"
-      get :show, id: user2.id
-      response.should be_redirect
-    end
-
-    it "should redirect and alert if banned user public profile" do
-      user2 = FactoryGirl.create :user, status: "banned"
-      get :show, id: user2.id
-      response.should be_redirect
-    end
-  end
-
   describe "GET 'informations'" do
     it "should return user informations form" do
       get 'informations'
