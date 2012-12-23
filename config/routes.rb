@@ -10,8 +10,8 @@ GymSport::Application.routes.draw do
     root to: "panel#index"
   end
 
+  resources :contacts
   resources :invitations #, except: [:create]
-
   resources :people do
     resources :invitations, only: [:create]
   end
