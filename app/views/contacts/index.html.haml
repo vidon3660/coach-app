@@ -1,0 +1,4 @@
+%h1 Contacts
+
+- @contacts.each do |contact|
+  = link_to contact.name, person_path(contact)
