@@ -57,7 +57,7 @@ describe InvitationsController do
     describe "reject invitation" do
       it "shouldn't create relationship" do
         -> {
-          put :update, id: invitation, invitation: { status: "rejected" }k
+          put :update, id: invitation, invitation: { status: "rejected" }
         }.should change(Relationship, :count).by(0)
       end
 
