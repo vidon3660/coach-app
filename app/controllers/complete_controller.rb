@@ -1,4 +1,4 @@
-class CompleteController < UserController
+class CompleteController < AuthenticatedController
 
   load_and_authorize_resource :user
 

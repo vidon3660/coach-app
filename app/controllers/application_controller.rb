@@ -12,11 +12,11 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    current_user.new? ? complete_url : super
+    current_user.new? ? complete_url : board_url
   end
 
   def after_sign_out_path_for(resource)
-    welcome_path
+    root_path
   end
 
   def layout_by_resource

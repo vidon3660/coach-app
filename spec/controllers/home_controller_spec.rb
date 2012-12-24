@@ -1,13 +1,12 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe HomeController do
-  let(:user) { FactoryGirl.create :user } 
-  before(:each) { sign_in(user) }
 
-  describe "signed user" do
-    it "GET 'index'" do
-      get :index
-      response.should render_template ("layouts/user")
+  describe "GET 'index'" do
+    it "returns http success" do
+      get 'index'
+      response.should be_success
+      response.should render_template ("layouts/home")
       response.should render_template ("home/index")
     end
   end

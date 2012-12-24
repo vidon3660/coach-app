@@ -6,10 +6,6 @@ GymSport::Application.routes.draw do
     root to: "panel#index"
   end
   
-  namespace :admin do
-    root to: "panel#index"
-  end
-
   resources :contacts
   resources :invitations #, except: [:create]
   resources :people do
@@ -26,8 +22,7 @@ GymSport::Application.routes.draw do
   match "/profile/update" => "profile#update", as: :profile_update
 
   match "/search" => "search#index", as: :search
-
-  match "/welcome" => "welcome#index", as: :welcome
+  match "/board" => "board#index", as: :board
 
   root to: "home#index"
   

@@ -7,7 +7,6 @@ describe "Friends invitations" do
   let!(:invitation) { FactoryGirl.create(:invitation, inviting: other_user, invited: user) }
 
   before(:each) do
-    visit root_path
     sign_in user
   end
 
@@ -26,7 +25,6 @@ describe "Friends invitations" do
 
   describe "show invitations" do
     before(:each) do
-      visit root_path
       click_link "Invitations"
       current_path.should == invitations_path
     end

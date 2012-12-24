@@ -2,7 +2,6 @@ require "spec_helper"
 
 describe "User profile" do
   before(:each) do
-    visit root_path
     sign_in
     click_link "Profile"
     current_path.should == profile_path

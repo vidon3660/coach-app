@@ -2,11 +2,8 @@ require "spec_helper"
 
 describe "Authentication" do
 
-  before(:each) do
-    visit root_path
-  end
-
   it "sign up" do
+    visit root_path
     click_link "Sign up"
     current_path.should == new_user_registration_path
     fill_in "Email", with: "other_user@example.com"
@@ -23,7 +20,7 @@ describe "Authentication" do
     fill_in "City", with: "Cracow"
     fill_in "Address", with: "Wawel"
     click_button "Save"
-    current_path.should == root_path
+    current_path.should == board_path
     page.has_content?("Welcome Peter Jones").should be_true
   end
 
@@ -34,7 +31,7 @@ describe "Authentication" do
   it "sign out" do
     sign_in
     click_link "Logout"
-    current_path.should == welcome_path
+    current_path.should == root_path
     page.has_content?("Signed out successfully.").should be_true
   end
 end

@@ -8,7 +8,6 @@ describe BannedController do
     it "returns http success" do
       get :index
       response.should be_success
-      response.should render_template ("layouts/banned")
       response.should render_template ("banned/index")
     end
   end
