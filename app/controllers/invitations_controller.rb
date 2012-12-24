@@ -1,4 +1,4 @@
-class InvitationsController < UserController
+class InvitationsController < AuthenticatedController
   def index
     @invitations = current_user.invitation_requests
   end

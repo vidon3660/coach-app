@@ -8,7 +8,7 @@ describe Coach::PanelController do
     it "returns http success" do
       get 'index'
       response.should be_success
-      response.should render_template("layouts/coach")
+      response.should render_template("layouts/user")
       response.should render_template("coach/panel/index")      
     end
   end

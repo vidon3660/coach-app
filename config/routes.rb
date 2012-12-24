@@ -6,10 +6,6 @@ GymSport::Application.routes.draw do
     root to: "panel#index"
   end
   
-  namespace :admin do
-    root to: "panel#index"
-  end
-
   resources :contacts
   resources :invitations #, except: [:create]
   resources :people do

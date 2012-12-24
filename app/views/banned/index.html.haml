@@ -1,0 +1,15 @@
+!!!
+%html
+  %head
+    %title BooksExchange
+    = stylesheet_link_tag    "application", :media => "all"
+    = stylesheet_link_tag    "banned", :media => "all"
+    = javascript_include_tag "application"
+    = javascript_include_tag "banned"
+    = csrf_meta_tags
+  %body
+    %h1= "Welcome #{current_user.name}"
+    %p
+      Your account is currently banned. Contact with administrator for more informations.
+
+    = link_to "Logout", destroy_user_session_path, method: :delete
