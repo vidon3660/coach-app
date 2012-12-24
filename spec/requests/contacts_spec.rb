@@ -7,13 +7,11 @@ describe "Contacts" do
   let!(:relationship) { FactoryGirl.create(:relationship, user: user, contact: other_user) }
 
   before(:each) do
-    visit root_path
     sign_in user
   end
 
   describe "show contacts" do
     before(:each) do
-      visit root_path
       click_link "Contacts"
       current_path.should == contacts_path
     end

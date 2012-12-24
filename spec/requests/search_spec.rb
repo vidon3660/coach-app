@@ -7,7 +7,6 @@ describe "Search" do
     before(:each) do
       ThinkingSphinx::Test.index
       sleep(0.5)
-      visit root_path
       sign_in user
     end
 

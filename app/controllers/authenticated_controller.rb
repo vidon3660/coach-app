@@ -10,7 +10,7 @@ class AuthenticatedController < ApplicationController
     end
 
     def auth_user
-      redirect_to welcome_path unless user_signed_in?
+      redirect_to root_path unless user_signed_in?
     end
 
 end

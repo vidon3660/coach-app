@@ -1,8 +1,14 @@
-class HomeController < AuthenticatedController
+class HomeController < ApplicationController
 
-  load_and_authorize_resource :user
+  layout "home"
 
   def index
   end
-  
+
+  protected
+
+  def auth_user
+    redirect_to board_path if user_signed_in?
+  end
+
 end
