@@ -23,16 +23,10 @@ class Invitation < ActiveRecord::Base
     end
   end
 
-  def accepted?
-    status == "accepted"
-  end
-
-  def expectant?
-    status == "expectant"
-  end
-
-  def rejected?
-    status == "rejected"
+  state_machine :status do
+    state :accepted
+    state :expectant
+    state :rejected
   end
 
   private

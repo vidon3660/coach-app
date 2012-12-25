@@ -73,6 +73,7 @@ describe User do
       user.status.should == "new"
       user.active!
       user.status.should == "active"
+      user.should be_active
     end
   end
 

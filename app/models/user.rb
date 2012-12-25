@@ -40,20 +40,14 @@ class User < ActiveRecord::Base
     set_property delta: true
   end
 
-  def active!
-    self.update_attribute(:status, "active")
-  end
+  state_machine :status do
+    state :new
+    state :active
+    state :banned
 
-  def active?
-    status == "active"
-  end
-
-  def banned?
-    status == "banned"
-  end
-
-  def new?
-    status == "new"
+    event :active do
+      transition [:new, :banned] => :active
+    end
   end
 
   def roles=(roles)
