@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
                   :address, :birth, :country, :city, :first_name, :last_name,
                   :phone
 
+  has_many :parameters
+
   has_many :relationships
   has_many :contacts, through: :relationships
 

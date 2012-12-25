@@ -18,19 +18,33 @@ describe "User profile" do
     page.has_content?("You updated your account successfully.").should be_true
   end
 
-  it "change user informations" do
-    click_link "Informations"
-    current_path.should == profile_informations_path
-    fill_in "First name", with: "Peter"
-    fill_in "Last name", with: "Jones"
-    fill_in "Phone", with: "+48 123 456 789"
-    select_date Date.parse('01-01-1960'), :from => "user_birth"
-    select "Poland", from:  "Country"
-    fill_in "City", with: "Cracow"
-    fill_in "Address", with: "Wawel"
-    click_button "Save"
-    current_path.should == profile_informations_path
-    page.has_content?("You updated your account successfully.").should be_true
+  describe "change user informations" do
+    before(:each) do
+      click_link "Informations"
+      current_path.should == profile_informations_path
+    end
+
+    it "should change personal informations" do
+      fill_in "First name", with: "Peter"
+      fill_in "Last name", with: "Jones"
+      fill_in "Phone", with: "+48 123 456 789"
+      select_date Date.parse('01-01-1960'), :from => "user_birth"
+      select "Poland", from:  "Country"
+      fill_in "City", with: "Cracow"
+      fill_in "Address", with: "Wawel"
+      click_button "Save"
+      current_path.should == profile_informations_path
+      page.has_content?("You updated your account successfully.").should be_true
+    end
+
+    it "should change data informations" do
+      select "178", from: "Height"
+      select "78", from: "Weight"
+      click_button "Add"
+      current_path.should == profile_informations_path
+      page.has_content?("178").should be_true
+      page.has_content?("78").should be_true
+    end
   end
 
   describe "user public profile" do
