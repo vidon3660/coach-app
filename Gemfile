@@ -14,6 +14,7 @@ gem 'friendly_id', '~> 4.0.0.beta14'
 gem 'haml'
 gem 'kaminari'
 gem 'simple_form'
+gem 'state_machine'
 gem 'thinking-sphinx', '2.0.10'
 gem 'country-select', git: 'git://github.com/jamesds/country-select.git'
 
