@@ -6,6 +6,8 @@ class ProfileController < AuthenticatedController
   end
 
   def informations
+    @parameters = current_user.parameters.order("created_at desc")
+    @parameter = Parameter.new
   end
 
   def update

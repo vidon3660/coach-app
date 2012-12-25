@@ -8,6 +8,7 @@ GymSport::Application.routes.draw do
   
   resources :contacts
   resources :invitations #, except: [:create]
+  resources :parameters
   resources :people do
     resources :invitations, only: [:create]
   end

@@ -2,3 +2,14 @@
 %p Find me in app/views/profile/informations.html.haml
 
 = render 'shared/user_information', url: profile_update_path
+
+%hr
+
+- @parameters.each do |parameter|
+  = "Height: #{parameter.height}"
+  = "Weight: #{parameter.weight}"
+
+= simple_form_for @parameter, url: parameters_path do |f|
+  = f.input :height, collection: 120..220
+  = f.input :weight, collection: 30..200
+  = f.button :submit, "Add"
