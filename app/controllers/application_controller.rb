@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
     	"authentication"
     elsif user_signed_in?
       "user"
+    end
   end
   
 end
