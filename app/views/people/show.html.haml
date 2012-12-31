@@ -2,6 +2,8 @@
 
 = button_to "Add to friends", person_invitations_path(@user)
 
+= button_to "Add to training", training_person_invitations_path(@user, training: true)
+
 %p= @user.first_name
 %p= @user.last_name
 %p= @user.city

@@ -62,6 +62,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def is_coach?
+    roles.include?("coach")
+  end
+
   def name
     [first_name, last_name].join(" ")
   end

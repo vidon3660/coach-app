@@ -2,7 +2,7 @@ class Invitation < ActiveRecord::Base
 
   STATUS = ["accepted", "expectant", "rejected"]
 
-  attr_accessible :status
+  attr_accessible :status, :training
 
   belongs_to :invited, class_name: "User"
   belongs_to :inviting, class_name: "User"

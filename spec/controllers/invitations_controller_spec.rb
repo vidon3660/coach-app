@@ -8,7 +8,9 @@ describe InvitationsController do
   let(:new_user)    { FactoryGirl.create :user, status: "new" }
   let!(:invitation) { FactoryGirl.create :invitation, inviting: other_user, invited: user }
 
-  before(:each) { sign_in(user) }
+  before(:each) do
+    sign_in(user)
+  end
 
   describe "GET 'index'" do
     it "show all invitations" do
@@ -34,7 +36,56 @@ describe InvitationsController do
     it "should send only one invitation to contacts for other user" do
       -> { post :create, person_id: other_user }.should change(Invitation, :count).by(1)
       response.should be_redirect
-      -> { post :create, person_id: user }.should change(Invitation, :count).by(0)
+      -> { post :create, person_id: user }.should_not change(Invitation, :count)
+    end
+
+    context "traning" do
+      it "should send invitation with training by coach" do
+        User.any_instance.stub(:roles).and_return(["user", "coach"])
+        post :create, person_id: other_user, training: true
+        Invitation.order("created_at desc").first.training.should be_true
+      end
+
+      it "shouldn't send invitation by user" do
+        User.any_instance.stub(:roles).and_return(["user"])
+        post :create, person_id: other_user, training: true
+        Invitation.order("created_at desc").first.training.should be_blank
+      end
+
+      it "should send invitation without training" do
+        post :create, person_id: other_user
+        Invitation.order("created_at desc").first.training.should be_blank
+      end
+    end
+  end
+
+  describe "POST 'training'" do
+    context "coach" do
+      before(:each) { User.any_instance.stub(:roles).and_return(["user", "coach"]) }
+
+      context "to user contact" do
+        it "should send invitation to training for exist contact" do
+          user.contacts << other_user
+          -> { post :training, person_id: other_user }.should_not change(Invitation, :count)
+          user.relationships.find_by_contact_id(other_user.id).training.should be_true
+          # Invitation.order("created_at desc").first.training.should be_true
+        end
+      end
+
+      context "to new contact" do
+        it "should send invitation to contacts and training for user" do
+          -> { post :training, person_id: other_user }.should change(Invitation, :count).by(1)
+          Invitation.order("created_at desc").first.training.should be_blank
+        end
+      end
+    end
+
+    context "not coach" do
+      before(:each) { User.any_instance.stub(:roles).and_return(["user"]) }
+
+      it "shouldn't send training invitation" do
+        -> { post :training, person_id: other_user }.should_not change(Invitation, :count)
+      end
     end
   end
 
