@@ -9,12 +9,39 @@ class InvitationsController < AuthenticatedController
 
   def create
     invited = User.find(params[:person_id])
+    invitation = Invitation.new
+    invitation.training = params[:training] if current_user.is_coach?
+    invitation.invited  = invited
+    invitation.inviting = current_user
 
-    begin
-      if current_user.invited << invited
-        redirect_to person_path(invited), notice: "Invitation sent successfully."
+    if invitation.save
+      redirect_to person_path(invited), notice: "Invitation sent successfully."
+    else
+      redirect_to person_path(invited), alert: "Error"
+    end
+  end
+
+  def training
+    invited = User.find(params[:person_id])
+    if current_user.is_coach?
+      contact = current_user.relationships.find_by_contact_id(params[:person_id])
+      if contact
+        contact.training = true
+        contact.save
+        redirect_to person_path(invited), notice: "Add to training successfully."
+      else
+        invitation = Invitation.new
+        invitation.training = params[:training]
+        invitation.invited  = invited
+        invitation.inviting = current_user
+
+        if invitation.save
+          redirect_to person_path(invited), notice: "Invitation sent successfully."
+        else
+          redirect_to person_path(invited), alert: "Error"
+        end
       end
-    rescue
+    else
       redirect_to person_path(invited), alert: "Error"
     end
   end

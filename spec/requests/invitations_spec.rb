@@ -21,6 +21,13 @@ describe "Friends invitations" do
       current_path.should == person_path(other_user)
       page.has_content?("Invitation sent successfully.").should be_true
     end
+
+    it "should send send invitation to training" do
+      user.contacts << other_user
+      click_button "Add to training"
+      current_path.should == person_path(other_user)
+      page.has_content?("Add to training successfully.").should be_true
+    end
   end
 
   describe "show invitations" do

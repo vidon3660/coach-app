@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121225113654) do
+ActiveRecord::Schema.define(:version => 20121226124257) do
 
   create_table "invitations", :force => true do |t|
     t.integer  "inviting_id"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(:version => 20121225113654) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.string   "status"
+    t.boolean  "training"
   end
 
   create_table "parameters", :force => true do |t|

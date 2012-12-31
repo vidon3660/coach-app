@@ -5,5 +5,6 @@ FactoryGirl.define do
     inviting { FactoryGirl.create :user }
     invited  { FactoryGirl.create :user }
     status   "expectant"
+    training false
   end
 end

@@ -10,7 +10,11 @@ GymSport::Application.routes.draw do
   resources :invitations #, except: [:create]
   resources :parameters
   resources :people do
-    resources :invitations, only: [:create]
+    resources :invitations do # , only: [:create] do
+      collection do
+        post "training"
+      end
+    end
   end
 
   match "/banned" => "banned#index", as: :banned
