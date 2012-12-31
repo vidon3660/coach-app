@@ -2,8 +2,6 @@ class ApplicationController < ActionController::Base
 	
   protect_from_forgery
 
-  layout :layout_by_resource
-
   before_filter :auth_user
 
   protected
@@ -26,5 +24,5 @@ class ApplicationController < ActionController::Base
       "user"
     end
   end
-
+  
 end
