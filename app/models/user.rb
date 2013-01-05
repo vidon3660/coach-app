@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   before_validation :set_initial_status
   before_validation :set_roles
 
-  after_create :set_player
+  after_save :set_player
 
   state_machine :status do
     state :new
