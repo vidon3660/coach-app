@@ -3,9 +3,10 @@ require 'spec_helper'
 describe SearchController do
 
   let(:user) { FactoryGirl.create :user }
+  let(:player) { user.player }
   before(:each) { sign_in(user) }
 
-  sphinx_environment :users do
+  sphinx_environment :players do
     describe "GET 'index'" do
       it "should render success with views" do
         get :index
@@ -21,32 +22,35 @@ describe SearchController do
         end
 
         context "user" do
-          it "should search by user first name" do
-            get :index, search: user.first_name
-            assigns(:users).should include(user)
+          it "should search by player first name" do
+            get :index, search: player.first_name
+            assigns(:players).should include(player)
           end
 
-          it "should search by user last name" do
-            get :index, search: user.last_name
-            assigns(:users).should include(user)
+          it "should search by player last name" do
+            get :index, search: player.last_name
+            assigns(:players).should include(player)
           end
 
-          it "should search by user name" do
+          it "should search by player name" do
             pending "to work this should be run in thinking sphinx"
-            get :index, search: user.name
-            assigns(:users).should include(user)
+            get :index, search: player.name
+            assigns(:players).should include(player)
           end
 
           it "return empty array if nothing search" do
             get :index
-            assigns(:users).should be_blank
+            assigns(:players).should be_blank
             response.should be_success
           end
 
           it "shouldn't search banned user" do
-            user2 = FactoryGirl.create(:user, status: "banned", first_name: "Paul")
-            get :index, search: user2.first_name
-            assigns(:users).should be_empty
+            user2 = FactoryGirl.create(:user, status: "banned") 
+            player = user2.player
+            player.update_attribute(:first_name, "Paul")
+            player.reload
+            get :index, search: player.first_name
+            assigns(:players).should be_empty
           end
         end
       end

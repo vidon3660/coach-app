@@ -10,11 +10,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :address, :birth, :country, :city, :first_name, :last_name,
-                  :phone
+  attr_accessible :email, :password, :password_confirmation, :remember_me
 
-  has_many :parameters
+  has_one :player
 
   has_many :relationships
   has_many :contacts, through: :relationships
@@ -26,21 +24,11 @@ class User < ActiveRecord::Base
   has_many :inviting, through: :invitation_requests, class_name: "User", foreign_key: "inviting_id"
 
   validates :status, inclusion: STATUS
-  validate :validate_birth
 
   before_validation :set_initial_status
   before_validation :set_roles
 
-  define_index do
-    # fields
-    indexes first_name, :sortable => true
-    indexes last_name, :sortable => true
-    indexes status
-
-    # attributes
-
-    set_property delta: true
-  end
+  after_create :set_player
 
   state_machine :status do
     state :new
@@ -66,14 +54,10 @@ class User < ActiveRecord::Base
     roles.include?("coach")
   end
 
-  def name
-    [first_name, last_name].join(" ")
-  end
-
   private
 
-    def validate_birth
-      errors.add(:birth, "Birth date is incorrect") if birth && birth > Date.today
+    def set_player
+      create_player unless player
     end
 
     def set_initial_status

@@ -9,26 +9,29 @@ class InvitationsController < AuthenticatedController
 
   def create
     invited = User.find(params[:person_id])
+    player = invited.player
     invitation = Invitation.new
     invitation.training = params[:training] if current_user.is_coach?
     invitation.invited  = invited
     invitation.inviting = current_user
 
     if invitation.save
-      redirect_to person_path(invited), notice: "Invitation sent successfully."
+      redirect_to player_path(player), notice: "Invitation sent successfully."
     else
-      redirect_to person_path(invited), alert: "Error"
+      redirect_to player_path(player), alert: "Error"
     end
   end
 
   def training
     invited = User.find(params[:person_id])
+    player = invited.player
+
     if current_user.is_coach?
       contact = current_user.relationships.find_by_contact_id(params[:person_id])
       if contact
         contact.training = true
         contact.save
-        redirect_to person_path(invited), notice: "Add to training successfully."
+        redirect_to player_path(player), notice: "Add to training successfully."
       else
         invitation = Invitation.new
         invitation.training = params[:training]
@@ -36,9 +39,9 @@ class InvitationsController < AuthenticatedController
         invitation.inviting = current_user
 
         if invitation.save
-          redirect_to person_path(invited), notice: "Invitation sent successfully."
+          redirect_to player_path(player), notice: "Invitation sent successfully."
         else
-          redirect_to person_path(invited), alert: "Error"
+          redirect_to player_path(player), alert: "Error"
         end
       end
     else
@@ -52,7 +55,7 @@ class InvitationsController < AuthenticatedController
 
     if invitation.accepted?
       invitation.make_relationship
-      flash[:notice] = "You add #{invitation.inviting.name} to your contacts."
+      flash[:notice] = "You add #{invitation.inviting.player.name} to your contacts."
     elsif invitation.rejected?
       flash[:notice] = "You reject invitation."
     end

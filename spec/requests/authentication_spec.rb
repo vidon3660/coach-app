@@ -1,4 +1,4 @@
-require "spec_helper"
+    require "spec_helper"
 
 describe "Authentication" do
 
@@ -15,8 +15,8 @@ describe "Authentication" do
     fill_in "First name", with: "Peter"
     fill_in "Last name", with: "Jones"
     fill_in "Phone", with: "+48 123 456 789"
-    select_date Date.parse('01-01-1960'), :from => "user_birth" 
-    select "Poland", from:  "Country"
+    select_date Date.parse('01-01-1960'), :from => "player_birth" 
+    select "Poland", from:  "player_country"
     fill_in "City", with: "Cracow"
     fill_in "Address", with: "Wawel"
     click_button "Save"

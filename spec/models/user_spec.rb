@@ -57,13 +57,12 @@ describe User do
     end
   end
 
-  describe "validate" do
-    describe "birth date" do
-      it "should be before today" do
-        user.should be_valid
-        user.birth = Date.today + 2.day
-        user.should_not be_valid
-      end
+  describe "player" do
+    it "create player for user after create user" do
+      user = User.new(email: "user@example.com", password: "password")
+      user.player.should be_blank
+      user.save
+      user.player.should be_present
     end
   end
 
@@ -74,12 +73,6 @@ describe User do
       user.active!
       user.status.should == "active"
       user.should be_active
-    end
-  end
-
-  describe "#name" do
-    it "should return user full name" do
-      user.name.should == "#{user.first_name} #{user.last_name}"
     end
   end
 

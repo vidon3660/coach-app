@@ -1,6 +1,6 @@
 %h1 Invitation
 
-%p= "#{@invitation.inviting.name} want to add you to contacts."
+%p= "#{@invitation.inviting.player.name} want to add you to contacts."
 
 = form_for @invitation, method: :put do |f|
   = f.hidden_field :status, value: 'accepted'

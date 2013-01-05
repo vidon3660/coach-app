@@ -4,9 +4,8 @@ require "cancan/matchers"
 describe "User" do
 
   subject { ability }
-  let(:ability){ Ability.new(user) }
-  let(:user){ FactoryGirl.create(:user) }
-
+  let(:ability) { Ability.new(user) }
+  let(:user)    { FactoryGirl.create(:user) }
 
   describe "abilities" do
     describe "update profile" do

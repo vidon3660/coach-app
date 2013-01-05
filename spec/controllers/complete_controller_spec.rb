@@ -1,7 +1,9 @@
 require 'spec_helper'
 
 describe CompleteController do
-  let(:user) { FactoryGirl.create :user, status: "new" }
+  let(:user)   { FactoryGirl.create :user, status: "new" }
+  let(:player) { user.player }
+  
   before(:each) { sign_in(user) }
   
   describe "GET 'edit'" do
@@ -15,15 +17,16 @@ describe CompleteController do
 
   describe "PUT 'update'" do
     it "should update user if valid" do
-      put :update, user: { first_name: "Peter" }
+      put :update, player: { first_name: "Peter" }
       user.reload
+      player.reload
       user.should be_active
-      user.first_name.should == "Peter"
+      player.first_name.should == "Peter"
       response.should redirect_to(root_url)
     end
 
     it "should render 'edit' if user isn't valid" do
-      put :update, user: { birth: (Date.today + 2.day) }
+      put :update, player: { birth: (Date.today + 2.day) }
       user.should_not be_active
       response.should render_template ("complete/edit")
     end

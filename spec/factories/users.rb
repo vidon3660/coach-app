@@ -7,13 +7,12 @@ FactoryGirl.define do
   end
 
   factory :user do
+    player
+    
     email
     password "password"
     status "active"
     roles ["user"]
-    first_name "John"
-    last_name "Kowalsky"
-    city "London"
 
     factory :admin do
       roles ["admin"]

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121226124257) do
+ActiveRecord::Schema.define(:version => 20130104001659) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -58,9 +58,23 @@ ActiveRecord::Schema.define(:version => 20121226124257) do
   create_table "parameters", :force => true do |t|
     t.integer  "height"
     t.integer  "weight"
-    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "player_id"
+  end
+
+  create_table "players", :force => true do |t|
+    t.string   "address"
+    t.date     "birth"
+    t.string   "country"
+    t.string   "city"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "phone"
+    t.integer  "user_id"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
+    t.boolean  "delta",      :default => true, :null => false
   end
 
   create_table "relationships", :force => true do |t|
@@ -72,8 +86,8 @@ ActiveRecord::Schema.define(:version => 20121226124257) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "",   :null => false
-    t.string   "encrypted_password",     :default => "",   :null => false
+    t.string   "email",                  :default => "", :null => false
+    t.string   "encrypted_password",     :default => "", :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -82,18 +96,10 @@ ActiveRecord::Schema.define(:version => 20121226124257) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
-    t.string   "first_name"
-    t.string   "last_name"
-    t.date     "birth"
-    t.string   "country"
-    t.string   "city"
-    t.string   "address"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
     t.string   "status"
-    t.string   "phone"
     t.integer  "roles_mask"
-    t.boolean  "delta",                  :default => true, :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
