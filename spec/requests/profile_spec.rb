@@ -52,11 +52,11 @@ describe "User profile" do
     let!(:other_player) { other_user.player }
 
     before(:each) do
-      visit person_path(other_user)
-      current_path.should == person_path(other_user)
+      visit player_path(other_player)
+      current_path.should == player_path(other_player)
     end
 
-    it "show user profile" do
+    it "show user public profile" do
       page.has_content?(other_player.first_name).should be_true
       page.has_content?(other_player.last_name).should be_true
       page.has_content?(other_player.city).should be_true

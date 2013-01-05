@@ -24,7 +24,7 @@ describe "Contacts" do
 
     it "show contact" do
       click_link other_player.name
-      current_path.should == person_path(other_user)
+      current_path.should == player_path(other_player)
       page.has_content?(other_player.name).should be_true
     end
   end

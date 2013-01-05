@@ -3,4 +3,4 @@
 %h3 Users
 - unless @players.empty?
   - @players.each do |player|
-    %p= link_to player.name, person_path(player.user)
+    %p= link_to player.name, player_path(player)

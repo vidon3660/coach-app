@@ -2,10 +2,10 @@ require "spec_helper"
 
 describe "Friends invitations" do
 
-  let!(:user) { FactoryGirl.create(:user) }
-  let!(:other_user) { FactoryGirl.create(:user) }
+  let!(:user)         { FactoryGirl.create(:user) }
+  let!(:other_user)   { FactoryGirl.create(:user) }
   let!(:other_player) { other_user.player }
-  let!(:invitation) { FactoryGirl.create(:invitation, inviting: other_user, invited: user) }
+  let!(:invitation)   { FactoryGirl.create(:invitation, inviting: other_user, invited: user) }
 
   before(:each) do
     other_player.update_attribute(:first_name, "Paul")
@@ -14,20 +14,20 @@ describe "Friends invitations" do
 
   describe "send invitation" do
     before(:each) do
-      visit person_path(other_user)
-      current_path.should == person_path(other_user)
+      visit player_path(other_player)
+      current_path.should == player_path(other_player)
     end
 
     it "should send invitation to contacts" do
       click_button "Add to friends"
-      current_path.should == person_path(other_user)
+      current_path.should == player_path(other_player)
       page.has_content?("Invitation sent successfully.").should be_true
     end
 
     it "should send send invitation to training" do
       user.contacts << other_user
       click_button "Add to training"
-      current_path.should == person_path(other_user)
+      current_path.should == player_path(other_player)
       page.has_content?("Add to training successfully.").should be_true
     end
   end

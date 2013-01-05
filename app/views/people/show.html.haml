@@ -1,9 +1,0 @@
-%h1 User profile
-
-= button_to "Add to friends", person_invitations_path(@user)
-
-= button_to "Add to training", training_person_invitations_path(@user, training: true)
-
-%p= @user.player.first_name
-%p= @user.player.last_name
-%p= @user.player.city
