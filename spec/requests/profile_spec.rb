@@ -28,8 +28,8 @@ describe "User profile" do
       fill_in "First name", with: "Peter"
       fill_in "Last name", with: "Jones"
       fill_in "Phone", with: "+48 123 456 789"
-      select_date Date.parse('01-01-1960'), :from => "user_birth"
-      select "Poland", from:  "Country"
+      select_date Date.parse('01-01-1960'), :from => "player_birth"
+      select "Poland", from: "player_country"
       fill_in "City", with: "Cracow"
       fill_in "Address", with: "Wawel"
       click_button "Save"
@@ -48,7 +48,8 @@ describe "User profile" do
   end
 
   describe "user public profile" do
-    let!(:other_user) { FactoryGirl.create(:user) }
+    let!(:other_user)  { FactoryGirl.create(:user) }
+    let!(:other_player) { other_user.player }
 
     before(:each) do
       visit person_path(other_user)
@@ -56,9 +57,9 @@ describe "User profile" do
     end
 
     it "show user profile" do
-      page.has_content?(other_user.first_name).should be_true
-      page.has_content?(other_user.last_name).should be_true
-      page.has_content?(other_user.city).should be_true
+      page.has_content?(other_player.first_name).should be_true
+      page.has_content?(other_player.last_name).should be_true
+      page.has_content?(other_player.city).should be_true
     end
   end
 end

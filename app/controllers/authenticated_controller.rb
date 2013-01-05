@@ -5,6 +5,8 @@ class AuthenticatedController < ApplicationController
   before_filter :authenticate_user!
   before_filter :check_banned_user
 
+  helper_method :current_player
+
   protected
 
 	  def layout_by_resource
@@ -16,6 +18,10 @@ class AuthenticatedController < ApplicationController
 	  end
 
   private
+
+    def current_player
+      @current_user.player
+    end
 
     def check_banned_user
       redirect_to banned_path if current_user.banned?

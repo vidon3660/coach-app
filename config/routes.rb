@@ -13,6 +13,7 @@ GymSport::Application.routes.draw do
   resources :contacts
   resources :invitations #, except: [:create]
   resources :parameters
+  #TODO: players
   resources :people do
     resources :invitations do # , only: [:create] do
       collection do

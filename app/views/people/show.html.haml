@@ -4,6 +4,6 @@
 
 = button_to "Add to training", training_person_invitations_path(@user, training: true)
 
-%p= @user.first_name
-%p= @user.last_name
-%p= @user.city
+%p= @user.player.first_name
+%p= @user.player.last_name
+%p= @user.player.city

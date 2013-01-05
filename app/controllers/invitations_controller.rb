@@ -52,7 +52,7 @@ class InvitationsController < AuthenticatedController
 
     if invitation.accepted?
       invitation.make_relationship
-      flash[:notice] = "You add #{invitation.inviting.name} to your contacts."
+      flash[:notice] = "You add #{invitation.inviting.player.name} to your contacts."
     elsif invitation.rejected?
       flash[:notice] = "You reject invitation."
     end
