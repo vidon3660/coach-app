@@ -1,2 +1,28 @@
-%h1 Home#index
-%p Find me in app/views/home/index.html.haml
+!!!
+%html
+  %head
+    %title BooksExchange
+    = stylesheet_link_tag    "application", :media => "all"
+    = stylesheet_link_tag    "welcome", :media => "all"
+    = javascript_include_tag "application"
+    = javascript_include_tag "welcome"
+    = csrf_meta_tags
+
+  %body
+    .row
+      = render partial: "shared/notice"
+
+      = link_to "Login", new_user_session_path
+
+    %hr
+
+    = simple_form_for(@user, :url => registration_path(@user)) do |f|
+      = f.error_notification
+
+      .form-inputs
+        = f.input :email, :required => true, :autofocus => true
+        = f.input :password, :required => true
+        = f.input :password_confirmation, :required => true
+
+      .form-actions
+        = f.button :submit, "Sign up"

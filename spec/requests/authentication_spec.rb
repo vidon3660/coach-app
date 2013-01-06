@@ -4,8 +4,6 @@ describe "Authentication" do
 
   it "sign up" do
     visit root_path
-    click_link "Sign up"
-    current_path.should == new_user_registration_path
     fill_in "Email", with: "other_user@example.com"
     fill_in "Password", with: "password"
     fill_in "Password confirmation", with: "password"
