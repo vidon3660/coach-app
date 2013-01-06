@@ -1,8 +1,9 @@
 class HomeController < ApplicationController
 
-  layout "home"
+  layout false
 
   def index
+    @user = User.new
   end
 
   protected
