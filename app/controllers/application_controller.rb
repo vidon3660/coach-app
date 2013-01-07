@@ -10,7 +10,10 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    current_user.new? ? complete_url : board_url
+    # admin isn't user, so we check user type here.
+    if current_user
+      current_user.new? ? complete_url : board_url
+    end
   end
 
   def after_sign_out_path_for(resource)
