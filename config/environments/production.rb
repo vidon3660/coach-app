@@ -46,7 +46,7 @@ GymSport::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( banned.js authentication.js coach.js user.js welcome.js active_admin.js app.js foundation.min.js home.js jquery.foundation.accordion.js jquery.foundation.alert.js jquery.foundation.button.js jquery.foundation.clearing.js jquery.foundation.forms.js jquery.foundation.joyride.js jquery.foundation.magellan.js jquery.foundation.mediaQueryToggle.js jquery.foundation.navigation.js jquery.foundation.orbit.js jquery.foundation.reveal.js jquery.foundation.tabs.js jquery.foundation.tooltips.js jquery.foundation.topbar.js jquery.js jquery.placeholder.js modernizr.foundation.js )
+  config.assets.precompile += %w( banned.js authentication.js coach.js user.js welcome.js active_admin.js app.js foundation.min.js home.js jquery.foundation.accordion.js jquery.foundation.alert.js jquery.foundation.buttons.js jquery.foundation.clearing.js jquery.foundation.forms.js jquery.foundation.joyride.js jquery.foundation.magellan.js jquery.foundation.mediaQueryToggle.js jquery.foundation.navigation.js jquery.foundation.orbit.js jquery.foundation.reveal.js jquery.foundation.tabs.js jquery.foundation.tooltips.js jquery.foundation.topbar.js jquery.js jquery.placeholder.js modernizr.foundation.js )
   config.assets.precompile += %w( banned.css authentication.css coach.css user.css welcome.css foundation.min.css active_admin.css app.css )
 
   # Disable delivery errors, bad email addresses will be ignored
