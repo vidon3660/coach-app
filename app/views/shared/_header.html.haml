@@ -1,10 +1,3 @@
--# 
-  %p= "Welcome #{current_player.name}"
-  = link_to "Logout", destroy_user_session_path, method: :delete
-  = link_to "Profile", profile_path
-  = link_to "Invitations", invitations_path
-  = link_to "Contacts", contacts_path
-
 .fullContent
   .row
     %div{ class: "twelve columns" }
@@ -12,9 +5,10 @@
       %ul.nav-bar
         %li.active
           = link_to "Gym App", root_path
-
         %li
           = link_to "Invitations (2)", invitations_path
+        %li
+          = link_to "Contacts", contacts_path
         %li.right{ id: "" }
           = link_to "Logout", destroy_user_session_path, method: :delete
         %li.has-flyout.right#about

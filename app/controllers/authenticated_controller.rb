@@ -20,7 +20,7 @@ class AuthenticatedController < ApplicationController
   private
 
     def current_player
-      @current_user.player
+      current_user.player
     end
 
     def check_banned_user

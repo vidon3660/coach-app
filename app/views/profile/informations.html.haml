@@ -8,6 +8,7 @@
 - @parameters.each do |parameter|
   = "Height: #{parameter.height}"
   = "Weight: #{parameter.weight}"
+  %br
 
 = simple_form_for @parameter, url: parameters_path do |f|
   = f.input :height, collection: 120..220

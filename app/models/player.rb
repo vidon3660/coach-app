@@ -6,6 +6,9 @@ class Player < ActiveRecord::Base
 
   has_many :parameters
 
+  validates :first_name, presence: true, on: :update
+  validates :last_name, presence: true, on: :update
+
   validate :validate_birth
 
   define_index do

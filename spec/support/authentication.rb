@@ -1,4 +1,5 @@
 def sign_in(user=nil)
+
   @user = user ? user : FactoryGirl.create(:user)
 
   visit root_path
@@ -9,4 +10,5 @@ def sign_in(user=nil)
   click_button "Login"
   current_path.should == board_path
   page.has_content?("Signed in successfully.").should be_true
+
 end
