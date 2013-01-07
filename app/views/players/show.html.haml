@@ -1,8 +1,9 @@
 %h1 User profile
 
-= button_to "Add to friends", person_invitations_path(@player.user)
+- unless @player == current_player
+	= button_to "Add to friends", person_invitations_path(@player.user)
 
-= button_to "Add to training", training_person_invitations_path(@player.user, training: true)
+	= button_to "Add to training", training_person_invitations_path(@player.user, training: true)
 
 %p= @player.first_name
 %p= @player.last_name

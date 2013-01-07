@@ -15,7 +15,7 @@ GymSport::Application.configure do
   config.assets.compress = true
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = false
+  config.assets.compile = true #false
 
   # Generate digests for assets URLs
   config.assets.digest = true
@@ -46,8 +46,9 @@ GymSport::Application.configure do
   # config.action_controller.asset_host = "http://assets.example.com"
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
-  config.assets.precompile += %w( jquery_ujs.js banned.js authentication.js coach.js user.js welcome.js active_admin.js app.js foundation.min.js home.js jquery.foundation.accordion.js jquery.foundation.alerts.js jquery.foundation.buttons.js jquery.foundation.clearing.js jquery.foundation.forms.js jquery.foundation.joyride.js jquery.foundation.magellan.js jquery.foundation.mediaQueryToggle.js jquery.foundation.navigation.js jquery.foundation.orbit.js jquery.foundation.reveal.js jquery.foundation.tabs.js jquery.foundation.tooltips.js jquery.foundation.topbar.js jquery.js jquery.placeholder.js modernizr.foundation.js )
-  config.assets.precompile += %w( banned.css authentication.css coach.css user.css welcome.css foundation.min.css active_admin.css app.css )
+  config.assets.precompile += %w( jquery_ujs.js banned.js authentication.js coach.js user.js welcome.js app.js foundation.min.js home.js jquery.foundation.accordion.js jquery.foundation.alerts.js jquery.foundation.buttons.js jquery.foundation.clearing.js jquery.foundation.forms.js jquery.foundation.joyride.js jquery.foundation.magellan.js jquery.foundation.mediaQueryToggle.js jquery.foundation.navigation.js jquery.foundation.orbit.js jquery.foundation.reveal.js jquery.foundation.tabs.js jquery.foundation.tooltips.js jquery.foundation.topbar.js jquery.js jquery.placeholder.js modernizr.foundation.js )
+  config.assets.precompile += %w( banned.css authentication.css coach.css user.css welcome.css foundation.min.css app.css )
+  config.assets.precompile += %w( active_admin.css active_admin.js active_admin/print.css)
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
