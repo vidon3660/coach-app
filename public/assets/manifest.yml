@@ -37,6 +37,8 @@ home.js: home-158641dd81b4e9489fb633cdff9fba7f.js
 home/index.js: home-158641dd81b4e9489fb633cdff9fba7f.js
 jquery.foundation.accordion.js: jquery.foundation.accordion-31eb1b7231fab31e556703d13e9b79ec.js
 jquery/index.foundation.accordion.js: jquery.foundation.accordion-31eb1b7231fab31e556703d13e9b79ec.js
+jquery.foundation.alerts.js: jquery.foundation.alerts-7115c0196651d0fcdbf54c5b3f8045ef.js
+jquery/index.foundation.alerts.js: jquery.foundation.alerts-7115c0196651d0fcdbf54c5b3f8045ef.js
 jquery.foundation.buttons.js: jquery.foundation.buttons-43227a84605dead083edee45f16dc2a7.js
 jquery/index.foundation.buttons.js: jquery.foundation.buttons-43227a84605dead083edee45f16dc2a7.js
 jquery.foundation.clearing.js: jquery.foundation.clearing-781d36980c0e43ae01ab1da46f5c57ed.js
