@@ -1,17 +1,88 @@
+-#
+  !!!
+  %html
+    %head
+      %title BooksExchange
+      = stylesheet_link_tag    "application", :media => "all"
+      = stylesheet_link_tag    "user", :media => "all"
+      = javascript_include_tag "application"
+      = javascript_include_tag "user"
+      = csrf_meta_tags
+    %body
+      = render "shared/header"
+      = render "shared/notice"
+
+      = yield
+
+
+-# board page
 !!!
+-# /[if IE 8]>    <html class="no-js lt-ie9" lang="en">
+-# /[if gt IE 8]> <html class="no-js" lang="en">
 %html
   %head
-    %title BooksExchange
-    = stylesheet_link_tag    "application", :media => "all"
-    = stylesheet_link_tag    "user", :media => "all"
-    = javascript_include_tag "application"
-    = javascript_include_tag "user"
-    = csrf_meta_tags
+    %meta{ :charset => "utf-8" }
+
+    - # Set the viewport width to device width for mobile
+    %meta{ :name => "viewport", :content => "width=device-width" }
+
+    %title Trainer
+    %link{ :href => 'http://fonts.googleapis.com/css?family=Ubuntu+Condensed', :rel => 'stylesheet', :type => 'text/css' }
+    %link{ :href => 'http://fonts.googleapis.com/css?family=Ubuntu:400,500,700', :rel => 'stylesheet', :type => 'text/css' }
+    
+    -# <!-- Included CSS Files (Compressed) -->
+    = stylesheet_link_tag href="foundation.min"
+    = stylesheet_link_tag href="app"
+
+    = javascript_include_tag "modernizr.foundation"
+
+    -# TODO: refactor stylesheets and javascripts
+      = stylesheet_link_tag    "application", :media => "all"
+      = stylesheet_link_tag    "user", :media => "all"
+      = javascript_include_tag "application"
+      = javascript_include_tag "user"
+      = csrf_meta_tags
+
   %body
     = render "shared/header"
 
-    = render "shared/notice"
-
-    %hr
-
     = yield
+    
+    -# <!-- Included JS Files (Uncompressed) -->
+    = javascript_include_tag "jquery.js"
+    = javascript_include_tag "jquery.foundation.mediaQueryToggle.js"
+    = javascript_include_tag "jquery.foundation.forms.js"
+    = javascript_include_tag "jquery.foundation.reveal.js"
+    = javascript_include_tag "jquery.foundation.orbit.js"
+    = javascript_include_tag "jquery.foundation.navigation.js"
+    = javascript_include_tag "jquery.foundation.buttons.js"
+    = javascript_include_tag "jquery.foundation.tabs.js"
+    = javascript_include_tag "jquery.foundation.tooltips.js"
+    = javascript_include_tag "jquery.foundation.accordion.js"
+    = javascript_include_tag "jquery.placeholder.js"
+    = javascript_include_tag "jquery.foundation.alerts.js"
+    = javascript_include_tag "jquery.foundation.joyride.js"
+    = javascript_include_tag "jquery.foundation.clearing.js"
+    = javascript_include_tag "jquery.foundation.magellan.js"
+    
+    -# <!-- Included JS Files (Compressed) -->
+    = javascript_include_tag "jquery.js"
+    = javascript_include_tag "foundation.min.js"
+    = javascript_include_tag "jquery.foundation.forms.js"
+    
+    -# <!-- Initialize JS Plugins -->
+    = javascript_include_tag "app.js"
+  
+
+    :javascript
+      $(window).load(function(){
+        $("#featured").orbit({
+          animation: 'fade'
+        });
+      });
+      $(document).ready(function(){
+        $("#aboutContent").hide();
+        $("#about").click(function(){
+          $("#aboutContent").slideToggle("slow");
+        })
+      })
