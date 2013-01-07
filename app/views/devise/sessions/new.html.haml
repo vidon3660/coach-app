@@ -1,12 +1,91 @@
-%h2 Sign in
+!!!
+-# <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+-# <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+%html
+  %head
+    %meta{ :charset => "utf-8" }
 
-= simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
-  .form-inputs
-    = f.input :email, :required => false, :autofocus => true
-    = f.input :password, :required => false
-    = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
+    - # Set the viewport width to device width for mobile
+    %meta{ :name => "viewport", :content => "width=device-width" }
 
-  .form-actions
-    = f.button :submit, "Login"
+    %title Login
+    %link{ :href => 'http://fonts.googleapis.com/css?family=Ubuntu+Condensed', :rel => 'stylesheet', :type => 'text/css' }
+    %link{ :href => 'http://fonts.googleapis.com/css?family=Ubuntu:400,500,700', :rel => 'stylesheet', :type => 'text/css' }
+    
+    -# <!-- Included CSS Files (Compressed) -->
+    = stylesheet_link_tag href="foundation.min.css"
+    = stylesheet_link_tag href="app.css"
 
-= render "devise/shared/links"
+    = javascript_include_tag "modernizr.foundation.js"
+
+  %body#loginContainer
+    .row
+      #loginForm.twelve.columns.whitebg
+        %h1 Login form:
+
+        -#
+          %h2 Sign in
+
+          = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+            .form-inputs
+              = f.input :email, :required => false, :autofocus => true
+              = f.input :password, :required => false
+              = f.input :remember_me, :as => :boolean if devise_mapping.rememberable?
+
+            .form-actions
+              = f.button :submit, "Login"
+
+          = render "devise/shared/links"
+ 
+        = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f|
+          .row
+            .three.mobile-one.columns
+              %label.right.inline{ for: "username" } Username:
+            .seven.end.mobile-three.columns
+              = f.input :email, required: false, autofocus: true, label: false
+          .row
+            .three.mobile-on.columns
+              %label.right.inline{ for: "password"} Password:
+            .seven.end.mobile-three.columns
+              = f.input :password, required: false, label: false
+          .row
+            .three.mobile-one.columns
+              %label.right.inline{ for: "remember" } Remember me:
+            .seven.end.mobile-three.columns
+              - if devise_mapping.rememberable?
+                = f.input :remember_me, as: :boolean, label: false  
+          .row
+            = f.button :submit, "Login", class: "nice button center"
+
+    -# <!-- Included JS Files (Uncompressed) -->
+    = javascript_include_tag "jquery.js"
+    = javascript_include_tag "jquery.foundation.mediaQueryToggle.js"
+    = javascript_include_tag "jquery.foundation.forms.js"
+    = javascript_include_tag "jquery.foundation.reveal.js"
+    = javascript_include_tag "jquery.foundation.orbit.js"
+    = javascript_include_tag "jquery.foundation.navigation.js"
+    = javascript_include_tag "jquery.foundation.buttons.js"
+    = javascript_include_tag "jquery.foundation.tabs.js"
+    = javascript_include_tag "jquery.foundation.tooltips.js"
+    = javascript_include_tag "jquery.foundation.accordion.js"
+    = javascript_include_tag "jquery.placeholder.js"
+    = javascript_include_tag "jquery.foundation.alerts.js"
+    = javascript_include_tag "jquery.foundation.joyride.js"
+    = javascript_include_tag "jquery.foundation.clearing.js"
+    = javascript_include_tag "jquery.foundation.magellan.js"
+    
+    -# <!-- Included JS Files (Compressed) -->
+    = javascript_include_tag "jquery.js"
+    = javascript_include_tag "foundation.min.js"
+    = javascript_include_tag "jquery.foundation.forms.js"
+    
+    -# <!-- Initialize JS Plugins -->
+    = javascript_include_tag "app.js"
+  
+    :javascript
+      $(window).load(function(){
+        $("#featured").orbit({
+          animation: 'fade'
+        });
+      });
+    

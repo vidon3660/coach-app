@@ -1,2 +1,14 @@
-%p.notice= flash[:notice]
-%p.alert= flash[:alert]
+%p= "Welcome #{current_player.name}"
+
+- if flash
+  .row
+    .twelve.columns#alertBoxes
+      - if flash[:notice]
+        .alert-box.success
+          = flash[:notice]
+          %a.close{ href: "" } &times;
+
+      - if flash[:alert]
+        .alert-box.alert
+          = flash[:alert]
+          %a.close{ href: "" } &times;

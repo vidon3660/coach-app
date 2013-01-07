@@ -4,9 +4,9 @@ describe "Authentication" do
 
   it "sign up" do
     visit root_path
-    fill_in "Email", with: "other_user@example.com"
-    fill_in "Password", with: "password"
-    fill_in "Password confirmation", with: "password"
+    fill_in "user_email", with: "other_user@example.com"
+    fill_in "user_password", with: "password"
+    fill_in "user_password_confirmation", with: "password"
     click_button "Sign up"
     current_path.should == complete_path
     page.has_content?("Welcome! You have signed up successfully.").should be_true
@@ -30,6 +30,5 @@ describe "Authentication" do
     sign_in
     click_link "Logout"
     current_path.should == root_path
-    page.has_content?("Signed out successfully.").should be_true
   end
 end

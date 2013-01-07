@@ -13,4 +13,5 @@ class CompleteController < AuthenticatedController
       render :edit
     end
   end
+  
 end

@@ -1,28 +1,144 @@
+
+
+-# WELCOME PAGE
 !!!
+
+-# <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+-# <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 %html
   %head
-    %title BooksExchange
-    = stylesheet_link_tag    "application", :media => "all"
-    = stylesheet_link_tag    "welcome", :media => "all"
-    = javascript_include_tag "application"
-    = javascript_include_tag "welcome"
-    = csrf_meta_tags
+    %meta{ :charset => "utf-8" }
+
+    -# Set the viewport width to device width for mobile
+    %meta{ :name => "viewport", :content => "width=device-width" }
+
+    %title Welcome
+    %link{ href: 'http://fonts.googleapis.com/css?family=Lato:400,700,900', rel: 'stylesheet', type: 'text/css' }
+    
+    -# Included CSS Files (Compressed)
+    = stylesheet_link_tag href="foundation.min.css"
+    = stylesheet_link_tag href="app.css"
+
+    = javascript_include_tag "modernizr.foundation.js"
+
+    -# TODO: refactor stylesheets and javascripts!!!
+      = stylesheet_link_tag    "application", :media => "all"
+      = stylesheet_link_tag    "welcome", :media => "all"
+      = javascript_include_tag "application"
+      = javascript_include_tag "welcome"
+      = csrf_meta_tags
 
   %body
-    .row
+    -# TODO: add notice
       = render partial: "shared/notice"
+    .fullContent.NavMore
+      .row
+        .twelve.columns#main-nav
+          -# Entire Navbar Code
+          %ul.nav-bar
+            %li.active
+              %a{ href: "#" } GYM APP
+            %li.right
+              = link_to "Login", new_user_session_path
 
-      = link_to "Login", new_user_session_path
+    %div
+      #featuredContent
+        %div
+          %header
+            %h4 1.Grat App!
+            %span xample text. This is example text. This is example text. This is ex
+          
+          %img{ src: "http://flickholdr.com/2000/800/it", alt: "Placeholder image from flickholdr.com" }
+        %div
+          %header
+            %h4 2. Works on every device!
+            %span xample text. This is example text. This is example text. This is ex
+          %img{ src: "http://flickholdr.com/2000/800/sun/1", alt: "Placeholder image from flickholdr.com" }
+        %div
+          %header
+            %h4 3. Become our partner!
+            %span xample text. This is example text. This is example text. This is ex
+          %img{ src: "http://flickholdr.com/2000/800/sun/2", alt: "Placeholder image from flickholdr.com" }
 
-    %hr
+      = simple_form_for @user, :url => registration_path(@user), html: { id: "signUpForm"}  do |f|
+        .row
+          .twelve.columns
+            %h3 Sign Up
+          .four.columns
+            = f.input :email, placeholder: "Your email", type: "email", label: false
+          .three.columns
+            = f.input :password, placeholder: "Your password", label: false
+          .three.columns
+            = f.input :password_confirmation, placeholder: "Type your password again :)", label: false
+          .two.columns
+            = f.button :submit, "Sign up", class: "nice small button"
 
-    = simple_form_for(@user, :url => registration_path(@user)) do |f|
-      = f.error_notification
+        .form-inputs
 
-      .form-inputs
-        = f.input :email, :required => true, :autofocus => true
-        = f.input :password, :required => true
-        = f.input :password_confirmation, :required => true
+    .row#ourPluses
+      .four.columns
+        %h2 How awesom we are
+        %p
+          We choose to go to the moon. We choose to go to the moon in this decade and do the other things, not because they are easy, but because they are hard, because that goal will serve to organize and measure the best of our energies and skills, because that challenge is one that we are willing to accept, one we are unwilling to postpone, and one which we intend to win, and the others, too.</p>
+      .our.columns
+        %h2 How awesom we are
+        %p 
+          That's one small step for [a] man; one giant leap for mankind.
+      .four.columns
+        %h2 How awesom we are
+        %p
+          Houston, that may have seemed like a very long final phase. The autotargeting was taking us right into a ... crater, with a large number of big boulders and rocks ... and it required ... flying manually over the rock field to find a reasonably good area</p>
 
-      .form-actions
-        = f.button :submit, "Sign up"
+    %footer#mainFooter
+      .row
+        - 4.times do 
+          .three.columns
+            %h4 About us
+            %ul.nav.nav-stacked
+              %li
+                %a{ href: "/about-us"} Who we are
+              %li
+                %a{ href: "/press" } In the press
+              %li
+                %a{ href: "/partners" } Partners
+              %li
+                %a{ href: "/careers" } Careers
+                %a{ href: "/careers", class: "btn-pill" } 
+                  %i.icon.icon-arrow-bottom-left we're hiring!
+              %li
+                %a{ href: "/terms" } Terms of service
+              %li
+                %a{ href: "/privacy" } Privacy policy
+  
+  
+    -# <!-- Included JS Files (Compressed) -->
+    = javascript_include_tag "jquery.js"
+    = javascript_include_tag "foundation.min.js"
+    = javascript_include_tag "jquery.foundation.forms.js"
+    
+    -# <!-- Initialize JS Plugins -->
+    = javascript_include_tag "app.js"
+  
+    :javascript
+      $(window).load(function(){
+          $("#featuredContent").orbit({
+          animation: 'horizontal-push',       // fade, horizontal-slide, vertical-slide, horizontal-push
+          animationSpeed: 800,                // how fast animtions are
+          timer: false,                        // true or false to have the timer
+          resetTimerOnClick: false,           // true resets the timer instead of pausing slideshow progress
+          advanceSpeed: 4000,                 // if timer is enabled, time between transitions
+          pauseOnHover: false,                // if you hover pauses the slider
+          startClockOnMouseOut: false,        // if clock should start on MouseOut
+          startClockOnMouseOutAfter: 1000,    // how long after MouseOut should the timer start again
+          directionalNav: true,               // manual advancing directional navs
+          captions: true,                     // do you want captions?
+          captionAnimation: 'slideOpen',           // fade, slideOpen, none
+          captionAnimationSpeed: 800,         // if so how quickly should they animate in
+          bullets: false,                     // true or false to activate the bullet navigation
+          bulletThumbs: false,                // thumbnails for the bullets
+          bulletThumbLocation: '',            // location from this file where thumbs will be
+          afterSlideChange: function(){},     // empty function
+          fluid: true                         // or set a aspect ratio for content slides (ex: '4x3')
+        });
+      });
+  
