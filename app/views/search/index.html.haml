@@ -1,6 +1,7 @@
-%p= "Search #{params[:search]}"
+.row
+  %p= "Search #{params[:search]}"
 
-%h3 Users
-- unless @players.empty?
-  - @players.each do |player|
-    %p= link_to player.name, player_path(player)
+  %h3 Users
+  - unless @players.empty?
+    - @players.each do |player|
+      %p= link_to player.name, player_path(player)

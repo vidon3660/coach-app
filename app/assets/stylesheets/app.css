@@ -99,13 +99,13 @@ html{
 }
 #loginContainer{
   height:100%;
-  background: url(http://flickholdr.com/1920/1920/gym/1) center top no-repeat;
-background-size: cover;
+  background: url(http://www.esplanadeberlin.com/var/plain_site/storage/images/press-photos/gym-area2/4332-1-eng-US/gym-area.jpg) center top no-repeat;
+  background-size: cover;
 }
 #registerContainer{
   height:100%;
-  background: url(http://flickholdr.com/1920/1200/gym/1) center top no-repeat;
-background-size: cover;
+  background: url(http://www.esplanadeberlin.com/var/plain_site/storage/images/press-photos/gym-area2/4332-1-eng-US/gym-area.jpg) center top no-repeat;
+  background-size: cover;
 }
 #background{
   width:100%;
