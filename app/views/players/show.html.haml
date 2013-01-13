@@ -1,6 +1,6 @@
 .row
-	.twelve.columns
-		%h1 User profile
+  .twelve.columns
+    %h1 User profile
 
     - unless @player == current_player
       = button_to "Add to friends", person_invitations_path(@player.user)
