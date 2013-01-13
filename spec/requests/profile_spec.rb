@@ -48,10 +48,18 @@ describe "User profile" do
   end
 
   describe "user public profile" do
-    let!(:other_user)  { FactoryGirl.create(:user) }
+    let(:parameter)     { FactoryGirl.create(:parameter) }
+    let(:prohibition)   { FactoryGirl.create(:prohibition) }
+    let!(:other_user)   { FactoryGirl.create(:user) }
     let!(:other_player) { other_user.player }
 
     before(:each) do
+      @user.stub(:roles).and_return(["user", "coach"])
+
+      @user.player.trained_players  << other_player
+      other_player.prohibitions     << prohibition
+      other_player.parameters       << parameter
+
       visit player_path(other_player)
       current_path.should == player_path(other_player)
     end
@@ -60,6 +68,17 @@ describe "User profile" do
       page.has_content?(other_player.first_name).should be_true
       page.has_content?(other_player.last_name).should be_true
       page.has_content?(other_player.city).should be_true
+    end
+
+    context "user is coach" do
+      it "show user prohibitions" do
+        page.has_content?(prohibition.name).should be_true
+      end
+
+      it "show user parameters" do
+        page.has_content?(parameter.height.to_s).should be_true
+        page.has_content?(parameter.weight.to_s).should be_true
+      end
     end
   end
 end

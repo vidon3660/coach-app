@@ -10,15 +10,18 @@ describe User do
 
     it "should send invitations" do
       user.invited.should include(other_user)
+      other_user.invited.should_not include(user)
     end
 
     it "should get invitations" do
       other_user.inviting.should include(user)
+      user.inviting.should_not include(other_user)
     end
 
     it "should has contacts created by self" do
       user.contacts << other_user
       user.contacts.should include(other_user)
+      other_user.contacts.should_not include(user)
     end
   end
 

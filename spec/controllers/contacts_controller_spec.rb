@@ -9,7 +9,7 @@ describe ContactsController do
   before(:each) { sign_in(user) }
 
   describe "GET 'index'" do
-    it "returns http success" do
+    it "returns all user contacts" do
       get 'index'
       response.should be_success
       response.should render_template ("layouts/user")

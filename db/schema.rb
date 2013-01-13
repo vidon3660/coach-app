@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130104001659) do
+ActiveRecord::Schema.define(:version => 20130112145631) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -46,6 +46,17 @@ ActiveRecord::Schema.define(:version => 20130104001659) do
   add_index "admin_users", ["email"], :name => "index_admin_users_on_email", :unique => true
   add_index "admin_users", ["reset_password_token"], :name => "index_admin_users_on_reset_password_token", :unique => true
 
+  create_table "body_parts", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "body_parts_prohibitions", :force => true do |t|
+    t.integer "body_part_id"
+    t.integer "prohibition_id"
+  end
+
   create_table "invitations", :force => true do |t|
     t.integer  "inviting_id"
     t.integer  "invited_id"
@@ -77,10 +88,28 @@ ActiveRecord::Schema.define(:version => 20130104001659) do
     t.boolean  "delta",      :default => true, :null => false
   end
 
+  create_table "players_prohibitions", :force => true do |t|
+    t.integer "player_id"
+    t.integer "prohibition_id"
+  end
+
+  create_table "prohibitions", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "relationships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "contact_id"
     t.boolean  "training"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "traineds", :force => true do |t|
+    t.integer  "coach_id"
+    t.integer  "trained_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

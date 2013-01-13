@@ -40,9 +40,24 @@ describe Invitation do
   describe "#make_relationship" do
     it "should create relationship for accepted invitation" do
       -> { invitation.make_relationship }.should change(Relationship, :count).by(2)
-      contact = Relationship.order("created_at desc").first
-      user.contacts.should include(other_user)
-      other_user.contacts.should include(user)
+
+      user.contacts.should        include(other_user)
+      other_user.contacts.should  include(user)
+    end
+
+    context "trained" do
+      before(:each) { invitation.update_attribute(:training, true) }
+
+      it "should create training relationship" do
+        -> { invitation.make_relationship }.should change(Trained, :count).by(1)
+        trained = Trained.order("created_at desc").first
+
+        user.player.trained_players.should      include(other_user.player)
+        other_user.player.coach_players.should  include(user.player)
+
+        user.player.trained_players.should_not      include(user.player)
+        other_user.player.coach_players.should_not  include(other_user.player)
+      end
     end
 
     it "shouldn't create relationship for rejected invitation"
