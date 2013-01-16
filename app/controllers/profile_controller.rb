@@ -6,8 +6,10 @@ class ProfileController < AuthenticatedController
   end
 
   def informations
-    @parameters = current_player.parameters.order("created_at desc")
-    @parameter = Parameter.new
+    @parameters       = current_player.parameters.order("created_at desc")
+    @parameter        = Parameter.new
+    @prohibitions     = current_player.prohibitions
+    @user_prohibition = PlayerProhibition.new
   end
 
   def update

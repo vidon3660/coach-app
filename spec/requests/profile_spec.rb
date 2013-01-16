@@ -1,6 +1,9 @@
 require "spec_helper"
 
 describe "User profile" do
+
+  let(:prohibition)   { FactoryGirl.create(:prohibition) }
+
   before(:each) do
     sign_in
     click_link "Profile"
@@ -20,6 +23,7 @@ describe "User profile" do
 
   describe "change user informations" do
     before(:each) do
+      prohibition.save
       click_link "Informations"
       current_path.should == profile_informations_path
     end
@@ -40,18 +44,34 @@ describe "User profile" do
     it "should change data informations" do
       select "178", from: "Height"
       select "78", from: "Weight"
-      click_button "Add"
+      click_button "add_paramterer"
       current_path.should == profile_informations_path
       page.has_content?("178").should be_true
       page.has_content?("78").should be_true
     end
+
+    it "should change prohibitions" do
+      @user.player.prohibitions.should be_blank
+      select prohibition.name, from: "prohibition"
+      click_button "add_user_prohibition"
+      current_path.should == profile_informations_path
+      page.has_content?(prohibition.name).should be_true
+      @user.player.reload.prohibitions.should_not be_blank
+    end
   end
 
   describe "user public profile" do
-    let!(:other_user)  { FactoryGirl.create(:user) }
+    let(:parameter)     { FactoryGirl.create(:parameter) }
+    let!(:other_user)   { FactoryGirl.create(:user) }
     let!(:other_player) { other_user.player }
 
     before(:each) do
+      @user.stub(:roles).and_return(["user", "coach"])
+
+      @user.player.trained_players  << other_player
+      other_player.prohibitions     << prohibition
+      other_player.parameters       << parameter
+
       visit player_path(other_player)
       current_path.should == player_path(other_player)
     end
@@ -60,6 +80,17 @@ describe "User profile" do
       page.has_content?(other_player.first_name).should be_true
       page.has_content?(other_player.last_name).should be_true
       page.has_content?(other_player.city).should be_true
+    end
+
+    context "user is coach" do
+      it "show user prohibitions" do
+        page.has_content?(prohibition.name).should be_true
+      end
+
+      it "show user parameters" do
+        page.has_content?(parameter.height.to_s).should be_true
+        page.has_content?(parameter.weight.to_s).should be_true
+      end
     end
   end
 end

@@ -1,4 +1,5 @@
 class Relationship < ActiveRecord::Base
+
   attr_accessible :training
 
   belongs_to :user
@@ -6,4 +7,5 @@ class Relationship < ActiveRecord::Base
 
   validates :user_id, presence: true
   validates :contact_id, presence: true
+
 end

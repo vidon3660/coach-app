@@ -6,6 +6,15 @@ class Player < ActiveRecord::Base
 
   has_many :parameters
 
+  has_many :traineds, class_name: "Trained", foreign_key: "coach_id"
+  has_many :trained_players, through: :traineds, source: :player
+
+  has_many :coaches, class_name: "Trained", foreign_key: "trained_id"
+  has_many :coach_players, through: :coaches, source: :coach
+
+  has_many :player_prohibitions
+  has_many :prohibitions, through: :player_prohibitions
+
   validates :first_name, presence: true, on: :update
   validates :last_name, presence: true, on: :update
 

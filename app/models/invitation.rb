@@ -17,9 +17,16 @@ class Invitation < ActiveRecord::Base
   before_validation :set_status
 
   def make_relationship
-    User.transaction do
-      invited.contacts << inviting
-      inviting.contacts << invited
+    ActiveRecord::Base.transaction do
+      invited.contacts    << inviting
+      inviting.contacts   << invited
+
+      if training
+        t = Trained.new
+        t.coach  = inviting.player
+        t.player = invited.player
+        t.save
+      end
     end
   end
 
