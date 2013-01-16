@@ -21,6 +21,7 @@ GymSport::Application.routes.draw do
     end
   end
   resources :players
+  resources :user_prohibitions
 
   match "/banned" => "banned#index", as: :banned
 

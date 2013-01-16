@@ -12,11 +12,13 @@
     %p= @player.city
 
 - if current_user.is_coach? && current_player.trained_players.include?(@player)
+  %h3 Parameters
   %ul
     - @player.parameters.each do |parameter|
       %li= parameter.height
       %li= parameter.weight
 
+  %h3 Prohibitions (przeciwskazania)
   %ul
     - @player.prohibitions.each do |prohibition|
       %li= prohibition.name

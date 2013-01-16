@@ -12,8 +12,8 @@ class Player < ActiveRecord::Base
   has_many :coaches, class_name: "Trained", foreign_key: "trained_id"
   has_many :coach_players, through: :coaches, source: :coach
 
-
-  has_and_belongs_to_many :prohibitions
+  has_many :player_prohibitions
+  has_many :prohibitions, through: :player_prohibitions
 
   validates :first_name, presence: true, on: :update
   validates :last_name, presence: true, on: :update
