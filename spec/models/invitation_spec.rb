@@ -2,18 +2,28 @@ require 'spec_helper'
 
 describe Invitation do
 
-  let(:user) { FactoryGirl.create :user }
+  let(:user)       { FactoryGirl.create :user }
   let(:other_user) { FactoryGirl.create :user }
   let(:invitation) { FactoryGirl.build :invitation, inviting: user, invited: other_user }
+  let(:training)   { FactoryGirl.build :invitation, inviting: user, invited: other_user, training: true }
 
   describe "validation" do
 
-    it "should send only one invitation to user" do
-      invitation.should be_valid
-      -> { invitation.save }.should change(Invitation, :count).by(1)
-      next_invitation = FactoryGirl.build :invitation, inviting: user, invited: other_user
-      next_invitation.should_not be_valid
-      next_invitation.errors[:invited].should include("You've sent invitation yet.")
+    context "should send only one invitation to user" do
+      before(:each) do
+        invitation.should be_valid
+        -> { invitation.save }.should change(Invitation, :count).by(1)
+      end
+
+      it "should send only one friend invitaiton to user" do
+        next_invitation = FactoryGirl.build :invitation, inviting: user, invited: other_user
+        next_invitation.should_not be_valid
+        next_invitation.errors[:invited].should include("You've sent invitation yet.")
+      end
+
+      it "should send friend invitaiton and next training invitation to user" do
+        training.should be_valid
+      end
     end
 
     it "shouldn't send invitation to self" do

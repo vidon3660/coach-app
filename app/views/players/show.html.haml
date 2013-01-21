@@ -3,9 +3,17 @@
     %h1 User profile
 
     - unless @player == current_player
-      = button_to "Add to friends", person_invitations_path(@player.user)
+      - invitations = current_user.invitations.where(invited_id: @player.user.id)
+      - if invitations.present?
+        %p You're sent invitation to friend now.
+      - else
+        = button_to "Add to friends", person_invitations_path(@player.user)
 
-      = button_to "Add to training", training_person_invitations_path(@player.user, training: true)
+      - if invitations.present? && invitations.select(&:training).present?
+        %p You're sent training invitation to user now.
+      - else
+        = button_to "Add to training", training_person_invitations_path(@player.user, training: true)
+
 
     %p= @player.first_name
     %p= @player.last_name
