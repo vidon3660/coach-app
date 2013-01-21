@@ -25,23 +25,6 @@ describe User do
     end
   end
 
-  describe "roles" do
-    let(:roles) { %w[admin coach user] }
-
-    it "should has all roles after create (temporary, while application is before first public release)" do
-      user.roles.should == roles
-    end
-
-    it "should has available roles" do
-      user.roles = roles
-      user.roles.should == roles
-
-      roles = %w[bad_role]
-      user.roles = roles
-      user.roles.should be_empty
-    end
-  end
-
   describe "status" do
     it "should has available statuses" do
       ["new", "active", "banned"].each do |status|

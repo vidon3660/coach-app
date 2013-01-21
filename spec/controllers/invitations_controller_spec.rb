@@ -41,13 +41,13 @@ describe InvitationsController do
 
     context "traning" do
       it "should send invitation with training by coach" do
-        User.any_instance.stub(:roles).and_return(["user", "coach"])
+        User.any_instance.stub(:coach).and_return(true)
         post :create, person_id: other_user, training: true
         Invitation.order("created_at desc").first.training.should be_true
       end
 
       it "shouldn't send invitation by user" do
-        User.any_instance.stub(:roles).and_return(["user"])
+        User.any_instance.stub(:coach).and_return(false)
         post :create, person_id: other_user, training: true
         Invitation.order("created_at desc").first.training.should be_blank
       end
@@ -61,7 +61,7 @@ describe InvitationsController do
 
   describe "POST 'training'" do
     context "coach" do
-      before(:each) { User.any_instance.stub(:roles).and_return(["user", "coach"]) }
+      before(:each) { User.any_instance.stub(:coach).and_return(true) }
 
       context "to user contact" do
         it "should send invitation to training for exist contact" do
@@ -81,7 +81,7 @@ describe InvitationsController do
     end
 
     context "not coach" do
-      before(:each) { User.any_instance.stub(:roles).and_return(["user"]) }
+      before(:each) { User.any_instance.stub(:coach).and_return(false) }
 
       it "shouldn't send training invitation" do
         -> { post :training, person_id: other_user }.should_not change(Invitation, :count)

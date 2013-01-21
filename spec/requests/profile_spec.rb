@@ -66,7 +66,7 @@ describe "User profile" do
     let!(:other_player) { other_user.player }
 
     before(:each) do
-      @user.stub(:roles).and_return(["user", "coach"])
+      @user.stub(:coach).and_return(true)
 
       @user.player.trained_players  << other_player
       other_player.prohibitions     << prohibition

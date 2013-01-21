@@ -11,7 +11,7 @@
     %p= @player.last_name
     %p= @player.city
 
-- if current_user.is_coach? && current_player.trained_players.include?(@player)
+- if current_user.coach && current_player.trained_players.include?(@player)
   %h3 Parameters
   %ul
     - @player.parameters.each do |parameter|
