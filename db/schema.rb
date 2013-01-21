@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130116010133) do
+ActiveRecord::Schema.define(:version => 20130121231820) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -74,6 +74,13 @@ ActiveRecord::Schema.define(:version => 20130116010133) do
     t.integer  "player_id"
   end
 
+  create_table "player_practises", :force => true do |t|
+    t.integer  "practise_id"
+    t.integer  "player_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "player_prohibitions", :force => true do |t|
     t.integer  "player_id"
     t.integer  "prohibition_id"
@@ -93,6 +100,17 @@ ActiveRecord::Schema.define(:version => 20130116010133) do
     t.datetime "created_at",                   :null => false
     t.datetime "updated_at",                   :null => false
     t.boolean  "delta",      :default => true, :null => false
+  end
+
+  create_table "practises", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "practises_prohibitions", :force => true do |t|
+    t.integer "practise_id"
+    t.integer "prohibition_id"
   end
 
   create_table "prohibitions", :force => true do |t|
