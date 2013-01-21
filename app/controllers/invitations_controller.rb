@@ -1,6 +1,6 @@
 class InvitationsController < AuthenticatedController
   def index
-    @invitations = current_user.invitation_requests
+    @invitations = current_user.invitation_requests.where(status: "expectant")
   end
 
   def show
