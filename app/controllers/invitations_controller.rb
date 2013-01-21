@@ -11,7 +11,7 @@ class InvitationsController < AuthenticatedController
     invited = User.find(params[:person_id])
     player = invited.player
     invitation = Invitation.new
-    invitation.training = params[:training] if current_user.is_coach?
+    invitation.training = params[:training] if current_user.coach
     invitation.invited  = invited
     invitation.inviting = current_user
 
@@ -26,7 +26,7 @@ class InvitationsController < AuthenticatedController
     invited = User.find(params[:person_id])
     player = invited.player
 
-    if current_user.is_coach?
+    if current_user.coach
       contact = current_user.relationships.find_by_contact_id(params[:person_id])
       if contact
         contact.training = true
@@ -45,7 +45,7 @@ class InvitationsController < AuthenticatedController
         end
       end
     else
-      redirect_to person_path(invited), alert: "Error"
+      redirect_to player_path(invited.player), alert: "Error"
     end
   end
 

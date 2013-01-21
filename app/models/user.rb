@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
 
-  ROLES  = %w[admin coach user]
   STATUS = %w[new active banned]
 
   # Include default devise modules. Others available are:
@@ -26,8 +25,8 @@ class User < ActiveRecord::Base
   validates :status, inclusion: STATUS
 
   before_validation :set_initial_status
-  before_validation :set_roles
 
+  before_save :set_coach
   after_save :set_player
 
   state_machine :status do
@@ -40,21 +39,11 @@ class User < ActiveRecord::Base
     end
   end
 
-  def roles=(roles)
-    self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.inject(0, :+)
-  end
-
-  def roles
-    ROLES.reject do |r|
-      ((roles_mask || 0) & 2**ROLES.index(r)).zero?
-    end
-  end
-
-  def is_coach?
-    roles.include?("coach")
-  end
-
   private
+
+    def	set_coach
+      self.coach = true
+    end
 
     def set_player
       create_player unless player
@@ -62,10 +51,6 @@ class User < ActiveRecord::Base
 
     def set_initial_status
       self.status = "new" if status.blank?
-    end
-
-    def set_roles
-      self.roles = ROLES
     end
 
 end

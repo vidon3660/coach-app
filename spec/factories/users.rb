@@ -12,14 +12,10 @@ FactoryGirl.define do
     email
     password "password"
     status "active"
-    roles ["user"]
-
-    factory :admin do
-      roles ["admin"]
-    end
+    coach false
 
     factory :coach do
-      roles ["coach"]
+      coach true
     end
   end
 end
