@@ -12,6 +12,9 @@ class Player < ActiveRecord::Base
   has_many :coaches, class_name: "Trained", foreign_key: "trained_id"
   has_many :coach_players, through: :coaches, source: :coach
 
+  has_many :player_practises
+  has_many :practises, through: :player_practises
+
   has_many :player_prohibitions
   has_many :prohibitions, through: :player_prohibitions
 
