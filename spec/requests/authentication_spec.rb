@@ -19,7 +19,7 @@ describe "Authentication" do
     fill_in "Address", with: "Wawel"
     click_button "Save"
     current_path.should == board_path
-    page.has_content?("Welcome Peter Jones").should be_true
+    page.has_content?("Welcome Peter").should be_true
   end
 
   it "sign in" do

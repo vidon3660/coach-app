@@ -10,7 +10,7 @@ describe CompleteController do
     it "should return form to update current user" do
       get 'edit'
       response.should be_success
-      response.should render_template ("layouts/user")
+      response.should_not render_template ("layouts/user")
       response.should render_template ("complete/edit")
     end
   end

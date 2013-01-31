@@ -53,13 +53,15 @@ class Invitation < ActiveRecord::Base
     end
 
     def duplicate_invitation
-      invitation = Invitation.find_by_invited_id_and_inviting_id(invited_id, inviting_id)
+      if self.new_record?
+        invitation = Invitation.find_by_invited_id_and_inviting_id(invited_id, inviting_id)
 
-      if invitation
-        if invitation.training.blank? && self.training.present?
-          
-        else
-          errors.add(:invited, "You've sent invitation yet.")
+        if invitation
+          if invitation.training.blank? && self.training.present?
+
+          else
+            errors.add(:invited, "You've sent invitation yet.")
+          end
         end
       end
     end

@@ -1,4 +1,8 @@
 .row
+  %h2= link_to "Invitations (#{current_user.invitation_requests.where(status: "expectant").count})", invitations_path
+
+  %hr
+
   %aside.four.columns
     %h4 Opening data
     %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque a magna vitae nunc tempor rhoncus. Phasellus tempor risus at metus iaculis ultricies. Ut sagittis mauris in urna laoreet pellentesque. Ut quis accumsan nunc.
