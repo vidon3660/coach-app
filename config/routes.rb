@@ -1,4 +1,4 @@
-GymSport::Application.routes.draw do
+CoachApp::Application.routes.draw do
 
   ActiveAdmin.routes(self)
 

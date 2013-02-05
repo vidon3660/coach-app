@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-GymSport::Application.load_tasks
+CoachApp::Application.load_tasks
