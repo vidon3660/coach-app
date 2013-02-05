@@ -7,9 +7,9 @@
     %h1 Invitation
 
     - if @invitation.training
-      %p= "#{@invitation.inviting.player.name} want to add you to training."
+      %p= "#{@invitation.inviting.name} want to add you to training."
     - else
-      %p= "#{@invitation.inviting.player.name} want to add you to contacts."
+      %p= "#{@invitation.inviting.name} want to add you to contacts."
 
     = form_for @invitation, method: :put do |f|
       = f.hidden_field :status, value: 'accepted'

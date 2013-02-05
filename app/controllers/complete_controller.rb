@@ -8,7 +8,7 @@ class CompleteController < AuthenticatedController
   end
 
   def update
-    if current_player.update_attributes(params[:player])
+    if current_user.update_attributes(params[:user])
       current_user.active!
       redirect_to root_path
     else

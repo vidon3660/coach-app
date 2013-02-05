@@ -2,12 +2,11 @@ require 'spec_helper'
 
 describe ProfileController do
   let(:user) { FactoryGirl.create :user }
-  let(:player) { user.player }
 
   before(:each) { sign_in(user) }
 
   describe "GET 'index'" do
-    it "should return current player profile" do
+    it "should return current user profile" do
       get 'index'
       response.should be_success
       response.should render_template ("layouts/user")
@@ -16,7 +15,7 @@ describe ProfileController do
   end
 
   describe "GET 'informations'" do
-    it "should return player informations form" do
+    it "should return user informations form" do
       get 'informations'
       response.should be_success
       response.should render_template ("layouts/user")
@@ -25,15 +24,15 @@ describe ProfileController do
   end
 
   describe "PUT 'update'" do
-    it "should update player informations" do
-      put :update, player: { first_name: "Peter" }
-      player.reload
-      player.first_name.should == "Peter"
+    it "should update user informations" do
+      put :update, user: { first_name: "Peter" }
+      user.reload
+      user.first_name.should == "Peter"
       response.should redirect_to(profile_informations_url)
     end
 
-    it "should render 'informations' if player isn't valid" do
-      put :update, player: { birth: (Date.today + 2.day) }
+    it "should render 'informations' if user isn't valid" do
+      put :update, user: { birth: (Date.today + 2.day) }
       response.should render_template ("profile/informations" )
     end
   end

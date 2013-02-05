@@ -2,4 +2,4 @@
   .twelve.columns
     %h4 Invitations
     - @invitations.each do |invitation|
-      %p= link_to "You've got invitation from #{invitation.inviting.player.name}", invitation_path(invitation)
+      %p= link_to "You've got invitation from #{invitation.inviting.name}", invitation_path(invitation)

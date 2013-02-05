@@ -33,8 +33,8 @@ class Invitation < ActiveRecord::Base
 
       if training
         t = Trained.new
-        t.coach  = inviting.player
-        t.player = invited.player
+        t.coach  = inviting
+        t.user = invited
         t.save
       end
 

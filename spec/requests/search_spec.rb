@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe "Search" do
   let!(:user)  { FactoryGirl.create :user }
-  let(:player) { user.player }
 
   sphinx_environment :users do
     before(:each) do
@@ -13,15 +12,15 @@ describe "Search" do
 
     describe "users" do
       it "should search by user first name" do
-        fill_in "search", with: player.first_name
+        fill_in "search", with: user.first_name
       end
 
       after(:each) do
         click_button "Search"
         current_path.should == search_path
-        page.has_content?(player.name).should be_true
-        click_link player.name
-        current_path.should == player_path(player)
+        page.has_content?(user.name).should be_true
+        click_link user.name
+        current_path.should == player_path(user)
       end
     end
   end

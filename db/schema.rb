@@ -60,46 +60,25 @@ ActiveRecord::Schema.define(:version => 20130121231820) do
   create_table "invitations", :force => true do |t|
     t.integer  "inviting_id"
     t.integer  "invited_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
     t.string   "status"
     t.boolean  "training"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "parameters", :force => true do |t|
     t.integer  "height"
     t.integer  "weight"
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "player_id"
   end
 
-  create_table "player_practises", :force => true do |t|
+  create_table "practise_users", :force => true do |t|
     t.integer  "practise_id"
-    t.integer  "player_id"
+    t.integer  "user_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-  end
-
-  create_table "player_prohibitions", :force => true do |t|
-    t.integer  "player_id"
-    t.integer  "prohibition_id"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
-  end
-
-  create_table "players", :force => true do |t|
-    t.string   "address"
-    t.date     "birth"
-    t.string   "country"
-    t.string   "city"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "phone"
-    t.integer  "user_id"
-    t.datetime "created_at",                   :null => false
-    t.datetime "updated_at",                   :null => false
-    t.boolean  "delta",      :default => true, :null => false
   end
 
   create_table "practises", :force => true do |t|
@@ -111,6 +90,13 @@ ActiveRecord::Schema.define(:version => 20130121231820) do
   create_table "practises_prohibitions", :force => true do |t|
     t.integer "practise_id"
     t.integer "prohibition_id"
+  end
+
+  create_table "prohibition_users", :force => true do |t|
+    t.integer  "prohibition_id"
+    t.integer  "user_id"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
   end
 
   create_table "prohibitions", :force => true do |t|
@@ -135,8 +121,8 @@ ActiveRecord::Schema.define(:version => 20130121231820) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
+    t.string   "email",                  :default => "",   :null => false
+    t.string   "encrypted_password",     :default => "",   :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -145,11 +131,17 @@ ActiveRecord::Schema.define(:version => 20130121231820) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.date     "birth"
+    t.string   "country"
+    t.string   "city"
     t.string   "status"
-    t.integer  "roles_mask"
+    t.string   "phone"
     t.boolean  "coach"
+    t.boolean  "delta",                  :default => true, :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

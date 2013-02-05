@@ -5,6 +5,8 @@ class AddUserInformationToUsers < ActiveRecord::Migration
     add_column :users, :birth, :date
     add_column :users, :country, :string
     add_column :users, :city, :string
-    add_column :users, :address, :string
+    add_column :users, :status, :string
+    add_column :users, :phone, :string
+    add_column :users, :coach, :boolean
   end
 end

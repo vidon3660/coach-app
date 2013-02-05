@@ -1,14 +1,13 @@
-= simple_form_for current_player, url: url, method: :put do |f|
+= simple_form_for current_user, url: url, method: :put do |f|
   .form-inputs
     = f.input :first_name
     = f.input :last_name
     = f.input :birth, as: :date, start_year: Date.today.year - 100, end_year: Date.today.year - 12 , order: [:day, :month, :year] 
 
     = f.label :country
-    = country_select("player", "country")
+    = country_select("user", "country")
 
     = f.input :city
-    = f.input :address
     = f.input :phone
 
   .form-actions

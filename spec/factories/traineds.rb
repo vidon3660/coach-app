@@ -2,7 +2,8 @@
 
 FactoryGirl.define do
   factory :trained do
-    user_id 1
-    player_id "MyString"
+    # TODO: build this factory!!!
+    # user_id 1
+    # player_id "MyString"
   end
 end

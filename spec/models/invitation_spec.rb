@@ -62,11 +62,11 @@ describe Invitation do
         -> { invitation.make_relationship }.should change(Trained, :count).by(1)
         trained = Trained.order("created_at desc").first
 
-        user.player.trained_players.should      include(other_user.player)
-        other_user.player.coach_players.should  include(user.player)
+        user.trained_users.should      include(other_user)
+        other_user.coach_players.should  include(user)
 
-        user.player.trained_players.should_not      include(user.player)
-        other_user.player.coach_players.should_not  include(other_user.player)
+        user.trained_users.should_not      include(user)
+        other_user.coach_players.should_not  include(other_user)
       end
     end
 

@@ -1,7 +1,7 @@
 class ParametersController < AuthenticatedController
 
   def create
-    parameter = current_player.parameters.build(params[:parameter])
+    parameter = current_user.parameters.build(params[:parameter])
     if parameter.save
       flash[:notice] = "Add successful."
     else

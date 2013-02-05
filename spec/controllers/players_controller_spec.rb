@@ -8,8 +8,8 @@ describe PlayersController do
 
   describe "GET 'show'" do
     it "should return active user public profile" do
-      get :show, id: user.player.id
-      assigns(:player).should == user.player
+      get :show, id: user.id
+      assigns(:user).should == user
       response.should be_success
       response.should render_template ("layouts/user")
       response.should render_template ("players/show")

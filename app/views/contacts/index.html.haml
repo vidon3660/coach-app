@@ -3,10 +3,10 @@
     %h1 Friends
     %ul
       - @contacts.each do |contact|
-        %li= link_to contact.player.name, player_path(contact.player)
+        %li= link_to contact.name, player_path(contact)
 
   .six.columns
-    %h1 Players
+    %h1 Trainings
     %ul
       - @contacts.each do |contact|
-        %li= link_to contact.player.name, player_path(contact.player)
+        %li= link_to contact.name, player_path(contact)
