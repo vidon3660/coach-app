@@ -40,29 +40,18 @@ describe "Friends invitations" do
       page.has_content?(invitation.inviting.name).should be_true
     end
 
-    describe "show invitation" do
-      before(:each) do
-        click_link invitation.inviting.name
-        current_path.should == invitation_path(invitation)
-      end
+    it "accept invitation" do
+      # Make friends method in invitation and destroy invitation
+      click_button "Accept"
+      current_path.should == invitations_path
+      page.has_content?("You add #{invitation.inviting.name} to your friends.").should be_true
+    end
 
-      it "show content" do
-        page.has_content?(invitation.inviting.name).should be_true
-      end
-
-      it "accept" do
-        # Make friends method in invitation and destroy invitation
-        click_button "Accept"
-        current_path.should == invitations_path
-        page.has_content?("You add #{invitation.inviting.name} to your friends.").should be_true
-      end
-
-      it "reject" do
-        # destroy invitation
-        click_button "Reject"
-        current_path.should == invitations_path
-        page.has_content?("You reject invitation.").should be_true
-      end
+    it "reject invitation" do
+      # destroy invitation
+      click_button "Reject"
+      current_path.should == invitations_path
+      page.has_content?("You reject invitation.").should be_true
     end
   end
 end

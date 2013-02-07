@@ -68,6 +68,7 @@ class User < ActiveRecord::Base
     set_property delta: true
   end
 
+  # TODO: check this!
   scope :active, -> { where("users.status = 'active'") }
 
   state_machine :status do

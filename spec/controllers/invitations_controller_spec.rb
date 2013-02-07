@@ -24,16 +24,6 @@ describe InvitationsController do
     end
   end
 
-  describe "GET 'show'" do
-    it "returns http success" do
-      get 'show', id: invitation
-      response.should be_success
-      response.should render_template ("layouts/user")
-      response.should render_template ("invitations/show")
-      assigns(:invitation).should == invitation
-    end
-  end
-
   describe "POST 'create'" do
     it "should send only one invitation to friends for other user" do
       -> { post :create, person_id: other_user }.should change(Invitation, :count).by(1)

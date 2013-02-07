@@ -24,6 +24,10 @@ gem 'country-select', git: 'git://github.com/jamesds/country-select.git'
 gem 'heroku'
 
 group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
+
   gem 'haml-rails'
   gem 'pry'
   gem 'debugger'

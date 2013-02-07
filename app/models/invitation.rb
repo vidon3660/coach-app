@@ -26,6 +26,8 @@ class Invitation < ActiveRecord::Base
     end
   end
 
+  default_scope { order("created_at desc") }
+
   def make_relationship
     ActiveRecord::Base.transaction do
       inviting.trained_users  << invited  if training

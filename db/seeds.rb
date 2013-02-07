@@ -10,10 +10,11 @@ user = User.create(email: "user@example.com", password: "password", first_name: 
 
 (0..4).each do |i|
   u = User.create(email: "user#{i}@example.com", password: "password", first_name: "First#{i}", last_name: "Last#{i}")
+  u.active
   invitation = u.invitations.build
   invitation.training = true
   invitation.invited = user
-  u.save
+  invitation.save
 end
 
 (5..10).each do |i|
@@ -21,7 +22,7 @@ end
   invitation = u.invitations.build
   invitation.friend = true
   invitation.invited = user
-  u.save
+  invitation.save
 end
 
 5.times do |i|
