@@ -2,11 +2,13 @@ require 'spec_helper'
 
 describe InvitationsController do
 
-  let!(:user)       { FactoryGirl.create :user }
-  let!(:other_user) { FactoryGirl.create :user }
-  let(:banned_user) { FactoryGirl.create :user, status: "banned" }
-  let(:new_user)    { FactoryGirl.create :user, status: "new" }
-  let!(:invitation) { FactoryGirl.create :invitation, inviting: other_user, invited: user }
+  #let!(:user)       { FactoryGirl.create :user }
+  #let!(:other_user) { FactoryGirl.create :user }
+  let(:banned_user)       { FactoryGirl.create :user, status: "banned" }
+  let(:new_user)          { FactoryGirl.create :user, status: "new" }
+  let!(:invitation)       { FactoryGirl.create :invitation } # , inviting: other_user, invited: user }
+  let(:user)              { invitation.invited  }
+  let(:other_user)        { invitation.inviting }
 
   before(:each) do
     sign_in(user)
@@ -33,90 +35,76 @@ describe InvitationsController do
   end
 
   describe "POST 'create'" do
-    it "should send only one invitation to contacts for other user" do
+    it "should send only one invitation to friends for other user" do
       -> { post :create, person_id: other_user }.should change(Invitation, :count).by(1)
       response.should be_redirect
       -> { post :create, person_id: user }.should_not change(Invitation, :count)
-    end
-
-    context "traning" do
-      it "should send invitation with training by coach" do
-        User.any_instance.stub(:coach).and_return(true)
-        post :create, person_id: other_user, training: true
-        Invitation.order("created_at desc").first.training.should be_true
-      end
-
-      it "shouldn't send invitation by user" do
-        User.any_instance.stub(:coach).and_return(false)
-        post :create, person_id: other_user, training: true
-        Invitation.order("created_at desc").first.training.should be_blank
-      end
-
-      it "should send invitation without training" do
-        post :create, person_id: other_user
-        Invitation.order("created_at desc").first.training.should be_blank
-      end
     end
   end
 
   describe "POST 'training'" do
     context "coach" do
-      before(:each) { User.any_instance.stub(:coach).and_return(true) }
-
-      context "to user contact" do
-        it "should send invitation to training for exist contact" do
-          user.contacts << other_user
-          -> { post :training, person_id: other_user }.should_not change(Invitation, :count)
-          user.relationships.find_by_contact_id(other_user.id).training.should be_true
-          # Invitation.order("created_at desc").first.training.should be_true
-        end
-      end
-
-      context "to new contact" do
-        it "should send invitation to contacts and training for user" do
-          -> { post :training, person_id: other_user }.should change(Invitation, :count).by(1)
-          Invitation.order("created_at desc").first.training.should be_blank
-        end
+      it "should send invitation to training for user" do
+        User.any_instance.stub(:coach).and_return(true)
+        -> { post :training, person_id: other_user }.should change(Invitation, :count).by(1)
+        Invitation.order("created_at desc").first.training.should be_present
+        -> { post :training, person_id: other_user }.should_not change(Invitation, :count)
       end
     end
 
     context "not coach" do
-      before(:each) { User.any_instance.stub(:coach).and_return(false) }
-
       it "shouldn't send training invitation" do
+        User.any_instance.stub(:coach).and_return(false)
         -> { post :training, person_id: other_user }.should_not change(Invitation, :count)
       end
     end
   end
 
   describe "PUT 'update'" do
-    describe "accept invitation" do
-      it "should create realtionship" do
-        -> {
-          put :update, id: invitation, invitation: {status: "accepted" }
-        }.should change(Relationship, :count).by(2)
+    context "friendships" do
+      before(:each) { Invitation.any_instance.stub(:friend).and_return(true) }
+
+      describe "accept invitation" do
+        it "should create friendship" do
+          -> {
+            put :update, id: invitation, invitation: { status: "accepted" }
+          }.should change(Friendship, :count).by(1)
+          invitation.reload.status.should == "accepted"
+        end
       end
 
-      it "should set status for accepted" do
-        pending "NOT WORKING!!!"
-        invitation = FactoryGirl.create :invitation, inviting: other_user, invited: user
-        put :update, id: invitation, invitation: { status: "accepted" }
-        invitation.reload.status.should == "accepted"
+      describe "reject invitation" do
+        it "shouldn't create Friendship" do
+          -> {
+            put :update, id: invitation, invitation: { status: "rejected" }
+          }.should_not change(Friendship, :count)
+          invitation.reload.status.should == "rejected"
+        end
       end
     end
 
-    describe "reject invitation" do
-      it "shouldn't create relationship" do
-        -> {
-          put :update, id: invitation, invitation: { status: "rejected" }
-        }.should change(Relationship, :count).by(0)
+    context "trainings" do
+      before(:each) { Invitation.any_instance.stub(:training).and_return(true) }
+
+      describe "accept invitation" do
+        it "should create training" do
+          -> {
+            put :update, id: invitation, invitation: { status: "accepted" }
+          }.should change(Training, :count).by(1)
+          invitation.reload.status.should == "accepted"
+        end
       end
 
-      it "should set status for rejected" do
-        pending "NOT WORKING!!!"
-        put :update, id: invitation, invitation: {status: "rejected" }
-        Invitation.first.status.should == "rejected"
+      describe "reject invitation" do
+        it "shouldn't create training" do
+          -> {
+            put :update, id: invitation, invitation: { status: "rejected" }
+          }.should_not change(Training, :count)
+          invitation.reload.status.should == "rejected"
+        end
       end
     end
+
+
   end
 end

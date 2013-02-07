@@ -1,12 +1,18 @@
 .row
-  .six.columns
+  .four.columns
     %h1 Friends
     %ul
-      - @contacts.each do |contact|
-        %li= link_to contact.name, player_path(contact)
+      - @friends.each do |friend|
+        %li= link_to friend.name, player_path(friend)
 
-  .six.columns
+  .four.columns
     %h1 Trainings
     %ul
-      - @contacts.each do |contact|
-        %li= link_to contact.name, player_path(contact)
+      - @trained_users.each do |trained_user|
+        %li= link_to trained_user.name, player_path(trained_user)
+
+  .four.columns
+    %h1 Coaches
+    %ul
+      - @coaches.each do |coach|
+        %li= link_to coach.name, player_path(coach)

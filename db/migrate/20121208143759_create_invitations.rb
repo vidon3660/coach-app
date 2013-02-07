@@ -4,6 +4,7 @@ class CreateInvitations < ActiveRecord::Migration
       t.integer :inviting_id
       t.integer :invited_id
       t.string :status
+      t.boolean :friend
       t.boolean :training
 
       t.timestamps

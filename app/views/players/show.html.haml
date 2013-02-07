@@ -12,7 +12,7 @@
       - if invitations.present? && invitations.select(&:training).present?
         %p You're sent training invitation to user now.
       - else
-        = button_to "Add to training", training_person_invitations_path(@user, training: true)
+        = button_to "Add to training", training_person_invitations_path(@user)
 
 
     %p= @user.first_name

@@ -57,10 +57,18 @@ ActiveRecord::Schema.define(:version => 20130121231820) do
     t.integer "prohibition_id"
   end
 
+  create_table "friendships", :force => true do |t|
+    t.integer  "friend_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "invitations", :force => true do |t|
     t.integer  "inviting_id"
     t.integer  "invited_id"
     t.string   "status"
+    t.boolean  "friend"
     t.boolean  "training"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
@@ -105,17 +113,9 @@ ActiveRecord::Schema.define(:version => 20130121231820) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "relationships", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "contact_id"
-    t.boolean  "training"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "traineds", :force => true do |t|
+  create_table "trainings", :force => true do |t|
     t.integer  "coach_id"
-    t.integer  "trained_id"
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end

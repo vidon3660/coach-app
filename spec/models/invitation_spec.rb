@@ -2,14 +2,15 @@ require 'spec_helper'
 
 describe Invitation do
 
-  let(:user)       { FactoryGirl.create :user }
-  let(:other_user) { FactoryGirl.create :user }
-  let(:invitation) { FactoryGirl.build :invitation, inviting: user, invited: other_user }
-  let(:training)   { FactoryGirl.build :invitation, inviting: user, invited: other_user, training: true }
+  let(:user)              { FactoryGirl.create :user }
+  let(:other_user)        { FactoryGirl.create :user }
+  let(:invitation)        { FactoryGirl.build :invitation, inviting: user, invited: other_user }
+  let(:friend_invitation) { FactoryGirl.build :invitation, inviting: user, invited: other_user, friend: true }
+  let(:training)          { FactoryGirl.build :invitation, inviting: user, invited: other_user, training: true }
 
   describe "validation" do
 
-    context "should send only one invitation to user" do
+    context "send only one invitation to user" do
       before(:each) do
         invitation.should be_valid
         -> { invitation.save }.should change(Invitation, :count).by(1)
@@ -49,24 +50,25 @@ describe Invitation do
 
   describe "#make_relationship" do
     it "should create relationship for accepted invitation" do
-      -> { invitation.make_relationship }.should change(Relationship, :count).by(2)
+      -> { friend_invitation.make_relationship }.should change(Friendship, :count).by(1)
 
-      user.contacts.should        include(other_user)
-      other_user.contacts.should  include(user)
+      user.friends.should        include(other_user)
+      other_user.friends.should  include(user)
     end
 
-    context "trained" do
+    context "training" do
       before(:each) { invitation.update_attribute(:training, true) }
 
       it "should create training relationship" do
-        -> { invitation.make_relationship }.should change(Trained, :count).by(1)
-        trained = Trained.order("created_at desc").first
+        -> { invitation.make_relationship }.should change(Training, :count).by(1)
 
-        user.trained_users.should      include(other_user)
-        other_user.coach_players.should  include(user)
+        training = Training.order("created_at desc").first
 
-        user.trained_users.should_not      include(user)
-        other_user.coach_players.should_not  include(other_user)
+        user.trained_users.should include(other_user)
+        other_user.coaches.should include(user)
+
+        user.trained_users.should_not include(user)
+        other_user.coaches.should_not include(other_user)
       end
     end
 

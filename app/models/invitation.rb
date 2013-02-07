@@ -2,7 +2,7 @@ class Invitation < ActiveRecord::Base
 
   STATUS = ["accepted", "expectant", "rejected"]
 
-  attr_accessible :status, :training
+  attr_accessible :status, :friend
 
   belongs_to :invited, class_name: "User"
   belongs_to :inviting, class_name: "User"
@@ -28,16 +28,8 @@ class Invitation < ActiveRecord::Base
 
   def make_relationship
     ActiveRecord::Base.transaction do
-      invited.contacts    << inviting
-      inviting.contacts   << invited
-
-      if training
-        t = Trained.new
-        t.coach  = inviting
-        t.user = invited
-        t.save
-      end
-
+      inviting.trained_users  << invited  if training
+      inviting.direct_friends << invited  if friend
       self.accepted
     end
   end

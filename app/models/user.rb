@@ -12,28 +12,38 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :birth, :city, :country, :first_name, :last_name, :phone
 
-  has_many :relationships
-  has_many :contacts, through: :relationships
 
-  has_many :invitations, class_name: "Invitation", foreign_key: "inviting_id"
-  has_many :invited, through: :invitations, class_name: "User", foreign_key: "invited_id"
-
+  # Contacts
+  has_many :invitations, foreign_key: "inviting_id"
   has_many :invitation_requests, class_name: "Invitation", foreign_key: "invited_id"
-  has_many :inviting, through: :invitation_requests, class_name: "User", foreign_key: "inviting_id"
+  has_many :invited_users, through: :invitations, source: :invited
+  has_many :inviting_users, through: :invitation_requests, source: :inviting
+
+  has_many :friendships
+  has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
+  has_many :direct_friends, :through => :friendships, :source => :friend
+  has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+
+  has_many :trainings, foreign_key: "coach_id"
+  has_many :inverse_trainings, class_name: "Training", foreign_key: "user_id"
+  has_many :trained_users, through: :trainings, source: :user
+  has_many :coaches, through: :inverse_trainings, source: :coach
+
+  def friends
+    direct_friends | inverse_friends
+  end
+
+  # User
 
   has_many :parameters
-
-  has_many :traineds, class_name: "Trained", foreign_key: "coach_id"
-  has_many :trained_users, through: :traineds, source: :user
-
-  has_many :coaches, class_name: "Trained", foreign_key: "trained_id"
-  has_many :coach_players, through: :coaches, source: :coach
 
   has_many :practise_users
   has_many :users, through: :practise_users
 
   has_many :prohibition_users
   has_many :prohibitions, through: :prohibition_users
+
+  # validations
 
   validates :first_name, presence: true, on: :update
   validates :last_name, presence: true, on: :update

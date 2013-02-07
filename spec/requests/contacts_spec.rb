@@ -4,7 +4,7 @@ describe "Contacts" do
 
   let!(:user) { FactoryGirl.create(:user) }
   let!(:other_user) { FactoryGirl.create(:user) }
-  let!(:relationship) { FactoryGirl.create(:relationship, user: user, contact: other_user) }
+  let!(:friendship) { FactoryGirl.create(:friendship, user: user, friend: other_user) }
 
   before(:each) do
     other_user.update_attribute(:first_name, "Paul")

@@ -2,19 +2,23 @@ require 'spec_helper'
 
 describe ContactsController do
 
-  let!(:user)       { FactoryGirl.create :user }
-  let!(:other_user) { FactoryGirl.create :user }
-  let!(:relationship) { FactoryGirl.create(:relationship, user: user, contact: other_user) }
+  let!(:friendship) { FactoryGirl.create :friendship }
+  let(:friend)      { friendship.friend }
+  let(:user)        { friendship.user }
+  let!(:training)    { FactoryGirl.create :training, coach: user, user: friend }
+  let!(:training2)    { FactoryGirl.create :training, coach: friend, user: user }
 
   before(:each) { sign_in(user) }
 
   describe "GET 'index'" do
-    it "returns all user contacts" do
+    it "returns all user friends, coaches and trained users" do
       get 'index'
       response.should be_success
       response.should render_template ("layouts/user")
       response.should render_template ("contacts/index")
-      assigns(:contacts).should include(other_user)
+      assigns(:friends).should include(friend)
+      assigns(:coaches).should include(friend)
+      assigns(:trained_users).should include(friend)
     end
   end
 

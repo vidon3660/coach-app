@@ -5,3 +5,28 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+user = User.create(email: "user@example.com", password: "password", first_name: "Example", last_name: "User")
+
+(0..4).each do |i|
+  u = User.create(email: "user#{i}@example.com", password: "password", first_name: "First#{i}", last_name: "Last#{i}")
+  invitation = u.invitations.build
+  invitation.training = true
+  invitation.invited = user
+  u.save
+end
+
+(5..10).each do |i|
+  u = User.create(email: "user#{i}@example.com", password: "password", first_name: "First#{i}", last_name: "Last#{i}")
+  invitation = u.invitations.build
+  invitation.friend = true
+  invitation.invited = user
+  u.save
+end
+
+5.times do |i|
+  u = User.create(email: "user#{i}#{i}@example.com", password: "password", first_name: "First#{i}#{i}", last_name: "Last#{i}#{i}")
+  u.direct_friends << user
+  u.coaches << user
+  u.trained_users << user
+end
