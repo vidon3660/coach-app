@@ -2,7 +2,7 @@ class Invitation < ActiveRecord::Base
 
   STATUS = ["accepted", "expectant", "rejected"]
 
-  attr_accessible :status, :training
+  attr_accessible :status, :friend
 
   belongs_to :invited, class_name: "User"
   belongs_to :inviting, class_name: "User"
@@ -26,18 +26,12 @@ class Invitation < ActiveRecord::Base
     end
   end
 
+  default_scope { order("created_at desc") }
+
   def make_relationship
     ActiveRecord::Base.transaction do
-      invited.contacts    << inviting
-      inviting.contacts   << invited
-
-      if training
-        t = Trained.new
-        t.coach  = inviting.player
-        t.player = invited.player
-        t.save
-      end
-
+      inviting.trained_users  << invited  if training
+      inviting.direct_friends << invited  if friend
       self.accepted
     end
   end
@@ -53,13 +47,15 @@ class Invitation < ActiveRecord::Base
     end
 
     def duplicate_invitation
-      invitation = Invitation.find_by_invited_id_and_inviting_id(invited_id, inviting_id)
+      if self.new_record?
+        invitation = Invitation.find_by_invited_id_and_inviting_id(invited_id, inviting_id)
 
-      if invitation
-        if invitation.training.blank? && self.training.present?
-          
-        else
-          errors.add(:invited, "You've sent invitation yet.")
+        if invitation
+          if invitation.training.blank? && self.training.present?
+
+          else
+            errors.add(:invited, "You've sent invitation yet.")
+          end
         end
       end
     end

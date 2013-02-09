@@ -1,7 +1,9 @@
 class ContactsController < AuthenticatedController
 
   def index
-    @contacts = current_user.contacts
+    @friends = current_user.friends
+    @trained_users = current_user.trained_users
+    @coaches = current_user.coaches
   end
   
 end

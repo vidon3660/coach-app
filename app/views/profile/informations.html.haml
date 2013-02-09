@@ -34,7 +34,7 @@
       = "Prohibition: #{prohibition.name}"
       %br
 
-    - available_prohibtions = Prohibition.all - current_player.prohibitions
+    - available_prohibtions = Prohibition.all - current_user.prohibitions
     - if available_prohibtions.present?
       = form_tag user_prohibitions_path do
         = select_tag "prohibition", options_from_collection_for_select(available_prohibtions, 'id', 'name')

@@ -1,7 +1,7 @@
 class PlayersController < AuthenticatedController
 
   def show
-    @player = Player.find(params[:id])
+    @user = User.find(params[:id])
   end
 
 end

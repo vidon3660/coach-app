@@ -6,22 +6,22 @@ describe User do
   let(:other_user) { FactoryGirl.create :user }
 
   describe "associations" do
-    before(:each) { user.invited << other_user }
+    before(:each) { user.invited_users << other_user }
 
     it "should send invitations" do
-      user.invited.should include(other_user)
-      other_user.invited.should_not include(user)
+      user.invited_users.should include(other_user)
+      other_user.invited_users.should_not include(user)
     end
 
     it "should get invitations" do
-      other_user.inviting.should include(user)
-      user.inviting.should_not include(other_user)
+      other_user.inviting_users.should include(user)
+      user.inviting_users.should_not include(other_user)
     end
 
     it "should has contacts created by self" do
-      user.contacts << other_user
-      user.contacts.should include(other_user)
-      other_user.contacts.should_not include(user)
+      user.direct_friends << other_user
+      user.friends.should include(other_user)
+      other_user.friends.should include(user)
     end
   end
 
@@ -43,15 +43,6 @@ describe User do
     end
   end
 
-  describe "player" do
-    it "create player for user after create user" do
-      user = User.new(email: "user@example.com", password: "password")
-      user.player.should be_blank
-      user.save
-      user.player.should be_present
-    end
-  end
-
   describe "#active!" do
     it "should activate user" do
       user = FactoryGirl.create :user, status: ""
@@ -59,6 +50,22 @@ describe User do
       user.active!
       user.status.should == "active"
       user.should be_active
+    end
+  end
+
+  describe "validate" do
+    describe "birth date" do
+      it "should be before today" do
+        user.should be_valid
+        user.birth = Date.today + 2.day
+        user.should_not be_valid
+      end
+    end
+  end
+
+  describe "#name" do
+    it "should return user full name" do
+      user.name.should == "#{user.first_name} #{user.last_name}"
     end
   end
 

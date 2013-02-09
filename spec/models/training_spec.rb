@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe PlayerProhibition do
+describe Training do
   pending "add some examples to (or delete) #{__FILE__}"
 end

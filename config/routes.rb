@@ -1,4 +1,4 @@
-GymSport::Application.routes.draw do
+CoachApp::Application.routes.draw do
 
   ActiveAdmin.routes(self)
 
@@ -11,7 +11,7 @@ GymSport::Application.routes.draw do
   end
   
   resources :contacts
-  resources :invitations #, except: [:create]
+  resources :invitations, except: [:show, :edit]
   resources :parameters
   resources :people do
     resources :invitations do # , only: [:create] do

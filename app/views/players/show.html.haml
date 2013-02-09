@@ -2,31 +2,35 @@
   .twelve.columns
     %h1 User profile
 
-    - unless @player == current_player
-      - invitations = current_user.invitations.where(invited_id: @player.user.id)
+    - if @user != current_user
+      - invitations = current_user.invitations.where(invited_id: @user.id)
       - if invitations.present?
         %p You're sent invitation to friend now.
       - else
-        = button_to "Add to friends", person_invitations_path(@player.user)
+        - unless current_user.friends.include?(@user)
+          = button_to "Add to friends", person_invitations_path(@user)
 
       - if invitations.present? && invitations.select(&:training).present?
         %p You're sent training invitation to user now.
       - else
-        = button_to "Add to training", training_person_invitations_path(@player.user, training: true)
+        - if current_user.trained_users.include?(@user)
+          %p= "You are coach for this user."
+          %p= "Close training!"
+        - else
+          = button_to "Add to training", training_person_invitations_path(@user)
 
+    %p= @user.first_name
+    %p= @user.last_name
+    %p= @user.city
 
-    %p= @player.first_name
-    %p= @player.last_name
-    %p= @player.city
-
-- if current_user.coach && current_player.trained_players.include?(@player)
+- if current_user.coach && current_user.trained_users.include?(@user)
   %h3 Parameters
   %ul
-    - @player.parameters.each do |parameter|
+    - @user.parameters.each do |parameter|
       %li= parameter.height
       %li= parameter.weight
 
   %h3 Prohibitions (przeciwskazania)
   %ul
-    - @player.prohibitions.each do |prohibition|
+    - @user.prohibitions.each do |prohibition|
       %li= prohibition.name

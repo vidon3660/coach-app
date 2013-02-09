@@ -4,31 +4,29 @@ describe "Friends invitations" do
 
   let!(:user)         { FactoryGirl.create(:user) }
   let!(:other_user)   { FactoryGirl.create(:user) }
-  let!(:other_player) { other_user.player }
   let!(:invitation)   { FactoryGirl.create(:invitation, inviting: other_user, invited: user) }
 
   before(:each) do
-    other_player.update_attribute(:first_name, "Paul")
+    other_user.update_attribute(:first_name, "Paul")
     sign_in user
   end
 
   describe "send invitation" do
     before(:each) do
-      visit player_path(other_player)
-      current_path.should == player_path(other_player)
+      visit player_path(other_user)
+      current_path.should == player_path(other_user)
     end
 
-    it "should send invitation to contacts" do
+    it "should send invitation to friends" do
       click_button "Add to friends"
-      current_path.should == player_path(other_player)
-      page.has_content?("Invitation sent successfully.").should be_true
+      current_path.should == player_path(other_user)
+      page.has_content?("Invitation to friend sent successfully.").should be_true
     end
 
     it "should send send invitation to training" do
-      user.contacts << other_user
       click_button "Add to training"
-      current_path.should == player_path(other_player)
-      page.has_content?("Add to training successfully.").should be_true
+      current_path.should == player_path(other_user)
+      page.has_content?("Invitation to training sent successfully.").should be_true
     end
   end
 
@@ -39,32 +37,21 @@ describe "Friends invitations" do
     end
 
     it "show all invitations" do
-      page.has_content?(invitation.inviting.player.name).should be_true
+      page.has_content?(invitation.inviting.name).should be_true
     end
 
-    describe "show invitation" do
-      before(:each) do
-        click_link invitation.inviting.player.name
-        current_path.should == invitation_path(invitation)
-      end
+    it "accept invitation" do
+      # Make friends method in invitation and destroy invitation
+      click_button "Accept"
+      current_path.should == invitations_path
+      page.has_content?("You add #{invitation.inviting.name} to your friends.").should be_true
+    end
 
-      it "show content" do
-        page.has_content?(invitation.inviting.player.name).should be_true
-      end
-
-      it "accept" do
-        # Make friends method in invitation and destroy invitation
-        click_button "Accept"
-        current_path.should == invitations_path
-        page.has_content?("You add #{invitation.inviting.player.name} to your contacts.").should be_true
-      end
-
-      it "reject" do
-        # destroy invitation
-        click_button "Reject"
-        current_path.should == invitations_path
-        page.has_content?("You reject invitation.").should be_true
-      end
+    it "reject invitation" do
+      # destroy invitation
+      click_button "Reject"
+      current_path.should == invitations_path
+      page.has_content?("You reject invitation.").should be_true
     end
   end
 end

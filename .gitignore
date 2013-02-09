@@ -16,3 +16,8 @@
 
 *.swp
 /db/sphinx/
+
+config/database.yml
+config/test.sphinx.conf
+config/development.sphinx.conf
+

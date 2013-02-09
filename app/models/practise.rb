@@ -4,7 +4,7 @@ class Practise < ActiveRecord::Base
 
   has_and_belongs_to_many :prohibitions
 
-  has_many :player_practises
-  has_many :players, through: :player_practises
+  has_many :practise_users
+  has_many :users, through: :practise_users
 
 end

@@ -5,7 +5,7 @@ class SearchController < AuthenticatedController
       # TODO: Thinking sphinx here!
       # @users = User.search params[:search], order: :last_name, conditions: { status: "active" }
 
-      @players = Player.active.where("first_name like ? or last_name like ?", params[:search], params[:search]).order(:last_name)
+      @users = User.active.where("first_name like ? or last_name like ?", params[:search], params[:search]).order(:last_name)
     end
   end
 

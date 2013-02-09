@@ -32,10 +32,9 @@ describe "User profile" do
       fill_in "First name", with: "Peter"
       fill_in "Last name", with: "Jones"
       fill_in "Phone", with: "+48 123 456 789"
-      select_date Date.parse('01-01-1960'), :from => "player_birth"
-      select "Poland", from: "player_country"
+      select_date Date.parse('01-01-1960'), :from => "user_birth"
+      select "Poland", from: "user_country"
       fill_in "City", with: "Cracow"
-      fill_in "Address", with: "Wawel"
       click_button "Save"
       current_path.should == profile_informations_path
       page.has_content?("You updated your account successfully.").should be_true
@@ -51,35 +50,34 @@ describe "User profile" do
     end
 
     it "should change prohibitions" do
-      @user.player.prohibitions.should be_blank
+      @user.prohibitions.should be_blank
       select prohibition.name, from: "prohibition"
       click_button "add_user_prohibition"
       current_path.should == profile_informations_path
       page.has_content?(prohibition.name).should be_true
-      @user.player.reload.prohibitions.should_not be_blank
+      @user.reload.prohibitions.should_not be_blank
     end
   end
 
   describe "user public profile" do
     let(:parameter)     { FactoryGirl.create(:parameter) }
     let!(:other_user)   { FactoryGirl.create(:user) }
-    let!(:other_player) { other_user.player }
 
     before(:each) do
       @user.stub(:coach).and_return(true)
 
-      @user.player.trained_players  << other_player
-      other_player.prohibitions     << prohibition
-      other_player.parameters       << parameter
+      @user.trained_users  << other_user
+      other_user.prohibitions     << prohibition
+      other_user.parameters       << parameter
 
-      visit player_path(other_player)
-      current_path.should == player_path(other_player)
+      visit player_path(other_user)
+      current_path.should == player_path(other_user)
     end
 
     it "show user public profile" do
-      page.has_content?(other_player.first_name).should be_true
-      page.has_content?(other_player.last_name).should be_true
-      page.has_content?(other_player.city).should be_true
+      page.has_content?(other_user.first_name).should be_true
+      page.has_content?(other_user.last_name).should be_true
+      page.has_content?(other_user.city).should be_true
     end
 
     context "user is coach" do

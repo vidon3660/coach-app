@@ -15,9 +15,9 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: gym-sport_development
+  database: coach-app_development
   pool: 5
-  username: gym-sport
+  username: coach-app
   password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -41,15 +41,15 @@ development:
 test:
   adapter: postgresql
   encoding: unicode
-  database: gym-sport_test
+  database: coach-app_test
   pool: 5
-  username: gym-sport
+  username: coach-app
   password:
 
 production:
   adapter: postgresql
   encoding: unicode
-  database: gym-sport_production
+  database: coach-app_production
   pool: 5
-  username: gym-sport
+  username: coach-app
   password:

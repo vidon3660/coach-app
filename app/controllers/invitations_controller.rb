@@ -1,51 +1,37 @@
 class InvitationsController < AuthenticatedController
   def index
-    @invitations = current_user.invitation_requests.where(status: "expectant")
-  end
-
-  def show
-    @invitation = Invitation.find(params[:id])
+    @invitations = current_user.invitation_requests
   end
 
   def create
     invited = User.find(params[:person_id])
-    player = invited.player
-    invitation = Invitation.new
-    invitation.training = params[:training] if current_user.coach
+    invitation = Invitation.new(friend: true)
     invitation.invited  = invited
     invitation.inviting = current_user
 
     if invitation.save
-      redirect_to player_path(player), notice: "Invitation sent successfully."
+      redirect_to player_path(invited), notice: "Invitation to friend sent successfully."
     else
-      redirect_to player_path(player), alert: "Error"
+      redirect_to player_path(invited), alert: "Error"
     end
   end
 
   def training
     invited = User.find(params[:person_id])
-    player = invited.player
 
     if current_user.coach
-      contact = current_user.relationships.find_by_contact_id(params[:person_id])
-      if contact
-        contact.training = true
-        contact.save
-        redirect_to player_path(player), notice: "Add to training successfully."
-      else
-        invitation = Invitation.new
-        invitation.training = params[:training]
-        invitation.invited  = invited
-        invitation.inviting = current_user
+      invitation = Invitation.new
+      invitation.training = true
+      invitation.invited  = invited
+      invitation.inviting = current_user
 
-        if invitation.save
-          redirect_to player_path(player), notice: "Invitation sent successfully."
-        else
-          redirect_to player_path(player), alert: "Error"
-        end
+      if invitation.save
+        redirect_to player_path(invited), notice: "Invitation to training sent successfully."
+      else
+        redirect_to player_path(invited), alert: "Error"
       end
     else
-      redirect_to player_path(invited.player), alert: "Error"
+      redirect_to player_path(invited), alert: "Sorry, you are not coach."
     end
   end
 
@@ -55,7 +41,7 @@ class InvitationsController < AuthenticatedController
 
     if invitation.accepted?
       invitation.make_relationship
-      flash[:notice] = "You add #{invitation.inviting.player.name} to your contacts."
+      flash[:notice] = "You add #{invitation.inviting.name} to your friends."
     elsif invitation.rejected?
       flash[:notice] = "You reject invitation."
     end
