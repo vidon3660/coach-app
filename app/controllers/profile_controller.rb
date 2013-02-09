@@ -6,6 +6,9 @@ class ProfileController < AuthenticatedController
   end
 
   def informations
+  end
+
+  def about
     @parameters       = current_user.parameters.order("created_at desc")
     @parameter        = Parameter.new
     @prohibitions     = current_user.prohibitions

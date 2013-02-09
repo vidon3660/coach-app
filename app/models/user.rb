@@ -81,6 +81,10 @@ class User < ActiveRecord::Base
     end
   end
 
+  def coach?
+    self.coach
+  end
+
   def name
     [first_name, last_name].join(" ")
   end
