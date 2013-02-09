@@ -17,4 +17,4 @@
 *.swp
 /db/sphinx/
 
-/config/database.yml
+config/database.yml
