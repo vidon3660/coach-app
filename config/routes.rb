@@ -9,7 +9,8 @@ CoachApp::Application.routes.draw do
   namespace :coach do
     root to: "panel#index"
   end
-  
+
+  resource :calendar
   resources :contacts
   resources :invitations, except: [:show, :edit]
   resources :parameters
@@ -22,6 +23,7 @@ CoachApp::Application.routes.draw do
   end
   resources :players
   resources :user_prohibitions
+  resources :trainings, only: [:show]
 
   match "/banned" => "banned#index", as: :banned
 
@@ -31,6 +33,7 @@ CoachApp::Application.routes.draw do
   match "/profile" => "profile#index", as: :profile
   match "/profile/informations" => "profile#informations", as: :profile_informations
   match "/profile/update" => "profile#update", as: :profile_update
+  match "/profile/about" => "profile#about", as: :profile_about
 
   match "/search" => "search#index", as: :search
   match "/board" => "board#index", as: :board

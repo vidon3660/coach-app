@@ -1,2 +1,44 @@
 .row
-  %h2= link_to "Invitations (#{current_user.invitation_requests.where(status: "expectant").count})", invitations_path
+  - if current_user.coach?
+    %h2 User
+    %h2 Coach
+    %hr
+  %h2 Welome / User
+  = link_to "Trainings"
+  %table
+    %tr
+      %th Player (name)
+      %th nearest training (date)
+      %th 
+    - 10.times do |i|
+      %tr
+        %td Jon Kowalsky
+        %td 23/12/2013
+        - if Training.first
+          %td= link_to "show", training_path(Training.first)
+        - else
+          %td= link_to "show"
+  
+  %br
+  = link_to "You / Preferences", profile_about_path
+  %br
+  = link_to "Find coach or place"
+
+  %hr
+
+  %h2 Coach
+  
+  %h4 Trainings
+  %table
+    %tr
+      %th Player (name)
+      %th nearest training (date)
+      %th 
+    - 10.times do |i|
+      %tr
+        %td Jon Kowalsky
+        %td 23/12/2013
+        - if Training.first
+          %td= link_to "show", training_path(Training.first)
+        - else
+          %td= link_to "show"

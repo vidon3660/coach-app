@@ -7,7 +7,7 @@ class ParametersController < AuthenticatedController
     else
       flash[:alert] = "Something is wrong."
     end
-    redirect_to profile_informations_path
+    redirect_to profile_about_path
   end
 
 end

@@ -1,41 +1,5 @@
 .row
-  %aside.four.columns
-    %h4 Opening data
-    %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque a magna vitae nunc tempor rhoncus. Phasellus tempor risus at metus iaculis ultricies. Ut sagittis mauris in urna laoreet pellentesque. Ut quis accumsan nunc.
-    %h4 Popup
-    %a.button{"data-reveal-id" => "exampleModal", :href => "#"} Example
-    #exampleModal.reveal-modal
-      %h2 This is popup.
-      %p
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu mauris sit amet leo tincidunt mattis id eu mi. Maecenas felis elit, vehicula quis porttitor sagittis, laoreet vel mauris. Donec ac nunc orci, sit amet consequat quam. Pellentesque rhoncus, mi ut blandit blandit, lectus velit sagittis ipsum, ac congue tellus velit at sem. Maecenas dapibus lorem erat, in posuere nisl. Mauris sit amet mi enim, at dictum sapien. Cras nec neque non felis condimentum volutpat. Duis erat ligula, lobortis ut tincidunt vitae, tristique ut augue. Donec feugiat nibh non lorem fringilla ornare. Maecenas lacus lectus, pretium et interdum tempus, lobortis in est. Donec ornare libero et felis dapibus feugiat.
-        %img{:src => "http://placehold.it/200x250"}/
-      %a.close-reveal-modal X
-  .eight.columns.end
-    %h4 Profile#informations
-    %p Find me in app/views/profile/informations.html.haml
+  %h4 Profile#informations
+  %p Find me in app/views/profile/informations.html.haml
 
-    = render 'shared/user_information', url: profile_update_path
-
-    %hr
-
-    %h3 Parameters
-    - @parameters.each do |parameter|
-      = "Height: #{parameter.height}"
-      = "Weight: #{parameter.weight}"
-      %br
-
-    = simple_form_for @parameter, url: parameters_path do |f|
-      = f.input :height, collection: 120..220
-      = f.input :weight, collection: 30..200
-      = f.button :submit, "Add", id: "add_paramterer"
-
-    %h3 Prohibitions
-    - @prohibitions.each do |prohibition|
-      = "Prohibition: #{prohibition.name}"
-      %br
-
-    - available_prohibtions = Prohibition.all - current_user.prohibitions
-    - if available_prohibtions.present?
-      = form_tag user_prohibitions_path do
-        = select_tag "prohibition", options_from_collection_for_select(available_prohibtions, 'id', 'name')
-        = submit_tag "Add", id: "add_user_prohibition"
+  = render 'shared/user_information', url: profile_update_path

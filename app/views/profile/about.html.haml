@@ -1,0 +1,22 @@
+.row
+  %h3 Parameters
+  - @parameters.each do |parameter|
+    = "Height: #{parameter.height}"
+    = "Weight: #{parameter.weight}"
+    %br
+
+  = simple_form_for @parameter, url: parameters_path do |f|
+    = f.input :height, collection: 120..220
+    = f.input :weight, collection: 30..200
+    = f.button :submit, "Add", id: "add_paramterer"
+
+  %h3 Prohibitions
+  - @prohibitions.each do |prohibition|
+    = "Prohibition: #{prohibition.name}"
+    %br
+
+  - available_prohibtions = Prohibition.all - current_user.prohibitions
+  - if available_prohibtions.present?
+    = form_tag user_prohibitions_path do
+      = select_tag "prohibition", options_from_collection_for_select(available_prohibtions, 'id', 'name')
+      = submit_tag "Add", id: "add_user_prohibition"

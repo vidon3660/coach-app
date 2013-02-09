@@ -6,9 +6,13 @@
         %li.active
           = link_to "Gym App", root_path
         %li
-          = link_to "Contacts", contacts_path
+          = link_to "Messages"
         %li
-          = link_to "Calendar"
+          = link_to "Invitations (#{current_user.invitation_requests.where(status: "expectant").count})", invitations_path
+        %li
+          = link_to "Calendar", calendar_path
+        %li
+          = link_to "Contacts", contacts_path
         %li.right{ id: "" }
           = link_to "Logout", destroy_user_session_path, method: :delete
         %li.has-flyout.right#about
