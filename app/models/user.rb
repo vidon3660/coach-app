@@ -10,7 +10,8 @@ class User < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me,
-                  :birth, :city, :country, :first_name, :last_name, :phone
+                  :birth, :city, :country, :first_name, :last_name, :phone,
+                  :avatar, :avatar_cache
 
 
   # Contacts
@@ -56,6 +57,7 @@ class User < ActiveRecord::Base
 
   before_save :set_coach
 
+  mount_uploader :avatar, AvatarUploader
 
   define_index do
     # fields

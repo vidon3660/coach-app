@@ -21,3 +21,4 @@ config/database.yml
 config/test.sphinx.conf
 config/development.sphinx.conf
 
+/public/uploads

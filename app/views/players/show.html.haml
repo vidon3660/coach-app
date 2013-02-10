@@ -19,6 +19,8 @@
         - else
           = button_to "Add to training", training_person_invitations_path(@user)
 
+    .avatar
+      = image_tag @user.avatar.url, size: "100x100" if @user.avatar?
     %p= @user.first_name
     %p= @user.last_name
     %p= @user.city
