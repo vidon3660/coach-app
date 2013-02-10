@@ -2,8 +2,6 @@ require 'spec_helper'
 
 describe InvitationsController do
 
-  #let!(:user)       { FactoryGirl.create :user }
-  #let!(:other_user) { FactoryGirl.create :user }
   let(:banned_user)       { FactoryGirl.create :user, status: "banned" }
   let(:new_user)          { FactoryGirl.create :user, status: "new" }
   let!(:invitation)       { FactoryGirl.create :invitation } # , inviting: other_user, invited: user }

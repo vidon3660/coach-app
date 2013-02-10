@@ -6,7 +6,7 @@
         %li.active
           = link_to "Gym App", root_path
         %li
-          = link_to "Messages"
+          = link_to "Messages", messages_path
         %li
           = link_to "Invitations (#{current_user.invitation_requests.where(status: "expectant").count})", invitations_path
         %li

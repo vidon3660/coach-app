@@ -13,6 +13,7 @@ CoachApp::Application.routes.draw do
   resource :calendar
   resources :contacts
   resources :invitations, except: [:show, :edit]
+  resources :messages
   resources :parameters
   resources :people do
     resources :invitations do # , only: [:create] do
