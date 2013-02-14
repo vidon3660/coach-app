@@ -1,0 +1,19 @@
+%h1= @event.name
+%h5= @event.event_type
+
+%p= @event.description
+
+%p= @event.start_at
+%p= @event.end_at
+
+.place
+  %h4 Place
+  %p show place and link to it
+  %p= @event.place
+
+.users
+  %h4 Users
+  %p Here should be users and more important - user friends/coaches.
+  %ul
+    - @event.users.each do |user|
+      %li= link_to user.name, player_path(user)

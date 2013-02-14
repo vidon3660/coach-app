@@ -4,6 +4,6 @@ FactoryGirl.define do
   factory :event do
     start_at "2013-02-12 01:39:29"
     end_at "2013-02-12 01:39:29"
-    type ""
+    event_type "training"
   end
 end

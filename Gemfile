@@ -20,7 +20,10 @@ gem 'simple_form'
 gem 'state_machine'
 gem 'thinking-sphinx', '2.0.10'
 gem 'country-select', git: 'git://github.com/jamesds/country-select.git'
+
 gem 'carrierwave'
+gem 'event-calendar', :require => 'event_calendar'
+gem 'pry'
 
 gem 'heroku'
 

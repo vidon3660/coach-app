@@ -1,7 +1,10 @@
 class Event < ActiveRecord::Base
-  attr_accessible :end_at, :start_at, :type, :description
+  has_event_calendar
 
-  has_and_belongs_to_many :places
+  attr_accessible :name, :description, :start_at, :end_at, :event_type
+
+  belongs_to :place
+
   has_and_belongs_to_many :trainings
   has_and_belongs_to_many :users
 
