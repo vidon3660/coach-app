@@ -1,5 +1,7 @@
 CoachApp::Application.routes.draw do
 
+  match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
+
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -10,8 +12,9 @@ CoachApp::Application.routes.draw do
     root to: "panel#index"
   end
 
-  resource :calendar
+  # resource :calendar
   resources :contacts
+  resources :events
   resources :invitations, except: [:show, :edit]
   resources :messages
   resources :parameters

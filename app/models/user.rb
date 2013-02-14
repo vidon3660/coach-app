@@ -36,6 +36,8 @@ class User < ActiveRecord::Base
 
   # User
 
+  has_and_belongs_to_many :events
+
   has_many :parameters
 
   has_many :practise_users

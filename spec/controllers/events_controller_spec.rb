@@ -1,13 +1,14 @@
 require 'spec_helper'
 
-describe CalendarsController do
-  let(:user)   { FactoryGirl.create :user, status: "new" }
-  
+describe EventsController do
+
+  let(:user) { FactoryGirl.create :user }
+  let(:event)  { FactoryGirl.create :event }
   before(:each) { sign_in(user) }
-  
+
   describe "GET 'show'" do
     it "returns http success" do
-      get 'show'
+      get 'show', id: event.id
       response.should be_success
     end
   end

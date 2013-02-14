@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130210134727) do
+ActiveRecord::Schema.define(:version => 20130212013437) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -57,6 +57,31 @@ ActiveRecord::Schema.define(:version => 20130210134727) do
     t.integer "prohibition_id"
   end
 
+  create_table "events", :force => true do |t|
+    t.string   "name"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.string   "event_type"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  create_table "events_places", :force => true do |t|
+    t.integer "event_id"
+    t.integer "place_id"
+  end
+
+  create_table "events_trainings", :force => true do |t|
+    t.integer "event_id"
+    t.integer "training_id"
+  end
+
+  create_table "events_users", :force => true do |t|
+    t.integer "event_id"
+    t.integer "user_id"
+  end
+
   create_table "friendships", :force => true do |t|
     t.integer  "friend_id"
     t.integer  "user_id"
@@ -80,6 +105,13 @@ ActiveRecord::Schema.define(:version => 20130210134727) do
     t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "places", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "practise_users", :force => true do |t|
