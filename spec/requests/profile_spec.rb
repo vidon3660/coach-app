@@ -48,7 +48,7 @@ describe "User profile" do
     before(:each) do
       @user.stub(:coach).and_return(true)
 
-      @user.trained_users  << other_user
+      @user.trained_users         << other_user
       other_user.prohibitions     << prohibition
       other_user.parameters       << parameter
 
