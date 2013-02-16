@@ -4,7 +4,10 @@
 
     - if @user != current_user
       - invitations = current_user.invitations.where(invited_id: @user.id)
-      - if invitations.present?
+
+      - if current_user.friends.include?(@user)
+        %p You are friend
+      - elsif invitations.present?
         %p You're sent invitation to friend now.
       - else
         - unless current_user.friends.include?(@user)
@@ -14,10 +17,22 @@
         %p You're sent training invitation to user now.
       - else
         - if current_user.trained_users.include?(@user)
-          %p= "You are coach for this user."
-          %p= "Close training!"
+          - training = current_user.trainings.find_by_user_id(@user.id)
+          .div
+            %p
+              = "You are coach for this user."
+              = link_to "Training", training_path(training)
         - else
           = button_to "Add to training", training_person_invitations_path(@user)
+
+      - if current_user.coaches.include?(@user)
+        .div
+          %p
+            - training = current_user.inverse_trainings.find_by_coach_id(@user.id)
+            = "You are trained for this user."
+            = link_to "Training", training_path(training)        
+    
+    %hr
 
     = link_to "send message", new_person_message_path(@user)
 

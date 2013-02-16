@@ -49,7 +49,6 @@ class Invitation < ActiveRecord::Base
     def duplicate_invitation
       if self.new_record?
         invitation = Invitation.find_by_invited_id_and_inviting_id(invited_id, inviting_id)
-
         if invitation
           if invitation.training.blank? && self.training.present?
 

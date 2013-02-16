@@ -57,7 +57,6 @@ describe InvitationsController do
           -> {
             put :update, id: invitation, invitation: { status: "accepted" }
           }.should change(Friendship, :count).by(1)
-          invitation.reload.status.should == "accepted"
         end
       end
 
@@ -66,7 +65,6 @@ describe InvitationsController do
           -> {
             put :update, id: invitation, invitation: { status: "rejected" }
           }.should_not change(Friendship, :count)
-          invitation.reload.status.should == "rejected"
         end
       end
     end
@@ -79,7 +77,6 @@ describe InvitationsController do
           -> {
             put :update, id: invitation, invitation: { status: "accepted" }
           }.should change(Training, :count).by(1)
-          invitation.reload.status.should == "accepted"
         end
       end
 
@@ -88,7 +85,6 @@ describe InvitationsController do
           -> {
             put :update, id: invitation, invitation: { status: "rejected" }
           }.should_not change(Training, :count)
-          invitation.reload.status.should == "rejected"
         end
       end
     end

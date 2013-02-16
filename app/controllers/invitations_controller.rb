@@ -45,6 +45,8 @@ class InvitationsController < AuthenticatedController
     elsif invitation.rejected?
       flash[:notice] = "You reject invitation."
     end
+
+    invitation.destroy
     redirect_to invitations_path
   end
 end
