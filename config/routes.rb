@@ -16,9 +16,14 @@ CoachApp::Application.routes.draw do
   resources :contacts
   resources :events
   resources :invitations, except: [:show, :edit]
-  resources :messages
+  resources :messages, only: [:index, :sent, :show, :destroy] do
+    collection do
+      get 'sent'
+    end
+  end
   resources :parameters
   resources :people do
+    resources :messages, only: [:new, :create]
     resources :invitations do # , only: [:create] do
       collection do
         post "training"
