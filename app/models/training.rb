@@ -5,4 +5,7 @@ class Training < ActiveRecord::Base
 
   has_and_belongs_to_many :events
 
+  scope :open,   -> { where("close_at IS NULL") }
+  scope :closed, -> { where("close_at IS NOT NULL") }
+
 end

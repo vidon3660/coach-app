@@ -32,7 +32,7 @@ CoachApp::Application.routes.draw do
   end
   resources :players
   resources :user_prohibitions
-  resources :trainings, only: [:show]
+  resources :trainings, only: [:show, :destroy]
 
   match "/banned" => "banned#index", as: :banned
 
