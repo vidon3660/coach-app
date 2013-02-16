@@ -59,6 +59,8 @@ class User < ActiveRecord::Base
 
   before_save :set_coach
 
+  has_private_messages
+
   mount_uploader :avatar, AvatarUploader
 
   define_index do

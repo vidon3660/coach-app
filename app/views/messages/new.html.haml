@@ -1,2 +1,6 @@
-%h1 Messages#new
-%p Find me in app/views/messages/new.html.haml
+%h1 New message
+
+= simple_form_for @message, url: person_messages_path(@recipient) do |f|
+  = f.input :subject
+  = f.input :body
+  = f.button :submit, "Send"

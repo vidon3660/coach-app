@@ -1,4 +1,4 @@
-%h1 Messages / Inbox
+%h1 Messages / Sent
 
 = render 'navigation'
 
@@ -10,6 +10,6 @@
   %tbody
     - @messages.each do |message|
       %tr
-        %td= message.read_at?
+        %td= #message.read_at?
         %td= link_to message.subject, message_path(message)
         %td= link_to "remove", message_path(message), method: :delete

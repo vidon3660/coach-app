@@ -1,2 +1,7 @@
-%h1 Messages#show
-%p Find me in app/views/messages/show.html.haml
+%h1 Message
+
+%p= "Sender: #{@message.sender.name}"
+%p= "Recipient: #{@message.recipient.name}"
+
+%h3= @message.subject
+%p= @message.body
