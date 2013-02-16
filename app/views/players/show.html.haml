@@ -6,7 +6,11 @@
       - invitations = current_user.invitations.where(invited_id: @user.id)
 
       - if current_user.friends.include?(@user)
-        %p You are friend
+        %p 
+          You are friend
+          - friend = current_user.friendships.find_by_friend_id(@user)
+          - friend = current_user.inverse_friendships.find_by_user_id(@user) if friend.blank?
+          = link_to "Remove from friends", friendship_path(friend), method: :delete, confirm: "Are you sure?"
       - elsif invitations.present?
         %p You're sent invitation to friend now.
       - else

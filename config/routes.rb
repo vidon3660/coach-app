@@ -15,6 +15,7 @@ CoachApp::Application.routes.draw do
   # resource :calendar
   resources :contacts
   resources :events
+  resources :friendships #, only: [:delete]
   resources :invitations, except: [:show, :edit]
   resources :messages, only: [:index, :sent, :show, :destroy] do
     collection do
@@ -31,8 +32,9 @@ CoachApp::Application.routes.draw do
     end
   end
   resources :players
-  resources :user_prohibitions
   resources :trainings, only: [:show, :destroy]
+  resources :user_prohibitions
+
 
   match "/banned" => "banned#index", as: :banned
 
