@@ -43,14 +43,26 @@ describe "Contacts" do
     end
   end
 
-  it "create new message" do
-    visit player_path(user2)
-    click_link "send message"
-    current_path.should == new_person_message_path(user2)
-    fill_in "Subject", with: "A new subject"
-    fill_in "Body", with: "bla bla bla"
-    click_button "Send"
-    current_path.should == sent_messages_path
-    page.has_content?("A new subject").should be_true
+  describe "send message" do
+    it "should create new message" do
+      visit player_path(user2)
+      click_link "send message"
+      fill_in "Subject", with: "A new subject"
+      fill_in "Body", with: "bla bla bla"
+      click_button "Send"
+      current_path.should == sent_messages_path
+      page.has_content?("A new subject").should be_true
+    end
+
+    it "should reply to message" do
+      visit message_path(message)
+      click_link "reply"
+      current_path.should == new_person_message_path(user2)
+      fill_in "Body", with: "bla bla bla"
+      click_button "Send"
+      current_path.should == sent_messages_path
+      page.has_content?("[RE]: #{message.subject}").should be_true
+    end
   end
+
 end

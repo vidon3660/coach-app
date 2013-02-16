@@ -5,3 +5,5 @@
 
 %h3= @message.subject
 %p= @message.body
+
+= link_to "reply", new_person_message_path(@message.sender,  message_id: @message)

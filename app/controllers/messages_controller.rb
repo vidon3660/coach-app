@@ -14,6 +14,11 @@ class MessagesController < AuthenticatedController
   def new
     @recipient = User.find(params[:person_id])
     @message = Message.new
+
+    if params[:message_id]
+      parent_message      = Message.find(params[:message_id])
+      @message.subject    = "[RE]: #{parent_message.subject}" if parent_message
+    end
   end
 
   def create
