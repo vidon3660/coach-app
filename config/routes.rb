@@ -13,6 +13,7 @@ CoachApp::Application.routes.draw do
   end
 
   # resource :calendar
+  resources :coaches
   resources :contacts
   resources :events
   resources :friendships #, only: [:delete]

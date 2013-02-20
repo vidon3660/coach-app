@@ -65,10 +65,10 @@ describe Invitation do
         training = Training.order("created_at desc").first
 
         user.trained_users.should include(other_user)
-        other_user.coaches.should include(user)
+        other_user.user_coaches.should include(user)
 
         user.trained_users.should_not include(user)
-        other_user.coaches.should_not include(other_user)
+        other_user.user_coaches.should_not include(other_user)
       end
     end
 

@@ -1,5 +1,4 @@
 class EventsController < AuthenticatedController
-  layout "user"
 
   def show
     @event = Event.find(params[:id])

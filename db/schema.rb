@@ -63,13 +63,9 @@ ActiveRecord::Schema.define(:version => 20130216194549) do
     t.datetime "end_at"
     t.string   "event_type"
     t.string   "description"
+    t.integer  "place_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
-  end
-
-  create_table "events_places", :force => true do |t|
-    t.integer "event_id"
-    t.integer "place_id"
   end
 
   create_table "events_trainings", :force => true do |t|

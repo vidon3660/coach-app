@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   has_many :trainings, foreign_key: "coach_id"
   has_many :inverse_trainings, class_name: "Training", foreign_key: "user_id"
   has_many :trained_users, through: :trainings, source: :user
-  has_many :coaches, through: :inverse_trainings, source: :coach
+  has_many :user_coaches, through: :inverse_trainings, source: :coach
 
   def friends
     direct_friends | inverse_friends
@@ -75,7 +75,8 @@ class User < ActiveRecord::Base
   end
 
   # TODO: check this!
-  scope :active, -> { where("users.status = 'active'") }
+  scope :active,  -> { where("users.status = 'active'") }
+  scope :coaches, -> { active.where(coach: true) }
 
   state_machine :status do
     state :new
