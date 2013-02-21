@@ -1,5 +1,4 @@
 class CalendarController < AuthenticatedController
-  layout "user"
 
   def index
     @month = (params[:month] || (Time.zone || Time).now.month).to_i

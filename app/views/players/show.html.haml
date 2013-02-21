@@ -29,7 +29,7 @@
         - else
           = button_to "Add to training", training_person_invitations_path(@user)
 
-      - if current_user.coaches.include?(@user)
+      - if current_user.user_coaches.include?(@user)
         .div
           %p
             - training = current_user.inverse_trainings.find_by_coach_id(@user.id)

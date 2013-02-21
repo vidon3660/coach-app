@@ -28,15 +28,17 @@ class User < ActiveRecord::Base
   has_many :trainings, foreign_key: "coach_id"
   has_many :inverse_trainings, class_name: "Training", foreign_key: "user_id"
   has_many :trained_users, through: :trainings, source: :user
-  has_many :coaches, through: :inverse_trainings, source: :coach
+  has_many :user_coaches, through: :inverse_trainings, source: :coach
 
   def friends
     direct_friends | inverse_friends
   end
 
   # User
-
   has_and_belongs_to_many :events
+
+  has_many :user_disciplines
+  has_many :disciplines, through: :user_disciplines
 
   has_many :parameters
 
@@ -75,7 +77,10 @@ class User < ActiveRecord::Base
   end
 
   # TODO: check this!
-  scope :active, -> { where("users.status = 'active'") }
+  scope :active,  -> { where("users.status = 'active'") }
+  scope :coaches, -> { active.where(coach: true) }
+
+  scope :match_by_city, ->(city) { where("city like ?", city) }
 
   state_machine :status do
     state :new
@@ -93,6 +98,20 @@ class User < ActiveRecord::Base
 
   def name
     [first_name, last_name].join(" ")
+  end
+
+  def self.custom_search(params)
+    if params
+      if params[:city].present?
+        User.coaches.match_by_city(params[:city]).order(:last_name)
+      elsif params[:city].present? && params[:discipline_ids].present?
+        User.coaches.joins(:disciplines).match_by_city(params[:city]).where("user_disciplines.is_coach='true' and disciplines.id in (?)", params[:discipline_ids].map(&:to_i)).order(:last_name)
+      elsif params[:discipline_ids].present?
+        User.coaches.joins(:disciplines).where("user_disciplines.is_coach='true' and disciplines.id in (?)", params[:discipline_ids].map(&:to_i)).order(:last_name)
+      end
+    else
+      []
+    end
   end
 
   private

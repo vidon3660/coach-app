@@ -28,6 +28,6 @@ end
 5.times do |i|
   u = User.create(email: "user#{i}#{i}@example.com", password: "password", first_name: "First#{i}#{i}", last_name: "Last#{i}#{i}")
   u.direct_friends << user
-  u.coaches << user
+  u.user_coaches << user
   u.trained_users << user
 end
