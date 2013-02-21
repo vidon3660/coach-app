@@ -101,16 +101,12 @@ class User < ActiveRecord::Base
   end
 
   def self.custom_search(params)
-    if params
-      if params[:city].present?
-        User.coaches.match_by_city(params[:city]).order(:last_name)
-      elsif params[:city].present? && params[:discipline_ids].present?
-        User.coaches.joins(:disciplines).match_by_city(params[:city]).where("user_disciplines.is_coach='true' and disciplines.id in (?)", params[:discipline_ids].map(&:to_i)).order(:last_name)
-      elsif params[:discipline_ids].present?
-        User.coaches.joins(:disciplines).where("user_disciplines.is_coach='true' and disciplines.id in (?)", params[:discipline_ids].map(&:to_i)).order(:last_name)
-      end
-    else
-      []
+    if params[:city].present?
+      User.coaches.match_by_city(params[:city]).order(:last_name)
+    elsif params[:city].present? && params[:discipline_ids].present?
+      User.coaches.joins(:disciplines).match_by_city(params[:city]).where("user_disciplines.is_coach='true' and disciplines.id in (?)", params[:discipline_ids].map(&:to_i)).order(:last_name)
+    elsif params[:discipline_ids].present?
+      User.coaches.joins(:disciplines).where("user_disciplines.is_coach='true' and disciplines.id in (?)", params[:discipline_ids].map(&:to_i)).order(:last_name)
     end
   end
 
