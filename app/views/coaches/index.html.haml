@@ -1,7 +1,8 @@
 %h1 Find coach!
 
 = simple_form_for User.new, url: coaches_path, method: :get do |f|
-  = f.input :city
+  = f.input :city, input_html: { value: (params[:user].present? ? params[:user][:city] : "") }
+  = f.association :disciplines, collection: Discipline.all, as: :check_boxes, checked: (params[:user].present? ? params[:user][:discipline_ids] : "")
   = f.button :submit, "Search", id: "user_search"
 
 %ul

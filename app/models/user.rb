@@ -35,8 +35,10 @@ class User < ActiveRecord::Base
   end
 
   # User
-
   has_and_belongs_to_many :events
+
+  has_many :user_disciplines
+  has_many :disciplines, through: :user_disciplines
 
   has_many :parameters
 
