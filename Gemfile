@@ -25,6 +25,7 @@ gem 'carrierwave'
 gem 'event-calendar', :require => 'event_calendar'
 gem 'pry'
 gem 'simple-private-messages', '0.0.0', :git => 'git://github.com/jongilbraith/simple-private-messages.git'
+gem "squeel"
 
 gem 'heroku'
 

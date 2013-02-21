@@ -5,4 +5,5 @@ class Discipline < ActiveRecord::Base
   has_many :users, through: :user_disciplines
 
   validate :name, presence: true, uniqueness: true
+
 end

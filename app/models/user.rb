@@ -80,6 +80,8 @@ class User < ActiveRecord::Base
   scope :active,  -> { where("users.status = 'active'") }
   scope :coaches, -> { active.where(coach: true) }
 
+  scope :match_by_city, ->(city) { where("city like ?", city) }
+
   state_machine :status do
     state :new
     state :active
@@ -96,6 +98,21 @@ class User < ActiveRecord::Base
 
   def name
     [first_name, last_name].join(" ")
+  end
+
+  def self.custom_search(params)
+    users = if params
+      if params[:city].present?
+        User.coaches.match_by_city(params[:city]).order(:last_name)
+      elsif params[:city].present? && params[:discipline_ids].present?
+        User.coaches.joins(:disciplines).match_by_city(params[:city]).where("user_disciplines.is_coach='true' and disciplines.id in (?)", params[:discipline_ids].map(&:to_i)).order(:last_name)
+      elsif params[:discipline_ids].present?
+        User.coaches.joins(:disciplines).where("user_disciplines.is_coach='true' and disciplines.id in (?)", params[:discipline_ids].map(&:to_i)).order(:last_name)
+      else
+        []
+      end
+    end
+    users
   end
 
   private
