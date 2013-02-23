@@ -27,6 +27,7 @@ CoachApp::Application.routes.draw do
       end
     end
   end
+  resources :places
   resources :players
   resources :trainings, only: [:show, :destroy]
   resources :user_prohibitions

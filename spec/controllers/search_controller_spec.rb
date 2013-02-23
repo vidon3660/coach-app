@@ -55,7 +55,10 @@ describe SearchController do
     describe "GET 'find'" do
       let!(:coach)      { FactoryGirl.create(:coach, city: "New York") }
       let!(:user_discipline) { FactoryGirl.create(:user_discipline, user: coach) }
-      let(:discipline) { user_discipline.discipline }
+      let!(:discipline) { user_discipline.discipline }
+      let!(:place) { FactoryGirl.create(:place) }
+      let!(:discipline_place) { FactoryGirl.create(:discipline_place, discipline: discipline, place: place) }
+      let!(:location) { FactoryGirl.create(:location, place: place) }
 
       it "returns http success" do
         get 'find'
@@ -77,6 +80,13 @@ describe SearchController do
         it "search by disciplines" do
           get 'find', user: { city: "", discipline_ids: [discipline.id, ""] }
           assigns(:users).should == [coach]
+        end
+      end
+
+      describe "search place" do
+        it "should search by city" do
+          get 'find', location: { city: location.city }
+          assigns(:places).should include(place)
         end
       end
     end

@@ -11,8 +11,14 @@ class SearchController < AuthenticatedController
   def find
     # TODO: Thinking sphinx here!
     @users = []
+    @places = []
+
     if params[:user]
       @users = User.custom_search(params[:user])
+    end
+
+    if params[:location]
+      @places = Place.joins(:location).where("locations.city = ?", params[:location][:city])
     end
   end
 
