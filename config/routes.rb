@@ -8,12 +8,7 @@ CoachApp::Application.routes.draw do
 
   devise_for :users, controllers: { registrations: "registrations" }
 
-  namespace :coach do
-    root to: "panel#index"
-  end
-
   # resource :calendar
-  resources :coaches
   resources :contacts
   resources :events
   resources :friendships #, only: [:delete]
@@ -48,6 +43,7 @@ CoachApp::Application.routes.draw do
   match "/profile/about" => "profile#about", as: :profile_about
 
   match "/search" => "search#index", as: :search
+  match "/find" => "search#find", as: :find
   match "/board" => "board#index", as: :board
 
   root to: "home#index"

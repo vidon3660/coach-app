@@ -51,5 +51,34 @@ describe SearchController do
         end
       end
     end
+
+    describe "GET 'find'" do
+      let!(:coach)      { FactoryGirl.create(:coach, city: "New York") }
+      let!(:user_discipline) { FactoryGirl.create(:user_discipline, user: coach) }
+      let(:discipline) { user_discipline.discipline }
+
+      it "returns http success" do
+        get 'find'
+        assigns(:users).should be_blank
+        response.should be_success
+      end
+
+      describe "search coach" do
+        it "search by city and disciplines" do
+          get 'find', user: { city: coach.city, discipline_ids: [discipline.id, ""] }
+          assigns(:users).should == [coach]
+        end
+
+        it "search by city" do
+          get 'find', user: { city: coach.city, discipline_ids: ["", ""] }
+          assigns(:users).should == [coach]
+        end
+
+        it "search by disciplines" do
+          get 'find', user: { city: "", discipline_ids: [discipline.id, ""] }
+          assigns(:users).should == [coach]
+        end
+      end
+    end
   end
 end
