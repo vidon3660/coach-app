@@ -37,10 +37,22 @@ describe "Find coach or place" do
   end
 
   context "search place" do
-    before(:each) { page.has_content?(coach.name).should be_false }
+    before(:each) { page.has_content?(place.name).should be_false }
 
     it "should search by city" do
       fill_in "location_city", with: location.city
+    end
+
+    it "should search by name" do
+      fill_in "place_name", with: place.name
+    end
+
+    it "should search by all params" do
+      fill_in "location_city", with: location.city
+      fill_in "place_name", with: place.name
+    end
+
+    after(:each) do
       click_button "place_search"
       current_path.should == find_path
       page.has_content?(place.name).should be_true

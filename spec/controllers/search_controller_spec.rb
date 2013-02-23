@@ -85,7 +85,17 @@ describe SearchController do
 
       describe "search place" do
         it "should search by city" do
-          get 'find', location: { city: location.city }
+          get 'find', place: {}, location: { city: location.city }
+          assigns(:places).should include(place)
+        end
+
+        it "should search by name" do
+          get 'find', place: { name: place.name }, location: {}
+          assigns(:places).should include(place)
+        end
+
+        it "should search by all parameters" do
+          get 'find', place: { name: place.name }, location: { city: location.city }
           assigns(:places).should include(place)
         end
       end

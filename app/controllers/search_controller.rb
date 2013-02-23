@@ -17,8 +17,15 @@ class SearchController < AuthenticatedController
       @users = User.custom_search(params[:user])
     end
 
-    if params[:location]
-      @places = Place.joins(:location).where("locations.city = ?", params[:location][:city])
+    if params[:location] && params[:place]
+      if params[:location][:city].present? && params[:place][:name].present?
+        @places = Place.joins(:location).where("locations.city = ?", params[:location][:city]).where(name: params[:place][:name])
+        # end
+      elsif params[:location][:city].present?
+        @places = Place.joins(:location).where("locations.city = ?", params[:location][:city])
+      elsif params[:place][:name].present?
+        @places = Place.where(name: params[:place][:name])
+      end
     end
   end
 

@@ -13,6 +13,10 @@
 = form_tag url: find_path, method: :get do
   = label_tag 'location[city]', "City"
   = text_field_tag "location[city]"
+  %br
+  = label_tag "place[name]", "City"
+  = text_field_tag "place[name]"
+  %br
   = submit_tag "Serach", id: "place_search"
 
 %ul
