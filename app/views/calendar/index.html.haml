@@ -1,0 +1,16 @@
+= stylesheet_link_tag "event_calendar"
+= javascript_include_tag "event_calendar"
+
+= raw(event_calendar)
+
+%hr
+
+= simple_form_for Event.new do |f|
+  = f.input :name
+  = f.input :description
+  = f.input :start_at, :class => "six columns"
+  = f.input :end_at, :class => "six columns"
+  = f.input :event_type
+  = f.button :submit
+end
+%hr

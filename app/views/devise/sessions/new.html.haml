@@ -19,6 +19,22 @@
     = javascript_include_tag "modernizr.foundation.js"
 
   %body#loginContainer
+    .fullContent.NavMore
+      .row
+        .twelve.columns
+          %nav.top-bar
+            %ul
+              / Title Area
+              %li.name
+                %h1
+                  = link_to "Coach App", root_path
+              %li.toggle-topbar
+                %a{:href => "#"}
+            %section
+              / Right Nav Section
+              %ul.right
+                %li{ id: "" }
+                  = link_to "Login", new_user_session_path
     .row
       #loginForm.twelve.columns.whitebg
         %h1 Login form:
@@ -72,9 +88,6 @@
     = javascript_include_tag "jquery.foundation.accordion.js"
     = javascript_include_tag "jquery.placeholder.js"
     = javascript_include_tag "jquery.foundation.alerts.js"
-    = javascript_include_tag "jquery.foundation.joyride.js"
-    = javascript_include_tag "jquery.foundation.clearing.js"
-    = javascript_include_tag "jquery.foundation.magellan.js"
     
     -# <!-- Included JS Files (Compressed) -->
     = javascript_include_tag "jquery.js"
