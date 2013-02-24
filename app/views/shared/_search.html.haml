@@ -1,6 +1,6 @@
-.row.collapse
+.search
   = form_tag search_path do
-    .ten.mobile-three.columns
+    .search_input
       = search_field_tag "search", params[:search]
-    .two.mobile-one.columns
+    .search_submit
       = button_tag "Search", :class => 'button expand postfix'

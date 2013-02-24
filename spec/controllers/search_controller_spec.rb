@@ -51,5 +51,54 @@ describe SearchController do
         end
       end
     end
+
+    describe "GET 'find'" do
+      let!(:coach)      { FactoryGirl.create(:coach, city: "New York") }
+      let!(:user_discipline) { FactoryGirl.create(:user_discipline, user: coach) }
+      let!(:discipline) { user_discipline.discipline }
+      let!(:place) { FactoryGirl.create(:place) }
+      let!(:discipline_place) { FactoryGirl.create(:discipline_place, discipline: discipline, place: place) }
+      let!(:location) { FactoryGirl.create(:location, place: place) }
+
+      it "returns http success" do
+        get 'find'
+        assigns(:users).should be_blank
+        response.should be_success
+      end
+
+      describe "search coach" do
+        it "search by city and disciplines" do
+          get 'find', user: { city: coach.city, discipline_ids: [discipline.id, ""] }
+          assigns(:users).should == [coach]
+        end
+
+        it "search by city" do
+          get 'find', user: { city: coach.city, discipline_ids: ["", ""] }
+          assigns(:users).should == [coach]
+        end
+
+        it "search by disciplines" do
+          get 'find', user: { city: "", discipline_ids: [discipline.id, ""] }
+          assigns(:users).should == [coach]
+        end
+      end
+
+      describe "search place" do
+        it "should search by city" do
+          get 'find', place: {}, location: { city: location.city }
+          assigns(:places).should include(place)
+        end
+
+        it "should search by name" do
+          get 'find', place: { name: place.name }, location: {}
+          assigns(:places).should include(place)
+        end
+
+        it "should search by all parameters" do
+          get 'find', place: { name: place.name }, location: { city: location.city }
+          assigns(:places).should include(place)
+        end
+      end
+    end
   end
 end

@@ -1,0 +1,24 @@
+.twelve.columns
+  %h1 Find coach!
+
+  = simple_form_for User.new, url: find_path, method: :get do |f|
+    = f.input :city, input_html: { value: (params[:user].present? ? params[:user][:city] : "") }
+    = f.association :disciplines, collection: Discipline.all, as: :check_boxes, checked: (params[:user].present? ? params[:user][:discipline_ids] : "")
+    = f.button :submit, "Search", id: "user_search", :class => "radius button"
+
+  %ul
+  - @users.each do |user|
+    %li= link_to user.name, player_path(user)
+
+= form_tag url: find_path, method: :get do
+  = label_tag 'location[city]', "City"
+  = text_field_tag "location[city]"
+  %br
+  = label_tag "place[name]", "City"
+  = text_field_tag "place[name]"
+  %br
+  = submit_tag "Serach", id: "place_search"
+
+%ul
+- @places.each do |place|
+  %li= link_to place.name, place

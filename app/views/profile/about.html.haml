@@ -1,4 +1,4 @@
-.row
+.six.columns
   %h3 Parameters
   - @parameters.each do |parameter|
     = "Height: #{parameter.height}"
@@ -8,8 +8,8 @@
   = simple_form_for @parameter, url: parameters_path do |f|
     = f.input :height, collection: 120..220
     = f.input :weight, collection: 30..200
-    = f.button :submit, "Add", id: "add_paramterer"
-
+    = f.button :submit, "Add", id: "add_paramterer", :class => "radius button medium"
+.six.columns
   %h3 Prohibitions
   - @prohibitions.each do |prohibition|
     = "Prohibition: #{prohibition.name}"

@@ -1,18 +1,17 @@
-.row
-  .four.columns
-    %h1 Friends
-    %ul
-      - @friends.each do |friend|
-        %li= link_to friend.name, player_path(friend)
+.four.columns
+  %h2 Friends
+  %ol
+    - @friends.each do |friend|
+      %li= link_to friend.name, player_path(friend)
 
-  .four.columns
-    %h1 Trainings
-    %ul
-      - @trained_users.each do |trained_user|
-        %li= link_to trained_user.name, player_path(trained_user)
+.four.columns
+  %h2 Trainings
+  %ol
+    - @trained_users.each do |trained_user|
+      %li= link_to trained_user.name, player_path(trained_user)
 
-  .four.columns
-    %h1 Coaches
-    %ul
-      - @coaches.each do |coach|
-        %li= link_to coach.name, player_path(coach)
+.four.columns
+  %h2 Coaches
+  %ol
+    - @coaches.each do |coach|
+      %li= link_to coach.name, player_path(coach)

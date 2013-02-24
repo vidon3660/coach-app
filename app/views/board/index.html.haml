@@ -1,44 +1,46 @@
-.row
+.twelve.columns
   - if current_user.coach?
-    %h2 User
-    %h2 Coach
+    / %h2 User
+    / %h2 Coach
     %hr
+.six.columns    
   %h2 Welome / User
-  = link_to "Trainings"
+  %h4
+    = link_to "Trainings"
   %table
-    %tr
-      %th Player (name)
-      %th nearest training (date)
-      %th 
+    %tr.twelve.columns
+      %th.seven Player (name)
+      %th.three nearest training (date)
+      %th.two 
     - 10.times do |i|
-      %tr
-        %td Jon Kowalsky
-        %td 23/12/2013
+      %tr.twelve.columns
+        %td.seven Jon Kowalsky
+        %td.three 23/12/2013
         - if Training.first
-          %td= link_to "show", training_path(Training.first)
+          %td.three= link_to "Show", training_path(Training.first), :class => "radius button tiny"
         - else
-          %td= link_to "show"
-  
-  %br
-  = link_to "You / Preferences", profile_about_path
-  %br
-  = link_to "Find coach or place", coaches_path
+          %td.two= link_to "Show", :class => "radius button tiny"
+  %ul.button-group.radius
+    %li
+      = link_to "You / Preferences", profile_about_path, :class => 'button radius'
+    %li
+      = link_to "Find coach or place", find_path, :class => 'button radius'        
 
   %hr
-
+.six.columns
   %h2 Coach
   
   %h4 Trainings
   %table
-    %tr
-      %th Player (name)
-      %th nearest training (date)
-      %th 
+    %tr.twelve.columns
+      %th.seven Player (name)
+      %th.three nearest training (date)
+      %th.two 
     - 10.times do |i|
-      %tr
-        %td Jon Kowalsky
-        %td 23/12/2013
+      %tr.twelve.columns
+        %td.seven Jon Kowalsky
+        %td.three 23/12/2013
         - if Training.first
-          %td= link_to "show", training_path(Training.first)
+          %td.three= link_to "Show", training_path(Training.first), :class => "radius button tiny"
         - else
-          %td= link_to "show"
+          %td.two= link_to "Show", :class => "radius button tiny"
