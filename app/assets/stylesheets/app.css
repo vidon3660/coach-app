@@ -179,18 +179,18 @@ html{
   background: transparent;
 }
 .searcher{
-  width: 270px;
+  width: 255px;
   background: transparent !important;
 }
 .searcher .search{
   margin-top: -13px;
 }
 .searcher .search_input{
-  width: 180px;
+  width: 60%;
   float: left;
 }
 .searcher .search_submit{
-  width: 90px;
+  width: 40%;
   float: right;
 }
 .searcher:hover{

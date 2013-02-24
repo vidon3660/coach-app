@@ -14,9 +14,16 @@
           %ul.left
             %li.divider
             %li
-              = link_to "Messages", messages_path
+              - if current_user.unread_messages?
+                = link_to "Messages (#{current_user.unread_message_count})", messages_path, id: "messages"
+              - else
+                = link_to "Messages", messages_path, id: "messages"
             %li
-              = link_to "Invitations (#{current_user.invitation_requests.where(status: "expectant").count})", invitations_path
+              - invitations_count = current_user.invitation_requests.where(status: "expectant").count
+              - if invitations_count
+                = link_to "Invitations (#{invitations_count})", invitations_path
+              - else
+                = link_to "Invitations", invitations_path
             %li
               = link_to "Calendar", calendar_path
             %li
