@@ -20,3 +20,5 @@
     = form_tag user_prohibitions_path do
       = select_tag "prohibition", options_from_collection_for_select(available_prohibtions, 'id', 'name')
       = submit_tag "Add", id: "add_user_prohibition"
+  - else
+    %p There are no available prohibitions now.

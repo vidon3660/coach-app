@@ -57,7 +57,7 @@ describe SearchController do
       let!(:user_discipline) { FactoryGirl.create(:user_discipline, user: coach) }
       let!(:discipline) { user_discipline.discipline }
       let!(:place) { FactoryGirl.create(:place) }
-      let!(:discipline_place) { FactoryGirl.create(:discipline_place, discipline: discipline, place: place) }
+      let!(:place_discipline) { FactoryGirl.create(:place_discipline, discipline: discipline, place: place) }
       let!(:location) { FactoryGirl.create(:location, place: place) }
 
       it "returns http success" do

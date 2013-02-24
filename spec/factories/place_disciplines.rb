@@ -1,7 +1,7 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :discipline_place do
+  factory :place_discipline do
     description "MyText"
     discipline
     place

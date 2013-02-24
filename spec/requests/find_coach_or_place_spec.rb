@@ -9,7 +9,7 @@ describe "Find coach or place" do
   let!(:place) { FactoryGirl.create :place }
 
   let!(:user_discipline) { FactoryGirl.create(:user_discipline, user: coach, discipline: discipline) }
-  let!(:discipline_place) { FactoryGirl.create(:discipline_place, discipline: discipline, place: place) }
+  let!(:place_discipline) { FactoryGirl.create(:place_discipline, discipline: discipline, place: place) }
   let!(:location) { FactoryGirl.create(:location, place: place) }
 
   before(:each) do

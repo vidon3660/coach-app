@@ -59,7 +59,8 @@
           %li
             <strong>Weight: </strong> #{parameter.weight} cm
   .four.columns
-    %h3 Prohibitions
-    %ul.circle
-      - @user.prohibitions.each do |prohibition|
-        %li= prohibition.name
+    - if current_user.coach && current_user.trained_users.include?(@user)
+      %h3 Prohibitions
+      %ul.circle
+        - @user.prohibitions.each do |prohibition|
+          %li= prohibition.name

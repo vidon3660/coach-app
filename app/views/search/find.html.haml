@@ -10,11 +10,13 @@
   - @users.each do |user|
     %li= link_to user.name, player_path(user)
 
+%h1 Or find place!
+
 = form_tag url: find_path, method: :get do
   = label_tag 'location[city]', "City"
   = text_field_tag "location[city]"
   %br
-  = label_tag "place[name]", "City"
+  = label_tag "place[name]", "Name"
   = text_field_tag "place[name]"
   %br
   = submit_tag "Serach", id: "place_search"

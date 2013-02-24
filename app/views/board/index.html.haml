@@ -12,14 +12,11 @@
       %th.seven Player (name)
       %th.three nearest training (date)
       %th.two 
-    - 10.times do |i|
+    - @user_trainings.each do |training|
       %tr.twelve.columns
-        %td.seven Jon Kowalsky
+        %td.seven= training.coach.name
         %td.three 23/12/2013
-        - if Training.first
-          %td.three= link_to "Show", training_path(Training.first), :class => "radius button tiny"
-        - else
-          %td.two= link_to "Show", :class => "radius button tiny"
+        %td.three= link_to "Show", training, :class => "radius button tiny"
   %ul.button-group.radius
     %li
       = link_to "You / Preferences", profile_about_path, :class => 'button radius'
@@ -36,11 +33,9 @@
       %th.seven Player (name)
       %th.three nearest training (date)
       %th.two 
-    - 10.times do |i|
+    -# 10.times do |i|
+    - @coach_trainings.each do |training|
       %tr.twelve.columns
-        %td.seven Jon Kowalsky
+        %td.seven= training.user.name
         %td.three 23/12/2013
-        - if Training.first
-          %td.three= link_to "Show", training_path(Training.first), :class => "radius button tiny"
-        - else
-          %td.two= link_to "Show", :class => "radius button tiny"
+        %td.three= link_to "Show", training, :class => "radius button tiny"

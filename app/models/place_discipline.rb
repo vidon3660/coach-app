@@ -1,4 +1,4 @@
-class DisciplinePlace < ActiveRecord::Base
+class PlaceDiscipline < ActiveRecord::Base
   attr_accessible :description
 
   belongs_to :discipline
