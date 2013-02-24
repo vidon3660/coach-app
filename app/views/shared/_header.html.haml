@@ -1,35 +1,45 @@
 .fullContent
   .row
-    %div{ class: "twelve columns" }
-      -# Entire Navbar Code
-      %ul.nav-bar
-        %li.active
-          = link_to "Gym App", root_path
-        %li
-          - if current_user.unread_messages?
-            = link_to "Messages (#{current_user.unread_message_count})", messages_path, id: "messages"
-          - else
-            = link_to "Messages", messages_path, id: "messages"
-        %li
-          - invitations_count = current_user.invitation_requests.where(status: "expectant").count
-          - if invitations_count
-            = link_to "Invitations (#{invitations_count})", invitations_path
-          - else
-            = link_to "Invitations", invitations_path
-        %li
-          = link_to "Calendar", calendar_path
-        %li
-          = link_to "Contacts", contacts_path
-        %li.right{ id: "" }
-          = link_to "Logout", destroy_user_session_path, method: :delete
-        %li.has-flyout.right#about
-          = link_to "Profile", profile_path
-          %a{ href: "#", class: "flyout-toggle"}
-            %span
-          %ul.flyout
+    .twelve.columns
+      %nav.top-bar
+        %ul
+          / Title Area
+          %li.name
+            %h1
+              = link_to "Coach App", root_path
+          %li.toggle-topbar
+            %a{:href => "#"}
+        %section
+          / Left Nav Section
+          %ul.left
+            %li.divider
             %li
-              = link_to "Informations", profile_informations_path
+              - if current_user.unread_messages?
+                = link_to "Messages (#{current_user.unread_message_count})", messages_path, id: "messages"
+              - else
+                = link_to "Messages", messages_path, id: "messages"
             %li
-              = link_to "Passwords", edit_user_registration_path
-
-= render "shared/search"
+              - invitations_count = current_user.invitation_requests.where(status: "expectant").count
+              - if invitations_count
+                = link_to "Invitations (#{invitations_count})", invitations_path
+              - else
+                = link_to "Invitations", invitations_path
+            %li
+              = link_to "Calendar", calendar_path
+            %li
+              = link_to "Contacts", contacts_path
+            %li.searcher
+              = render "shared/search"
+          / Right Nav Section
+          %ul.right
+            %li.divider.show-for-medium-and-up
+            %li.has-dropdown
+              = link_to "Profile", profile_path
+              %ul.dropdown
+                %li
+                  = link_to "Informations", profile_informations_path
+                %li
+                  = link_to "Passwords", edit_user_registration_path
+            %li.divider
+            %li{ id: "" }
+              = link_to "Logout", destroy_user_session_path, method: :delete

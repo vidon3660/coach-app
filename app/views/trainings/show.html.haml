@@ -1,8 +1,8 @@
-.row
+.twelve.columns
   - if @training.user == current_user
     %h1 Training - layout for user
 
   - if @training.coach == current_user
     %h1 Training - layout for coach
 
-  %p= link_to "Close training", training_path(@training), method: :delete, confirm: "Are you sure?"
+  %p= link_to "Close training", training_path(@training), method: :delete, confirm: "Are you sure?", :class => "radius button alert small"

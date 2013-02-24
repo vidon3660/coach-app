@@ -37,7 +37,15 @@
                   = link_to "Login", new_user_session_path
     .row
       #loginForm.twelve.columns.whitebg
-        = render "shared/notice"
-        %h1 Complete registration
+        %h2 Resend confirmation instructions
 
-        = render 'shared/user_information', url: complete_user_path
+        = simple_form_for(resource, :as => resource_name, :url => confirmation_path(resource_name), :html => { :method => :post }) do |f|
+          = f.error_notification
+
+          .form-inputs
+            = f.input :email, :required => true
+
+          .form-actions
+            = f.button :submit, "Resend confirmation instructions"
+
+        = render "devise/shared/links"

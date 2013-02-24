@@ -1,19 +1,20 @@
-= simple_form_for current_user, url: url, method: :put do |f|
-  .form-inputs
-    = f.input :first_name
-    = f.input :last_name
-    = f.input :birth, as: :date, start_year: Date.today.year - 100, end_year: Date.today.year - 12 , order: [:day, :month, :year] 
+.seven.columns.centered.end
+  = simple_form_for current_user, url: url, method: :put do |f|
+    .form-inputs
+      = f.input :first_name
+      = f.input :last_name
+      = f.input :birth, as: :date, start_year: Date.today.year - 100, end_year: Date.today.year - 12 , order: [:day, :month, :year] 
 
-    = f.label :country
-    = country_select("user", "country")
+      = f.label :country
+      = country_select("user", "country")
 
-    = f.input :city
-    = f.input :phone
+      = f.input :city
+      = f.input :phone
 
-    %label Avatar
-    = image_tag(current_user.avatar_url, size: "100x100") if current_user.avatar?
-    = f.file_field :avatar
-    = f.hidden_field :avatar_cache
+      %label Avatar
+      = image_tag(current_user.avatar_url, size: "100x100") if current_user.avatar?
+      = f.file_field :avatar
+      = f.hidden_field :avatar_cache
 
-  .form-actions
-    = f.button :submit, "Save"
+    .form-actions
+      = f.button :submit, "Save", class: "nice button center"

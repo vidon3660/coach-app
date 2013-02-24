@@ -1,6 +1,5 @@
-.row
-  %h2= "Edit #{resource_name.to_s.humanize}"
-
+%h2= "Edit #{resource_name.to_s.humanize}"
+.seven.columns.centered.end
   = simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f|
     = f.error_notification
 
@@ -9,8 +8,8 @@
       = f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true
       = f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false
       = f.input :password_confirmation, :required => false
-
-    .form-actions
-      = f.button :submit, "Save"
-
-  = link_to "Back", :back
+    %ul.button-group.radius
+      %li
+        = link_to "Back", :back, :class => "radius button"
+      %li
+        = f.button :submit, "Save", :class => "radius button"

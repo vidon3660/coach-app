@@ -1,15 +1,14 @@
-%h1 Messages / Sent
-
-= render 'navigation'
-
-%table
-  %thead
-    %th Unread
-    %th Subject
-    %th
-  %tbody
-    - @messages.each do |message|
-      %tr
-        %td= #message.read_at?
-        %td= link_to message.subject, message_path(message)
-        %td= link_to "remove", message_path(message), method: :delete
+.twelve.columns
+  %h1 Messages / Sent
+  = render 'navigation'
+  %table.messageList
+    %thead
+      %th.status Unread
+      %th.subject Subject
+      %th.action
+    %tbody
+      - @messages.each do |message|
+        %tr
+          %td= #message.read_at?
+          %td= link_to message.subject, message_path(message)
+          %td= link_to "remove", message_path(message), method: :delete, :class => "radius button alert tiny"
