@@ -1,7 +1,8 @@
-.row
-  %p= "Search #{params[:search]}"
-
-  %h3 Users
+.alert-box.secondary
+  "Search #{params[:search]}"
+%h3 
+  Users
   - unless @users.empty?
+    %ol
     - @users.each do |user|
-      %p= link_to user.name, player_path(user)
+      %li= link_to user.name, player_path(user)

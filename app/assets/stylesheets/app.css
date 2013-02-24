@@ -82,10 +82,10 @@ p{
 
 /* Main footer */
 #mainFooter{
-  background: #4D4D4D;
+  background: #ededed;
 }
 #mainFooter a{
-  color:#fff;
+  color:#0f0f0f;
 }
 
 /* login */
@@ -172,6 +172,32 @@ html{
   z-index: 99;
   background: rgba(255, 255, 255, 0.5);
 }
+select{
+  margin-bottom: 12px;
+}
+.date label{
+  float: none !important;
+  clear: both;
+}
+.date .optional{
+  width: 33.333%;
+  float: left;
+}
+.error{
+  display: block;
+  margin-bottom: 5px;
+  color: red;
+}
+.hint{
+  display: block;
+  margin-bottom: 25px;
+  color: #a6a6a6;
+}
+.field_with_errors{
+  padding:5px;
+  border: 1px solid red;
+  margin-bottom:5px;
+}
 .fullContent{
   background: #0f0f0f;
 }
@@ -195,4 +221,24 @@ html{
 }
 .searcher:hover{
   background: transparent !important;
+}
+
+
+/*Message*/
+.messageList{
+  width: 90%;
+}
+.messageList .status{
+  width: 15%;
+}
+.messageList .subject{
+  width: 70%;
+}
+.messageList .action{
+  width: 15%;
+}
+
+/*Invitations*/
+.edit_invitation{
+  margin-bottom: 0;
 }

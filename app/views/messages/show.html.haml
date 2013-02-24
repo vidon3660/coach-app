@@ -1,10 +1,13 @@
 .twelve.columns
 	%h1 Message
 
-	%p= "Sender: #{@message.sender.name}"
-	%p= "Recipient: #{@message.recipient.name}"
+	%p 
+		<strong>Sender:</strong> #{@message.sender.name}
+	%p
+		<strong>Recipient:</strong> #{@message.recipient.name}
 
-	%h3= @message.subject
+	%h5
+		<strong>Title:</strong> #{@message.subject}
 	%p= @message.body
 
-	= link_to "reply", new_person_message_path(@message.sender,  message_id: @message)
+	= link_to "reply", new_person_message_path(@message.sender,  message_id: @message), :class => "radius button"

@@ -1,8 +1,8 @@
-.row
-  .twelve.columns
-    %h1 User profile
+.twelve.columns
+  %h1 Profile:  #{@user.first_name} #{@user.last_name}
 
-    - if @user != current_user
+  - if @user != current_user
+    %ul.button-group.radius
       - invitations = current_user.invitations.where(invited_id: @user.id)
       - if current_user.friends.include?(@user)
         %p 
@@ -34,26 +34,32 @@
             = "You are trained for this user."
             = link_to "Training", training_path(training)        
     
-    %hr
+  %hr
 
-    = link_to "send message", new_person_message_path(@user)
+  = link_to "send message", new_person_message_path(@user), :class => "radius button small"
 
-    %hr
-
+  %hr
+  .four.columns
+    %h3 Informations
     .avatar
       = image_tag @user.avatar.url, size: "100x100" if @user.avatar?
-    %p= @user.first_name
-    %p= @user.last_name
-    %p= @user.city
-
-- if current_user.coach && current_user.trained_users.include?(@user)
-  %h3 Parameters
-  %ul
-    - @user.parameters.each do |parameter|
-      %li= parameter.height
-      %li= parameter.weight
-
-  %h3 Prohibitions (przeciwskazania)
-  %ul
-    - @user.prohibitions.each do |prohibition|
-      %li= prohibition.name
+    %p
+      <strong>Name:</strong> #{@user.first_name}
+    %p
+      <strong>Last name:</strong> #{@user.last_name}
+    %p
+      <strong>City:</strong> #{@user.city}
+  .four.columns
+    - if current_user.coach && current_user.trained_users.include?(@user)
+      %h3 Parameters
+      %ul.circle
+        - @user.parameters.each do |parameter|
+          %li
+            <strong>Height: </strong> #{parameter.height} cm
+          %li
+            <strong>Weight: </strong> #{parameter.weight} cm
+  .four.columns
+    %h3 Prohibitions
+    %ul.circle
+      - @user.prohibitions.each do |prohibition|
+        %li= prohibition.name

@@ -1,6 +1,6 @@
 .twelve.columns
-  %h1 Messages#new
+  %h1 New message
   = simple_form_for @message, url: person_messages_path(@recipient) do |f|
     = f.input :subject
     = f.input :body
-    = f.button :submit, "Send"
+    = f.button :submit, "Send message"

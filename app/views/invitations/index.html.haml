@@ -1,34 +1,33 @@
-.row
-  .twelve.columns
-    %h4 Invitations
-    %table
+.twelve.columns
+  %h1 Invitations
+  %table.messageList
+    %tr
+      %th Friend
+      %th Training
+      %th User (here will be avatar)
+      %th
+      %th
+      %th
+    - @invitations.each do |invitation|
       %tr
-        %th Friend
-        %th Training
-        %th User (here will be avatar)
-        %th
-        %th
-        %th
-      - @invitations.each do |invitation|
-        %tr
-          %td= invitation.friend
-          %td= invitation.training
-          %td= link_to invitation.inviting.name, player_path(invitation.inviting)
-          - if invitation.training
-            %td= "#{invitation.inviting.name} want to add you to training."
-          - elsif invitation.friend
-            %td= "#{invitation.inviting.name} want to add you to friend."
+        %td= invitation.friend
+        %td= invitation.training
+        %td= link_to invitation.inviting.name, player_path(invitation.inviting)
+        - if invitation.training
+          %td= "#{invitation.inviting.name} want to add you to training."
+        - elsif invitation.friend
+          %td= "#{invitation.inviting.name} want to add you to friend."
 
-          - if invitation.expectant?
-            %td
-              = form_for invitation, method: :put do |f|
-                = f.hidden_field :status, value: 'accepted'
-                = f.submit "Accept"
-            %td
-              = form_for invitation, method: :put do |f|
-                = f.hidden_field :status, value: 'rejected'
-                = f.submit "Reject"
-          - else
-            %td
-            %td
-              = invitation.status
+        - if invitation.expectant?
+          %td
+            = form_for invitation, method: :put do |f|
+              = f.hidden_field :status, value: 'accepted'
+              = f.submit "Accept"
+          %td
+            = form_for invitation, method: :put do |f|
+              = f.hidden_field :status, value: 'rejected'
+              = f.submit "Reject"
+        - else
+          %td
+          %td
+            = invitation.status

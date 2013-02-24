@@ -17,9 +17,9 @@
         %td.seven Jon Kowalsky
         %td.three 23/12/2013
         - if Training.first
-          %td.three= link_to "show", training_path(Training.first)
+          %td.three= link_to "Show", training_path(Training.first), :class => "radius button tiny"
         - else
-          %td.two= link_to "show"
+          %td.two= link_to "Show", :class => "radius button tiny"
   %ul.button-group.radius
     %li
       = link_to "You / Preferences", profile_about_path, :class => 'button radius'
@@ -41,6 +41,6 @@
         %td.seven Jon Kowalsky
         %td.three 23/12/2013
         - if Training.first
-          %td.three= link_to "show", training_path(Training.first)
+          %td.three= link_to "Show", training_path(Training.first), :class => "radius button tiny"
         - else
-          %td.two= link_to "show"
+          %td.two= link_to "Show", :class => "radius button tiny"
