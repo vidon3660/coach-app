@@ -22,11 +22,11 @@
           %td
             = form_for invitation, method: :put do |f|
               = f.hidden_field :status, value: 'accepted'
-              = f.submit "Accept"
+              = f.submit "Accept", :class => "button foundicon-plus"
           %td
             = form_for invitation, method: :put do |f|
               = f.hidden_field :status, value: 'rejected'
-              = f.submit "Reject"
+              = f.submit "Reject", :class => "button foundicon-minus"
         - else
           %td
           %td

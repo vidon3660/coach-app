@@ -3,4 +3,4 @@
   = simple_form_for @message, url: person_messages_path(@recipient) do |f|
     = f.input :subject
     = f.input :body
-    = f.button :submit, "Send message"
+    = f.button :submit, "Send message", :class => "radius button"

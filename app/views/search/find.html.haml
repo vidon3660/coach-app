@@ -1,26 +1,30 @@
 .twelve.columns
-  %h1 Find coach!
+  %h1 Find
 
   = simple_form_for User.new, url: find_path, method: :get do |f|
     = f.input :city, input_html: { value: (params[:user].present? ? params[:user][:city] : "") }
     = f.association :disciplines, collection: Discipline.all, as: :check_boxes, checked: (params[:user].present? ? params[:user][:discipline_ids] : "")
     = f.button :submit, "Search", id: "user_search", :class => "radius button"
-
   %ul
   - @users.each do |user|
     %li= link_to user.name, player_path(user)
+  %h2 Or find place!
 
-%h1 Or find place!
+  = form_tag url: find_path, method: :get do
+    = label_tag 'location[city]', "City"
+    = text_field_tag "location[city]"
+    %br
+    = label_tag "place[name]", "Name"
+    = text_field_tag "place[name]"
+    %br
+    = submit_tag "Serach", id: "place_search"
 
-= form_tag url: find_path, method: :get do
-  = label_tag 'location[city]', "City"
-  = text_field_tag "location[city]"
-  %br
-  = label_tag "place[name]", "Name"
-  = text_field_tag "place[name]"
-  %br
-  = submit_tag "Serach", id: "place_search"
-
-%ul
-- @places.each do |place|
-  %li= link_to place.name, place
+    %ul
+    - @places.each do |place|
+      %li= link_to place.name, place
+  %h2 coach!
+  = form_tag url: find_path, method: :get do
+    = label_tag 'coach[name]', "name"
+    = text_field_tag "coach[name]"
+    %br
+    = submit_tag "Serach", id: "place_search", :class => "radius button"

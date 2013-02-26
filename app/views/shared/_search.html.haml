@@ -1,6 +1,6 @@
 .search
   = form_tag search_path do
     .search_input
-      = search_field_tag "search", params[:search]
+      = search_field_tag "search", params[:search], :placeholder => "Search..."
     .search_submit
-      = button_tag "Search", :class => 'button expand postfix'
+      = button_tag "Search", :class => 'button expand postfix foundicon-search'

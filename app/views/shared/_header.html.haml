@@ -15,19 +15,19 @@
             %li.divider
             %li
               - if current_user.unread_messages?
-                = link_to "Messages (#{current_user.unread_message_count})", messages_path, id: "messages"
+                = link_to "Messages (#{current_user.unread_message_count})", messages_path, id: "messages", :class => "foundicon-mail newThing"
               - else
-                = link_to "Messages", messages_path, id: "messages"
+                = link_to "Messages", messages_path, id: "messages", :class => "foundicon-mail"
             %li
               - invitations_count = current_user.invitation_requests.where(status: "expectant").count
               - if invitations_count
-                = link_to "Invitations (#{invitations_count})", invitations_path
+                = link_to "Invitations (#{invitations_count})", invitations_path, :class => "foundicon-plus newThing"
               - else
-                = link_to "Invitations", invitations_path
+                = link_to "Invitations", invitations_path, :class => "foundicon-plus"
             %li
-              = link_to "Calendar", calendar_path
+              = link_to "Calendar", calendar_path, :class => "foundicon-calendar"
             %li
-              = link_to "Contacts", contacts_path
+              = link_to "Contacts", contacts_path, :class => "foundicon-address-book"
             %li.searcher
               = render "shared/search"
           / Right Nav Section
