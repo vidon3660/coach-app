@@ -1,3 +1,11 @@
+require "rvm/capistrano"
+set :rvm_ruby_string, 'default'
+set :rvm_type, :user
+
+# Bundler
+require "bundler/capistrano"
+
+
 # General
 set :application, "coach-app"
 set :user, "michal"
