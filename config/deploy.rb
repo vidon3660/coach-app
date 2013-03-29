@@ -26,6 +26,8 @@ role :app, "94.124.6.116"                          # This may be the same as you
 role :db,  "94.124.6.116", :primary => true # This is where Rails migrations will run
 role :db,  "94.124.6.116"
 
+after "deploy:update_code","deploy:config_symlink"
+
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
 
@@ -38,5 +40,9 @@ namespace :deploy do
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
+  end
+
+  task :config_symlink do
+    run "cp #{release_path}/config/database.yml.example #{release_path}/config/database.yml"
   end
 end
