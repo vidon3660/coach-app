@@ -49,6 +49,12 @@
       <strong>Last name:</strong> #{@user.last_name}
     %p
       <strong>City:</strong> #{@user.city}
+    %p
+      <strong>Disciplines:</strong>
+      %ul
+        - @user.disciplines.each do |discipline|
+          %li= discipline.name
+
   .four.columns
     - if current_user.coach && current_user.trained_users.include?(@user)
       %h3 Parameters

@@ -2,10 +2,10 @@
   Welcome
 .six.columns
   = form_tag search_path do
-    = label_tag 'location[city]', "City"
-    = text_field_tag "location[city]"
+    = label_tag 'city', "City"
+    = text_field_tag "city"
     %br
-    = label_tag "discipline[name]", "Discipline"
-    = text_field_tag "discipline[name]"
+    = label_tag "discipline", "Discipline"
+    = text_field_tag "discipline"
     %br
     = submit_tag "Serach", id: "place_search"

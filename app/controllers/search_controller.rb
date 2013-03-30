@@ -6,6 +6,12 @@ class SearchController < AuthenticatedController
     if params[:search]
       # @users = User.search params[:search], order: :last_name, conditions: { status: "active" }
       @users = User.active.where("first_name like ? or last_name like ?", params[:search], params[:search]).order(:last_name)
+    elsif params[:city].present? && params[:discipline].present?
+      @users = User.active.joins(:disciplines).where("disciplines.name = ? and users.city = ? ", params[:discipline], params[:city])
+    elsif params[:city].present?
+      @users = User.active.where("city like ?", params[:city])
+    elsif params[:discipline].present?
+      @users = User.active.joins(:disciplines).where("disciplines.name = ?", params[:discipline])
     end
   end
 

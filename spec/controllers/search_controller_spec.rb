@@ -2,8 +2,13 @@ require 'spec_helper'
 
 describe SearchController do
 
-  let(:user) { FactoryGirl.create :user }
-  before(:each) { sign_in(user) }
+  let!(:user) { FactoryGirl.create :user }
+  let!(:discipline) { FactoryGirl.create :discipline }
+
+  before(:each) do
+    user.disciplines << discipline
+    sign_in(user)
+  end
 
   sphinx_environment :users do
     describe "GET 'index'" do
@@ -33,6 +38,26 @@ describe SearchController do
           it "should search by user name" do
             pending "to work this should be run in thinking sphinx"
             get :index, search: user.name
+            assigns(:users).should include(user)
+          end
+
+          it "should search by user city and discipline" do
+            get :index, discipline: discipline.name, city: user.city
+            assigns(:users).should include(user)
+          end
+
+          it "should search by user city" do
+            get :index, city: user.city
+            assigns(:users).should include(user)
+          end
+
+          it "should search by user discipline" do
+            get :index, discipline: discipline.name
+            assigns(:users).should include(user)
+          end
+
+          it "should search by user city" do
+            get :index, city: user.city
             assigns(:users).should include(user)
           end
 
