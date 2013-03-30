@@ -7,7 +7,6 @@ describe BoardController do
   describe "signed user" do
     it "GET 'index'" do
       get :index
-      response.should render_template ("layouts/user")
       response.should render_template ("board/index")
     end
   end

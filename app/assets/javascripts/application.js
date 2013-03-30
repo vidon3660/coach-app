@@ -12,3 +12,20 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require app
+//= require foundation.min
+//= require jquery.foundation.forms
+//= require modernizr.foundation
+
+$(window).load(function(){
+  $("#featured").orbit({
+    animation: 'fade'
+  });
+});
+
+$(document).ready(function(){
+  $("#aboutContent").hide();
+  $("#about").click(function(){
+    $("#aboutContent").slideToggle("slow");
+  });
+});

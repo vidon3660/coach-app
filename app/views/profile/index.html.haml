@@ -1,19 +1,19 @@
 .row
-  %aside.four.columns
-    %h4 Opening data
-    %p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque a magna vitae nunc tempor rhoncus. Phasellus tempor risus at metus iaculis ultricies. Ut sagittis mauris in urna laoreet pellentesque. Ut quis accumsan nunc.
-    %h4 Popup
-    %a.button{"data-reveal-id" => "exampleModal", :href => "#"} Example
-    #exampleModal.reveal-modal
-      %h2 This is popup.
-      %p
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas eu mauris sit amet leo tincidunt mattis id eu mi. Maecenas felis elit, vehicula quis porttitor sagittis, laoreet vel mauris. Donec ac nunc orci, sit amet consequat quam. Pellentesque rhoncus, mi ut blandit blandit, lectus velit sagittis ipsum, ac congue tellus velit at sem. Maecenas dapibus lorem erat, in posuere nisl. Mauris sit amet mi enim, at dictum sapien. Cras nec neque non felis condimentum volutpat. Duis erat ligula, lobortis ut tincidunt vitae, tristique ut augue. Donec feugiat nibh non lorem fringilla ornare. Maecenas lacus lectus, pretium et interdum tempus, lobortis in est. Donec ornare libero et felis dapibus feugiat.
-        %img{:src => "http://placehold.it/200x250"}/
-      %a.close-reveal-modal X
-  .eight.columns
-    %h4 Profile#index
-    %p Find me in app/views/profile/index.html.haml
+  %h1 Profile
+  .seven.columns.centered.end
+    = simple_form_for(@user, :url => registration_path(@user), :html => { :method => :put }) do |f|
+      = f.error_notification
+      .form-inputs
+        = f.input :email, :required => true, :autofocus => true
+        = f.input :current_password, :hint => "we need your current password to confirm your changes", :required => true
+        = f.input :password, :autocomplete => "off", :hint => "leave it blank if you don't want to change it", :required => false
+        = f.input :password_confirmation, :required => false
+      %ul.button-group.radius
+        %li
+          = link_to "Back", :back, :class => "radius button"
+        %li
+          = f.button :submit, "Save", :class => "radius button"
 
-    %ul
-      %li= link_to "Informations", profile_informations_path
-      %li= link_to "Passwords", edit_user_registration_path
+.row
+  %h2 Informations
+  = render 'shared/user_information', url: profile_update_path

@@ -1,6 +1,4 @@
 class TrainingsController < AuthenticatedController
-  layout "user"
-  
   def show
     @training = Training.find(params[:id])
   end

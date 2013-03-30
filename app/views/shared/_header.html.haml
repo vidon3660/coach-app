@@ -1,45 +1,57 @@
-.fullContent
-  .row
-    .twelve.columns
-      %nav.top-bar
-        %ul
-          / Title Area
-          %li.name
-            %h1
-              = link_to "Coach App", root_path
-          %li.toggle-topbar
-            %a{:href => "#"}
-        %section
-          / Left Nav Section
-          %ul.left
-            %li.divider
-            %li
-              - if current_user.unread_messages?
-                = link_to "Messages (#{current_user.unread_message_count})", messages_path, id: "messages", :class => "foundicon-mail newThing"
-              - else
-                = link_to "Messages", messages_path, id: "messages", :class => "foundicon-mail"
-            %li
-              - invitations_count = current_user.invitation_requests.where(status: "expectant").count
-              - if invitations_count
-                = link_to "Invitations (#{invitations_count})", invitations_path, :class => "foundicon-plus newThing"
-              - else
-                = link_to "Invitations", invitations_path, :class => "foundicon-plus"
-            %li
-              = link_to "Calendar", calendar_path, :class => "foundicon-calendar"
-            %li
-              = link_to "Contacts", contacts_path, :class => "foundicon-address-book"
-            %li.searcher
-              = render "shared/search"
-          / Right Nav Section
-          %ul.right
-            %li.divider.show-for-medium-and-up
-            %li.has-dropdown
-              = link_to "Profile", profile_path
-              %ul.dropdown
-                %li
-                  = link_to "Informations", profile_informations_path
-                %li
-                  = link_to "Passwords", edit_user_registration_path
-            %li.divider
-            %li{ id: "" }
-              = link_to "Logout", destroy_user_session_path, method: :delete
+- if current_user
+  .fullContent
+    .row
+      .twelve.columns
+        %nav.top-bar
+          %ul
+            / Title Area
+            %li.name
+              %h1
+                = link_to "Coach App", root_path
+            %li.toggle-topbar
+              %a{:href => "#"}
+          %section
+            / Left Nav Section
+            %ul.left
+              %li.divider
+              %li
+                - if current_user.unread_messages?
+                  = link_to "Messages (#{current_user.unread_message_count})", messages_path, id: "messages", :class => "foundicon-mail newThing"
+                - else
+                  = link_to "Messages", messages_path, id: "messages", :class => "foundicon-mail"
+              %li
+                - invitations_count = current_user.invitation_requests.where(status: "expectant").count
+                - if invitations_count
+                  = link_to "Invitations (#{invitations_count})", invitations_path, :class => "foundicon-plus newThing"
+                - else
+                  = link_to "Invitations", invitations_path, :class => "foundicon-plus"
+              %li
+                = link_to "Contacts", contacts_path, :class => "foundicon-address-book"
+              %li.searcher
+                = render "shared/search"
+            / Right Nav Section
+            %ul.right
+              %li.divider.show-for-medium-and-up
+              %li= link_to "Profile", profile_path
+              %li.divider
+              %li{ id: "" }
+                = link_to "Logout", destroy_user_session_path, method: :delete
+- else
+  .fullContent.NavMore
+    .row
+      .twelve.columns
+        %nav.top-bar
+          %ul
+            / Title Area
+            %li.name
+              %h1
+                = link_to "Coach App", root_path
+            %li.toggle-topbar
+              %a{:href => "#"}
+          %section
+            / Right Nav Section
+            %ul.right
+              %li{ id: "" }
+                = link_to "Sign up", new_user_registration_path
+              %li{ id: "" }
+                = link_to "Login", new_user_session_path

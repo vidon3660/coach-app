@@ -10,7 +10,6 @@ describe SearchController do
       it "should render success with views" do
         get :index
         response.should be_success
-        response.should render_template ("layouts/user")
         response.should render_template ("search/index")
       end
 

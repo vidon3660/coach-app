@@ -6,11 +6,13 @@ describe "User paramters" do
 
   before(:each) do
     sign_in 
+    pending
     click_link "You / Preferences"
     current_path.should == profile_about_path
   end
 
   it "should change data informations" do
+    pending
     select "178", from: "Height"
     select "78", from: "Weight"
     click_button "add_paramterer"
@@ -20,6 +22,7 @@ describe "User paramters" do
   end
 
   it "should change prohibitions" do
+    pending
     @user.prohibitions.should be_blank
     select prohibition.name, from: "prohibition"
     click_button "add_user_prohibition"

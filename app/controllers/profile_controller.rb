@@ -3,9 +3,7 @@ class ProfileController < AuthenticatedController
   load_and_authorize_resource :user
 
   def index
-  end
-
-  def informations
+    @user = current_user
   end
 
   def about
@@ -16,10 +14,11 @@ class ProfileController < AuthenticatedController
   end
 
   def update
-    if current_user.update_attributes(params[:user])
-      redirect_to profile_informations_path, notice: t('devise.registrations.updated')
+    @user = current_user
+    if @user.update_attributes(params[:user])
+      redirect_to profile_path, notice: t('devise.registrations.updated')
     else
-      render :informations
+      render :index
     end
   end
 end

@@ -1,7 +1,5 @@
 class CompleteController < AuthenticatedController
 
-  layout false
-
   load_and_authorize_resource :user
 
   def edit

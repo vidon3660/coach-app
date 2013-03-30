@@ -1,14 +1,11 @@
 CoachApp::Application.routes.draw do
 
-  match '/calendar(/:year(/:month))' => 'calendar#index', :as => :calendar, :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}
-
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   devise_for :users, controllers: { registrations: "registrations" }
 
-  # resource :calendar
   resources :contacts
   resources :events
   resources :friendships #, only: [:delete]

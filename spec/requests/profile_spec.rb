@@ -2,7 +2,7 @@ require "spec_helper"
 
 describe "User profile" do
 
-  let(:prohibition)   { FactoryGirl.create(:prohibition) }
+  let!(:prohibition)   { FactoryGirl.create(:prohibition) }
 
   before(:each) do
     sign_in
@@ -11,23 +11,15 @@ describe "User profile" do
   end
 
   it "change password" do
-    click_link "Password"
-    current_path.should == edit_user_registration_path
     fill_in "Current password", with: @user.password
     fill_in "Password", with: "password"
     fill_in "Password confirmation", with: "password"
     click_button "Save"
-    current_path.should == edit_user_registration_path
+    current_path.should == profile_path
     page.has_content?("You updated your account successfully.").should be_true
   end
 
   describe "change user informations" do
-    before(:each) do
-      prohibition.save
-      click_link "Informations"
-      current_path.should == profile_informations_path
-    end
-
     it "should change personal informations" do
       fill_in "First name", with: "Peter"
       fill_in "Last name", with: "Jones"
@@ -35,8 +27,8 @@ describe "User profile" do
       select_date Date.parse('01-01-1960'), :from => "user_birth"
       select "Poland", from: "user_country"
       fill_in "City", with: "Cracow"
-      click_button "Save"
-      current_path.should == profile_informations_path
+      click_button "save_user_information"
+      current_path.should == profile_path
       page.has_content?("You updated your account successfully.").should be_true
     end
   end

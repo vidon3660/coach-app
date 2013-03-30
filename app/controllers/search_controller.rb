@@ -1,6 +1,7 @@
 class SearchController < AuthenticatedController
 
   def index
+    @users = []
     # TODO: Thinking sphinx here!
     if params[:search]
       # @users = User.search params[:search], order: :last_name, conditions: { status: "active" }

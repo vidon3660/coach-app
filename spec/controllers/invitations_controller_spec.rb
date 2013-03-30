@@ -16,7 +16,6 @@ describe InvitationsController do
     it "show all invitations" do
       get 'index'
       response.should be_success
-      response.should render_template ("layouts/user")
       response.should render_template ("invitations/index")
       assigns(:invitations).should include(invitation)
     end

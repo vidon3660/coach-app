@@ -11,6 +11,7 @@ describe "Home page" do
   end
 
   it "redirect to root page if user is signed" do
+    pending
     sign_in
     current_path.should == board_path
     visit root_path

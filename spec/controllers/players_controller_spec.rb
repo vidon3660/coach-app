@@ -11,7 +11,6 @@ describe PlayersController do
       get :show, id: user.id
       assigns(:user).should == user
       response.should be_success
-      response.should render_template ("layouts/user")
       response.should render_template ("players/show")
     end
   end

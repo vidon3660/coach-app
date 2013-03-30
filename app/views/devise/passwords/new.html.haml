@@ -1,52 +1,15 @@
-!!!
--# <!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
--# <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-%html
-  %head
-    %meta{ :charset => "utf-8" }
+.row
+  #loginForm.twelve.columns.whitebg
+    %h2 Forgot your password?
 
-    - # Set the viewport width to device width for mobile
-    %meta{ :name => "viewport", :content => "width=device-width" }
+    .seven.columns.centered.end
+      = simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
+        = f.error_notification
 
-    %title Login
-    %link{ :href => 'http://fonts.googleapis.com/css?family=Ubuntu+Condensed', :rel => 'stylesheet', :type => 'text/css' }
-    %link{ :href => 'http://fonts.googleapis.com/css?family=Ubuntu:400,500,700', :rel => 'stylesheet', :type => 'text/css' }
-    
-    -# <!-- Included CSS Files (Compressed) -->
-    = stylesheet_link_tag href="foundation.min.css"
-    = stylesheet_link_tag href="app.css"
+        .form-inputs
+          = f.input :email, :required => true
 
-    = javascript_include_tag "modernizr.foundation.js"
-
-  %body#loginContainer
-    .fullContent.NavMore
+        .form-actions
+          = f.button :submit, "Send me reset password instructions", class: "nice button center"
       .row
-        .twelve.columns
-          %nav.top-bar
-            %ul
-              / Title Area
-              %li.name
-                %h1
-                  = link_to "Coach App", root_path
-              %li.toggle-topbar
-                %a{:href => "#"}
-            %section
-              / Right Nav Section
-              %ul.right
-                %li{ id: "" }
-                  = link_to "Login", new_user_session_path
-    .row
-      #loginForm.twelve.columns.whitebg
-        %h2 Forgot your password?
-
-        .seven.columns.centered.end
-          = simple_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f|
-            = f.error_notification
-
-            .form-inputs
-              = f.input :email, :required => true
-
-            .form-actions
-              = f.button :submit, "Send me reset password instructions", class: "nice button center"
-          .row
-          = render "devise/shared/links"
+      = render "devise/shared/links"
