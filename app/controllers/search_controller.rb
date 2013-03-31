@@ -1,39 +1,52 @@
 class SearchController < AuthenticatedController
 
   def index
-    @users = []
-    # TODO: Thinking sphinx here!
-    if params[:search]
-      # @users = User.search params[:search], order: :last_name, conditions: { status: "active" }
-      @users = User.active.where("first_name like ? or last_name like ?", params[:search], params[:search]).order(:last_name)
-    elsif params[:city].present? && params[:discipline].present?
-      @users = User.active.joins(:disciplines).where("disciplines.name = ? and users.city = ? ", params[:discipline], params[:city])
-    elsif params[:city].present?
-      @users = User.active.where("city like ?", params[:city])
-    elsif params[:discipline].present?
-      @users = User.active.joins(:disciplines).where("disciplines.name = ?", params[:discipline])
-    end
-  end
-
-  def find
-    # TODO: Thinking sphinx here!
+    @coaches = []
     @users = []
     @places = []
 
+    if params[:search]
+      results = User.search(params[:search], order: :last_name, conditions: { status: "active" })
+      @coaches = results.select { |u| u.coach? }
+      @users = results.reject   { |u| u.coach? }
+    end
+
+    if params[:city].present? && params[:discipline].present?
+      results = User.active.joins(:disciplines).where("disciplines.name like ? and users.city like ?", params[:discipline], params[:city]).uniq!
+      if results
+        @coaches = results.select { |u| u.coach? }
+        @users = results.reject   { |u| u.coach? }
+      end
+    elsif params[:city].present?
+      results = User.active.where("city like ?", params[:city])
+      if results
+        @coaches = results.select { |u| u.coach? }
+        @users = results.reject   { |u| u.coach? }
+      end
+    elsif params[:discipline].present?
+      results = User.active.joins(:disciplines).where("disciplines.name like ?", params[:discipline]).uniq!
+      if results
+        @coaches = results.select { |u| u.coach? }
+        @users = results.reject   { |u| u.coach? }
+      end
+    end
+
     if params[:user]
-      @users = User.custom_search(params[:user])
+      @coaches = User.custom_search(params[:user])
     end
 
     if params[:location] && params[:place]
       if params[:location][:city].present? && params[:place][:name].present?
         @places = Place.joins(:location).where("locations.city = ?", params[:location][:city]).where(name: params[:place][:name])
-        # end
       elsif params[:location][:city].present?
         @places = Place.joins(:location).where("locations.city = ?", params[:location][:city])
       elsif params[:place][:name].present?
         @places = Place.where(name: params[:place][:name])
       end
     end
+  end
+
+  def find
   end
 
 end

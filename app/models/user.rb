@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
 
   before_validation :set_initial_status
 
-  before_save :set_coach
+  before_create :set_coach
 
   has_private_messages
 
@@ -69,7 +69,8 @@ class User < ActiveRecord::Base
     # fields
     indexes first_name, :sortable => true
     indexes last_name, :sortable => true
-    # indexes status
+    indexes status
+    indexes coach
 
     # attributes
 

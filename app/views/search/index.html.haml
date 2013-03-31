@@ -1,8 +1,20 @@
 .alert-box.secondary
   "Search #{params[:search]}"
-%h3 
-  Users
-  - unless @users.empty?
-    %ol
-    - @users.each do |user|
-      %li= link_to user.name, player_path(user)
+
+%h3 Places
+- unless @places.empty?
+  %ol
+  - @places.each do |place|
+    %li= link_to place.name, place
+
+%h3 Coaches
+- unless @coaches.empty?
+  %ol
+  - @coaches.each do |coach|
+    %li= link_to coach.name, player_path(coach)
+
+%h3 Users
+- unless @users.empty?
+  %ol
+  - @users.each do |user|
+    %li= link_to user.name, player_path(user)
