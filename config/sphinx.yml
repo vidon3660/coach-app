@@ -1,0 +1,6 @@
+test:
+  port: 9313
+
+production:
+  pid_file: tmp/searchd.pid
+  indices_location: config/sphinx
