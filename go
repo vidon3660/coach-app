@@ -3,6 +3,11 @@ then
   cp config/database.yml.example config/database.yml 
 fi
 
+if [ ! -f /config/sphinx.yml ]
+then
+  cp config/sphinx.yml.example config/sphinx.yml
+fi
+
 sudo -u postgres createuser coach-app -s
 
 rake db:drop

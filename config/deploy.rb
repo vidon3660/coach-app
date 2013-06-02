@@ -4,8 +4,7 @@ set :rvm_type, :user
 
 # Bundler
 require "bundler/capistrano"
-require 'thinking_sphinx/deploy/capistrano'
-
+require 'thinking_sphinx/capistrano'
 
 # General
 set :application, "coach-app"
@@ -27,17 +26,7 @@ role :app, "94.124.6.116"                          # This may be the same as you
 role :db,  "94.124.6.116", :primary => true # This is where Rails migrations will run
 role :db,  "94.124.6.116"
 
-before 'deploy:update_code', 'thinking_sphinx:stop'
-after "deploy:update_code", "deploy:config_symlink", 'thinking_sphinx:start'
-
-namespace :sphinx do
-  desc "Symlink Sphinx indexes"
-  task :symlink_indexes, :roles => [:app] do
-    run "ln -nfs #{shared_path}/db/sphinx #{release_path}/db/sphinx"
-  end
-end
-
-after 'deploy:finalize_update', 'sphinx:symlink_indexes'
+after "deploy:update_code","deploy:config_symlink"
 
 # if you want to clean up old releases on each deploy uncomment this:
 # after "deploy:restart", "deploy:cleanup"
