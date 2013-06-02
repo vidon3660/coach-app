@@ -4,8 +4,6 @@ describe PlayersController do
 
   let(:user) { FactoryGirl.create :user }
 
-  before(:each) { sign_in(user) }
-
   describe "GET 'show'" do
     it "should return active user public profile" do
       get :show, id: user.id

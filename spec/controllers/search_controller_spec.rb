@@ -14,7 +14,6 @@ describe SearchController do
     user.coach = false
     user.save
     user.disciplines << discipline
-    sign_in(user)
   end
 
   sphinx_environment :users do
