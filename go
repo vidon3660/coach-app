@@ -1,3 +1,5 @@
+bundle
+
 if [ ! -f /config/database.yml ]
 then
   cp config/database.yml.example config/database.yml 
