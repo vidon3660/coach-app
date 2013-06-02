@@ -18,7 +18,7 @@ set :use_sudo, false
 # GIT
 set :scm, :git
 set :repository, "git@bitbucket.org:coachapp/coach-app.git"
-set :branch, "release"
+set :branch, "master"
 
 # VPS
 role :web, "94.124.6.116"                          # Your HTTP server, Apache/etc
