@@ -1,4 +1,4 @@
-class SearchController < AuthenticatedController
+class SearchController < ApplicationController
 
   def index
     @coaches = []

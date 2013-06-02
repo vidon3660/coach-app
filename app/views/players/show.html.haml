@@ -1,7 +1,7 @@
 .twelve.columns
   %h1 Profile:  #{@user.first_name} #{@user.last_name}
 
-  - if @user != current_user
+  - if current_user && @user != current_user
     %ul.button-group.radius
       - invitations = current_user.invitations.where(invited_id: @user.id)
       - if current_user.friends.include?(@user)
@@ -56,7 +56,7 @@
           %li= discipline.name
 
   .four.columns
-    - if current_user.coach && current_user.trained_users.include?(@user)
+    - if current_user && current_user.coach && current_user.trained_users.include?(@user)
       %h3 Parameters
       %ul.circle
         - @user.parameters.each do |parameter|
@@ -65,7 +65,7 @@
           %li
             <strong>Weight: </strong> #{parameter.weight} cm
   .four.columns
-    - if current_user.coach && current_user.trained_users.include?(@user)
+    - if current_user && current_user.coach && current_user.trained_users.include?(@user)
       %h3 Prohibitions
       %ul.circle
         - @user.prohibitions.each do |prohibition|

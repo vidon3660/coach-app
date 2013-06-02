@@ -7,15 +7,12 @@ describe "Search" do
     before(:each) do
       ThinkingSphinx::Test.index
       sleep(0.5)
-      sign_in user
+      visit root_path
     end
 
     describe "users" do
       it "should search by user first name" do
         fill_in "search", with: user.first_name
-      end
-
-      after(:each) do
         click_button "Search"
         current_path.should == search_path
         page.has_content?(user.name).should be_true

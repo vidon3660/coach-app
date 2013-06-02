@@ -51,6 +51,9 @@
           %section
             / Right Nav Section
             %ul.right
+              %li.searcher
+                = render "shared/search"
+
               %li{ id: "" }
                 = link_to "Sign up", new_user_registration_path
               %li{ id: "" }
