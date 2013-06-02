@@ -5,14 +5,16 @@ class SearchController < AuthenticatedController
     @users = []
     @places = []
 
-    if params[:search]
+    if params[:search].present?
       results = User.search(params[:search], order: :last_name, conditions: { status: "active" })
-      @coaches = results.select { |u| u.coach? }
-      @users = results.reject   { |u| u.coach? }
+      if results
+        @coaches = results.select { |u| u.coach? }
+        @users = results.reject   { |u| u.coach? }
+      end
     end
 
     if params[:city].present? && params[:discipline].present?
-      results = User.active.joins(:disciplines).where("disciplines.name like ? and users.city like ?", params[:discipline], params[:city]).uniq!
+      results = User.active.joins(:disciplines).where("disciplines.name like ? and users.city like ?", params[:discipline], params[:city]).uniq
       if results
         @coaches = results.select { |u| u.coach? }
         @users = results.reject   { |u| u.coach? }
@@ -24,7 +26,7 @@ class SearchController < AuthenticatedController
         @users = results.reject   { |u| u.coach? }
       end
     elsif params[:discipline].present?
-      results = User.active.joins(:disciplines).where("disciplines.name like ?", params[:discipline]).uniq!
+      results = User.active.joins(:disciplines).where("disciplines.name like ?", params[:discipline]).uniq
       if results
         @coaches = results.select { |u| u.coach? }
         @users = results.reject   { |u| u.coach? }
