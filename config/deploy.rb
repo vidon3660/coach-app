@@ -17,7 +17,7 @@ set :use_sudo, false
 
 # GIT
 set :scm, :git
-set :repository, "git@bitbucket.org:coachapp/coach-app.git"
+set :repository, "git@bitbucket.org:mkrajewski90/coach-app.git"
 set :branch, "master"
 
 # VPS
