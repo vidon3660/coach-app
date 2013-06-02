@@ -1,5 +1,5 @@
 test:
-  port: 9313
+  mysql41: 9307
 
 production:
   pid_file: tmp/searchd.pid

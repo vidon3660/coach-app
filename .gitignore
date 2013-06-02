@@ -16,7 +16,8 @@
 /tmp
 
 *.swp
-/db/sphinx/
+config/development.sphinx.conf
+db/sphinx/*
 
 config/database.yml
 config/test.sphinx.conf
