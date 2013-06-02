@@ -18,7 +18,7 @@ gem 'haml'
 gem 'kaminari'
 gem 'simple_form'
 gem 'state_machine'
-gem 'thinking-sphinx', '2.0.10'
+gem 'thinking-sphinx', '~> 3.0.2'
 gem 'country-select', git: 'git://github.com/jamesds/country-select.git'
 
 gem 'carrierwave'
