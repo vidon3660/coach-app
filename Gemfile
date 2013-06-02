@@ -18,6 +18,7 @@ gem 'haml'
 gem 'kaminari'
 gem 'simple_form'
 gem 'state_machine'
+gem 'mysql2',          '0.3.12b5'
 gem 'thinking-sphinx', '~> 3.0.2'
 gem 'country-select', git: 'git://github.com/jamesds/country-select.git'
 

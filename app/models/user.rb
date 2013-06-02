@@ -65,7 +65,7 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, AvatarUploader
 
-  define_index do
+  ThinkingSphinx::Index.define :user, :with => :active_record do
     # fields
     indexes first_name, :sortable => true
     indexes last_name, :sortable => true
