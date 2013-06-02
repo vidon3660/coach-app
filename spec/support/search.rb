@@ -4,7 +4,8 @@ def sphinx_environment(*tables, &block)
     before(:all) do
       obj.use_transactional_fixtures = false
       DatabaseCleaner.strategy = :truncation, {:only => tables}
-      ThinkingSphinx::Test.create_indexes_folder
+      # ThinkingSphinx::Test.create_indexes_folder
+      ThinkingSphinx::Test.index
       ThinkingSphinx::Test.start
     end
 
